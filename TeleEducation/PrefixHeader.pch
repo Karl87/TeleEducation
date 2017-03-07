@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  TeleEducation
+//
+//  Created by Karl on 2017/2/9.
+//  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import "NIMSDK.h"
+#import "NIMKit.h"
+#import "TEGlobalMacro.h"
+#import "UIView+TE.h"
+#endif
+
+#endif /* PrefixHeader_pch */

@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "UIImage+TEColor.h"
 #import "TEPurchaseManager.h"
-#import "TEPurchaseActionViewController.h"
+#import "TEPayViewController.h"
 
 @interface TEBuyClassViewController ()<UITableViewDelegate,UITableViewDataSource,TEPurchaseManagerDelegate>
 @property (nonatomic,strong) NSArray *data;
@@ -70,7 +70,7 @@
 - (void)creatOrderWithGoods:(NSInteger)goods{
     NSLog(@"%ld",goods);
 
-    TEPurchaseActionViewController *vc = [[TEPurchaseActionViewController alloc] initWithTitle:@"在线支付" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
+    TEPayViewController *vc = [[TEPayViewController alloc] initWithTitle:@"在线支付" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

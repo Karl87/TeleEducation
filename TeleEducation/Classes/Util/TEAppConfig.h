@@ -14,5 +14,6 @@
 
 @property (nonatomic,copy) NSString *NIMAppKey;
 @property (nonatomic,copy) NSString *NIMCerName;
+@property (nonatomic,copy)  NSString    *NIMApiURL;
 
 @end

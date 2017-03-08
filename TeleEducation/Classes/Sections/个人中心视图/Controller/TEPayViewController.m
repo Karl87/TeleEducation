@@ -6,14 +6,17 @@
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
-#import "TEPurchaseActionViewController.h"
+#import "TEPayViewController.h"
 #import "TEGetPurchaseOrderApi.h"
 #import "TELoginManager.h"
 #import "TEPurchaseManager.h"
 #import "TEGoods.h"
 #import "TEPurchaseOrder.h"
+#import "TEPayWayCell.h"
+#import "TEPayOrderApi.h"
+#import "TELoginManager.h"
 
-@interface TEPurchaseActionViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TEPayViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) TEGoods *goods;
 @property (nonatomic,strong) TEPurchaseOrder *order;
@@ -31,9 +34,11 @@
 @property (nonatomic,strong) UILabel *purchaseWayTitle;
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UIButton *purchaseBtn;
+
+@property (nonatomic,strong) NSArray *payWays;
 @end
 
-@implementation TEPurchaseActionViewController
+@implementation TEPayViewController
 
 - (void)buildData{
     
@@ -126,10 +131,15 @@
     _goodNum.height = 20;
     _goodNum.width = 100;
     
-    _purchaseWayTitle.width = 64;
+    _purchaseWayTitle.width = self.view.width;
     _purchaseWayTitle.height = 22;
     _purchaseWayTitle.top = _goodsView.bottom+26;
-    _purchaseWayTitle.left = (self.view.width - 64)/2;
+    _purchaseWayTitle.left =0;
+    
+    _tableView.left = 0;
+    _tableView.top = _purchaseWayTitle.bottom+26;
+    _tableView.width = self.view.width;
+    _tableView.height = 100;
     
     _purchaseBtn .left = 0;
     _purchaseBtn .top = self.view.height - 50;
@@ -140,6 +150,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _payWays = @[@"微信支付",@"支付宝"];
     
     _header = [UIView new];
     [_header setBackgroundColor:UIColorFromRGB(0xffffff)];
@@ -203,27 +214,66 @@
     [_purchaseBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
     [_purchaseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_purchaseBtn setTitle:@"确认支付" forState:UIControlStateNormal];
-    [_purchaseBtn addTarget:self action:@selector(purchaseBtnTouchAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_purchaseBtn addTarget:self action:@selector(payBtnTouchAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_purchaseBtn];
+    
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [_tableView registerClass:[TEPayWayCell class] forCellReuseIdentifier:@"cell"];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
     
     [self buildData];
 }
-- (void)purchaseBtnTouchAction:(id)sender{
-    
+- (void)payBtnTouchAction:(id)sender{
+    TEPayOrderApi *api = [[TEPayOrderApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token] order:_order.orderID status:1];
+    [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSLog(@"%@",request.responseJSONObject);
+        NSDictionary *dic = request.responseJSONObject;
+        if (![dic isKindOfClass:[NSDictionary class]]) {
+            return;
+        }
+        NSInteger code = [dic[@"code"] integerValue];
+        if (code !=1) {
+            return;
+        }
+        
+        if ([dic[@"status"] integerValue] == 1) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提醒" message:@"充值失败，请联系客服！" preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
-*/
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _payWays.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TEPayWayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.payTitle = _payWays[indexPath.row];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
 @end

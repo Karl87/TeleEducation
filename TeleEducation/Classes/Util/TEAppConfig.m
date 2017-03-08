@@ -23,10 +23,14 @@
     if (self  =[super init]) {
         _NIMAppKey = @"1ee5a51b7d008254cd73b1d4369a9494";
         _NIMCerName = @"ENTERPRISE";
+        _NIMApiURL = @"https://app.netease.im/api";
+
     }
     return self;
 }
-
+- (NSString *)NIMApiURL{
+    return _NIMApiURL;
+}
 - (NSString *)NIMAppKey{
     return _NIMAppKey;
 }

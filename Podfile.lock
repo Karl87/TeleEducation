@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Masonry (1.0.2)
+  - MBProgressHUD (1.0.0)
   - Reachability (3.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -24,7 +25,9 @@ PODS:
     - AFNetworking (~> 3.0)
 
 DEPENDENCIES:
+  - AFNetworking
   - Masonry
+  - MBProgressHUD
   - Reachability
   - SDWebImage
   - TZImagePickerController
@@ -33,11 +36,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   TZImagePickerController: cbfd57ba947263759b860f74132dd1bc33125afc
   YTKNetwork: c4b0c29c9d639dc050d475de69ee626d53eac598
 
-PODFILE CHECKSUM: 5bb0f290eb3bb88a9d134bf1b530f3108ccddcae
+PODFILE CHECKSUM: c42506b73bd590ed79851078d0df5b9747a5147f
 
 COCOAPODS: 1.1.1

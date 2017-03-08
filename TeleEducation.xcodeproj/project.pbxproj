@@ -224,7 +224,6 @@
 		CB3391F71E5E90FB007D29A1 /* TELesson.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391F61E5E90FB007D29A1 /* TELesson.m */; };
 		CB3391FA1E5E912C007D29A1 /* TEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391F91E5E912C007D29A1 /* TEUser.m */; };
 		CB3391FD1E5E9143007D29A1 /* TELessonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391FC1E5E9143007D29A1 /* TELessonCell.m */; };
-		CB3391FF1E5EC62E007D29A1 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3391FE1E5EC62E007D29A1 /* clock.png */; };
 		CB3392021E5FDC8E007D29A1 /* TEChooseLessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392011E5FDC8E007D29A1 /* TEChooseLessonViewController.m */; };
 		CB3392051E5FFC37007D29A1 /* TEChooseLessonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392041E5FFC37007D29A1 /* TEChooseLessonCell.m */; };
 		CB3392081E601B8B007D29A1 /* TEChooseLessonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392071E601B8B007D29A1 /* TEChooseLessonHeaderView.m */; };
@@ -242,16 +241,13 @@
 		CB3392341E66C6DA007D29A1 /* TELoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392331E66C6DA007D29A1 /* TELoginApi.m */; };
 		CB33923A1E67ECE9007D29A1 /* TELoginInput.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392391E67ECE9007D29A1 /* TELoginInput.m */; };
 		CB33923D1E67FB2A007D29A1 /* TERegisterApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB33923C1E67FB2A007D29A1 /* TERegisterApi.m */; };
-		CB3392401E681CD3007D29A1 /* TEViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB33923F1E681CD3007D29A1 /* TEViewManager.m */; };
 		CB3392461E6918C7007D29A1 /* TETeacher.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392451E6918C7007D29A1 /* TETeacher.m */; };
 		CB33924C1E69460E007D29A1 /* TECommonPostTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB33924B1E69460E007D29A1 /* TECommonPostTokenApi.m */; };
 		CB33924F1E694BEA007D29A1 /* TEBook.m in Sources */ = {isa = PBXBuildFile; fileRef = CB33924E1E694BEA007D29A1 /* TEBook.m */; };
 		CB3392521E694BF5007D29A1 /* TEUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392511E694BF5007D29A1 /* TEUnit.m */; };
 		CB3392551E694BFF007D29A1 /* TECourse.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392541E694BFF007D29A1 /* TECourse.m */; };
 		CB3392581E69748E007D29A1 /* TEPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3392571E69748E007D29A1 /* TEPeriod.m */; };
-		CB4F62C51E6D3137006204BF /* TEOrderLessonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62C41E6D3136006204BF /* TEOrderLessonManager.m */; };
 		CB4F62C81E6D5587006204BF /* TEUserInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62C71E6D5587006204BF /* TEUserInfoApi.m */; };
-		CB4F62CE1E6D6151006204BF /* TEPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62CD1E6D6151006204BF /* TEPurchaseManager.m */; };
 		CB4F62D11E6D62DE006204BF /* TEPurchaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62D01E6D62DE006204BF /* TEPurchaseDetailViewController.m */; };
 		CB4F62D41E6D78E7006204BF /* TEPurchaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62D31E6D78E7006204BF /* TEPurchaseCell.m */; };
 		CB4F62D71E6D7907006204BF /* TEPurchaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62D61E6D7907006204BF /* TEPurchaseHeaderView.m */; };
@@ -262,8 +258,17 @@
 		CB4F62E61E6E9B49006204BF /* TEGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62E51E6E9B49006204BF /* TEGoods.m */; };
 		CB4F62E91E6EAC36006204BF /* NSString+TEPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62E81E6EAC36006204BF /* NSString+TEPrice.m */; };
 		CB4F62EC1E6EB191006204BF /* TEGetPurchaseOrderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62EB1E6EB191006204BF /* TEGetPurchaseOrderApi.m */; };
-		CB4F62EF1E6EB3B8006204BF /* TEPurchaseActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62EE1E6EB3B8006204BF /* TEPurchaseActionViewController.m */; };
+		CB4F62EF1E6EB3B8006204BF /* TEPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62EE1E6EB3B8006204BF /* TEPayViewController.m */; };
 		CB4F62F21E6EC6C9006204BF /* TEPurchaseOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62F11E6EC6C9006204BF /* TEPurchaseOrder.m */; };
+		CB4F62F51E6FA98B006204BF /* TEPayWayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62F41E6FA98B006204BF /* TEPayWayCell.m */; };
+		CB4F62F81E6FB3AA006204BF /* TEPayOrderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62F71E6FB3AA006204BF /* TEPayOrderApi.m */; };
+		CB4F62FF1E6FECC4006204BF /* TEOrderLessonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62FA1E6FECC4006204BF /* TEOrderLessonManager.m */; };
+		CB4F63001E6FECC4006204BF /* TEPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62FC1E6FECC4006204BF /* TEPurchaseManager.m */; };
+		CB4F63011E6FECC4006204BF /* TEViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62FE1E6FECC4006204BF /* TEViewManager.m */; };
+		CB4F63061E6FEE14006204BF /* TENIMRegisterTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63051E6FEE14006204BF /* TENIMRegisterTask.m */; };
+		CB4F63091E6FFFDE006204BF /* TENIMCreatMeetingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63081E6FFFDE006204BF /* TENIMCreatMeetingTask.m */; };
+		CB4F630C1E7011F4006204BF /* TENIMCloseMeetingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F630B1E7011F4006204BF /* TENIMCloseMeetingTask.m */; };
+		CB4F630F1E7012DF006204BF /* TENIMService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F630E1E7012DF006204BF /* TENIMService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -756,7 +761,6 @@
 		CB3391F91E5E912C007D29A1 /* TEUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEUser.m; sourceTree = "<group>"; };
 		CB3391FB1E5E9143007D29A1 /* TELessonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELessonCell.h; sourceTree = "<group>"; };
 		CB3391FC1E5E9143007D29A1 /* TELessonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELessonCell.m; sourceTree = "<group>"; };
-		CB3391FE1E5EC62E007D29A1 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		CB3392001E5FDC8E007D29A1 /* TEChooseLessonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEChooseLessonViewController.h; sourceTree = "<group>"; };
 		CB3392011E5FDC8E007D29A1 /* TEChooseLessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEChooseLessonViewController.m; sourceTree = "<group>"; };
 		CB3392031E5FFC37007D29A1 /* TEChooseLessonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TEChooseLessonCell.h; path = ../Model/TEChooseLessonCell.h; sourceTree = "<group>"; };
@@ -791,8 +795,6 @@
 		CB3392391E67ECE9007D29A1 /* TELoginInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELoginInput.m; sourceTree = "<group>"; };
 		CB33923B1E67FB2A007D29A1 /* TERegisterApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERegisterApi.h; sourceTree = "<group>"; };
 		CB33923C1E67FB2A007D29A1 /* TERegisterApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TERegisterApi.m; sourceTree = "<group>"; };
-		CB33923E1E681CD3007D29A1 /* TEViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEViewManager.h; sourceTree = "<group>"; };
-		CB33923F1E681CD3007D29A1 /* TEViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEViewManager.m; sourceTree = "<group>"; };
 		CB3392441E6918C7007D29A1 /* TETeacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TETeacher.h; sourceTree = "<group>"; };
 		CB3392451E6918C7007D29A1 /* TETeacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TETeacher.m; sourceTree = "<group>"; };
 		CB33924A1E69460E007D29A1 /* TECommonPostTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECommonPostTokenApi.h; sourceTree = "<group>"; };
@@ -805,12 +807,8 @@
 		CB3392541E694BFF007D29A1 /* TECourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECourse.m; sourceTree = "<group>"; };
 		CB3392561E69748E007D29A1 /* TEPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPeriod.h; sourceTree = "<group>"; };
 		CB3392571E69748E007D29A1 /* TEPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPeriod.m; sourceTree = "<group>"; };
-		CB4F62C31E6D3136006204BF /* TEOrderLessonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEOrderLessonManager.h; sourceTree = "<group>"; };
-		CB4F62C41E6D3136006204BF /* TEOrderLessonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEOrderLessonManager.m; sourceTree = "<group>"; };
 		CB4F62C61E6D5587006204BF /* TEUserInfoApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEUserInfoApi.h; sourceTree = "<group>"; };
 		CB4F62C71E6D5587006204BF /* TEUserInfoApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEUserInfoApi.m; sourceTree = "<group>"; };
-		CB4F62CC1E6D6151006204BF /* TEPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseManager.h; sourceTree = "<group>"; };
-		CB4F62CD1E6D6151006204BF /* TEPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPurchaseManager.m; sourceTree = "<group>"; };
 		CB4F62CF1E6D62DE006204BF /* TEPurchaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseDetailViewController.h; sourceTree = "<group>"; };
 		CB4F62D01E6D62DE006204BF /* TEPurchaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPurchaseDetailViewController.m; sourceTree = "<group>"; };
 		CB4F62D21E6D78E7006204BF /* TEPurchaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseCell.h; sourceTree = "<group>"; };
@@ -831,10 +829,29 @@
 		CB4F62E81E6EAC36006204BF /* NSString+TEPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TEPrice.m"; sourceTree = "<group>"; };
 		CB4F62EA1E6EB191006204BF /* TEGetPurchaseOrderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEGetPurchaseOrderApi.h; sourceTree = "<group>"; };
 		CB4F62EB1E6EB191006204BF /* TEGetPurchaseOrderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEGetPurchaseOrderApi.m; sourceTree = "<group>"; };
-		CB4F62ED1E6EB3B8006204BF /* TEPurchaseActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseActionViewController.h; sourceTree = "<group>"; };
-		CB4F62EE1E6EB3B8006204BF /* TEPurchaseActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPurchaseActionViewController.m; sourceTree = "<group>"; };
+		CB4F62ED1E6EB3B8006204BF /* TEPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPayViewController.h; sourceTree = "<group>"; };
+		CB4F62EE1E6EB3B8006204BF /* TEPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPayViewController.m; sourceTree = "<group>"; };
 		CB4F62F01E6EC6C9006204BF /* TEPurchaseOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseOrder.h; sourceTree = "<group>"; };
 		CB4F62F11E6EC6C9006204BF /* TEPurchaseOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPurchaseOrder.m; sourceTree = "<group>"; };
+		CB4F62F31E6FA98B006204BF /* TEPayWayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPayWayCell.h; sourceTree = "<group>"; };
+		CB4F62F41E6FA98B006204BF /* TEPayWayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPayWayCell.m; sourceTree = "<group>"; };
+		CB4F62F61E6FB3AA006204BF /* TEPayOrderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPayOrderApi.h; sourceTree = "<group>"; };
+		CB4F62F71E6FB3AA006204BF /* TEPayOrderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPayOrderApi.m; sourceTree = "<group>"; };
+		CB4F62F91E6FECC4006204BF /* TEOrderLessonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEOrderLessonManager.h; sourceTree = "<group>"; };
+		CB4F62FA1E6FECC4006204BF /* TEOrderLessonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEOrderLessonManager.m; sourceTree = "<group>"; };
+		CB4F62FB1E6FECC4006204BF /* TEPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPurchaseManager.h; sourceTree = "<group>"; };
+		CB4F62FC1E6FECC4006204BF /* TEPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPurchaseManager.m; sourceTree = "<group>"; };
+		CB4F62FD1E6FECC4006204BF /* TEViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEViewManager.h; sourceTree = "<group>"; };
+		CB4F62FE1E6FECC4006204BF /* TEViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEViewManager.m; sourceTree = "<group>"; };
+		CB4F63031E6FED3D006204BF /* TENIMServiceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMServiceTask.h; sourceTree = "<group>"; };
+		CB4F63041E6FEE14006204BF /* TENIMRegisterTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMRegisterTask.h; sourceTree = "<group>"; };
+		CB4F63051E6FEE14006204BF /* TENIMRegisterTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMRegisterTask.m; sourceTree = "<group>"; };
+		CB4F63071E6FFFDE006204BF /* TENIMCreatMeetingTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMCreatMeetingTask.h; sourceTree = "<group>"; };
+		CB4F63081E6FFFDE006204BF /* TENIMCreatMeetingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMCreatMeetingTask.m; sourceTree = "<group>"; };
+		CB4F630A1E7011F4006204BF /* TENIMCloseMeetingTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMCloseMeetingTask.h; sourceTree = "<group>"; };
+		CB4F630B1E7011F4006204BF /* TENIMCloseMeetingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMCloseMeetingTask.m; sourceTree = "<group>"; };
+		CB4F630D1E7012DF006204BF /* TENIMService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMService.h; sourceTree = "<group>"; };
+		CB4F630E1E7012DF006204BF /* TENIMService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -938,7 +955,6 @@
 		CB338E3F1E4C5064007D29A1 /* TeleEducation */ = {
 			isa = PBXGroup;
 			children = (
-				CB3391FE1E5EC62E007D29A1 /* clock.png */,
 				CB338E571E4C5519007D29A1 /* Classes */,
 				CB338E431E4C5064007D29A1 /* AppDelegate.h */,
 				CB338E441E4C5064007D29A1 /* AppDelegate.m */,
@@ -966,6 +982,7 @@
 		CB338E571E4C5519007D29A1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CB4F63021E6FECF1006204BF /* Services */,
 				CB33922B1E66C52B007D29A1 /* Network */,
 				CB3392211E651C61007D29A1 /* Common */,
 				CB3391DC1E5C2A6A007D29A1 /* Global */,
@@ -1830,6 +1847,12 @@
 		CB3390FE1E519C63007D29A1 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CB4F62F91E6FECC4006204BF /* TEOrderLessonManager.h */,
+				CB4F62FA1E6FECC4006204BF /* TEOrderLessonManager.m */,
+				CB4F62FB1E6FECC4006204BF /* TEPurchaseManager.h */,
+				CB4F62FC1E6FECC4006204BF /* TEPurchaseManager.m */,
+				CB4F62FD1E6FECC4006204BF /* TEViewManager.h */,
+				CB4F62FE1E6FECC4006204BF /* TEViewManager.m */,
 				CB3390FF1E519C78007D29A1 /* TEMeetingManager.h */,
 				CB3391001E519C78007D29A1 /* TEMeetingManager.m */,
 			);
@@ -1954,8 +1977,8 @@
 				CB3392291E658639007D29A1 /* TEBuyClassViewController.m */,
 				CB4F62CF1E6D62DE006204BF /* TEPurchaseDetailViewController.h */,
 				CB4F62D01E6D62DE006204BF /* TEPurchaseDetailViewController.m */,
-				CB4F62ED1E6EB3B8006204BF /* TEPurchaseActionViewController.h */,
-				CB4F62EE1E6EB3B8006204BF /* TEPurchaseActionViewController.m */,
+				CB4F62ED1E6EB3B8006204BF /* TEPayViewController.h */,
+				CB4F62EE1E6EB3B8006204BF /* TEPayViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1993,6 +2016,8 @@
 				CB4F62D31E6D78E7006204BF /* TEPurchaseCell.m */,
 				CB4F62D51E6D7907006204BF /* TEPurchaseHeaderView.h */,
 				CB4F62D61E6D7907006204BF /* TEPurchaseHeaderView.m */,
+				CB4F62F31E6FA98B006204BF /* TEPayWayCell.h */,
+				CB4F62F41E6FA98B006204BF /* TEPayWayCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2174,12 +2199,6 @@
 		CB33922C1E66C5EE007D29A1 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				CB33923E1E681CD3007D29A1 /* TEViewManager.h */,
-				CB33923F1E681CD3007D29A1 /* TEViewManager.m */,
-				CB4F62C31E6D3136006204BF /* TEOrderLessonManager.h */,
-				CB4F62C41E6D3136006204BF /* TEOrderLessonManager.m */,
-				CB4F62CC1E6D6151006204BF /* TEPurchaseManager.h */,
-				CB4F62CD1E6D6151006204BF /* TEPurchaseManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2201,6 +2220,8 @@
 				CB4F62E21E6E9A5E006204BF /* TEGetGoodsApi.m */,
 				CB4F62EA1E6EB191006204BF /* TEGetPurchaseOrderApi.h */,
 				CB4F62EB1E6EB191006204BF /* TEGetPurchaseOrderApi.m */,
+				CB4F62F61E6FB3AA006204BF /* TEPayOrderApi.h */,
+				CB4F62F71E6FB3AA006204BF /* TEPayOrderApi.m */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -2212,6 +2233,22 @@
 				CB3392301E66C602007D29A1 /* TENetworkConfig.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		CB4F63021E6FECF1006204BF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F63031E6FED3D006204BF /* TENIMServiceTask.h */,
+				CB4F63041E6FEE14006204BF /* TENIMRegisterTask.h */,
+				CB4F63051E6FEE14006204BF /* TENIMRegisterTask.m */,
+				CB4F63071E6FFFDE006204BF /* TENIMCreatMeetingTask.h */,
+				CB4F63081E6FFFDE006204BF /* TENIMCreatMeetingTask.m */,
+				CB4F630A1E7011F4006204BF /* TENIMCloseMeetingTask.h */,
+				CB4F630B1E7011F4006204BF /* TENIMCloseMeetingTask.m */,
+				CB4F630D1E7012DF006204BF /* TENIMService.h */,
+				CB4F630E1E7012DF006204BF /* TENIMService.m */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2282,7 +2319,6 @@
 				CB338E4D1E4C5064007D29A1 /* Assets.xcassets in Resources */,
 				CB3390361E4C551A007D29A1 /* NIMKitResource.bundle in Resources */,
 				CB338E4B1E4C5064007D29A1 /* Main.storyboard in Resources */,
-				CB3391FF1E5EC62E007D29A1 /* clock.png in Resources */,
 				CB3390351E4C551A007D29A1 /* NIMKitEmoticon.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2371,6 +2407,7 @@
 				CB3392461E6918C7007D29A1 /* TETeacher.m in Sources */,
 				CB33901E1E4C551A007D29A1 /* NIMCardMemberItem.m in Sources */,
 				CB3390C21E4C7543007D29A1 /* NIMWebImageManager.m in Sources */,
+				CB4F63011E6FECC4006204BF /* TEViewManager.m in Sources */,
 				CB4F62E91E6EAC36006204BF /* NSString+TEPrice.m in Sources */,
 				CB3390BF1E4C7543007D29A1 /* NIMWebImageDecoder.m in Sources */,
 				CB3391E51E5D3444007D29A1 /* TESettingSwitchCell.m in Sources */,
@@ -2389,7 +2426,6 @@
 				CB3391BA1E5C099E007D29A1 /* TELoginData.m in Sources */,
 				CB338FD21E4C551A007D29A1 /* NIMKitSwitcherCell.m in Sources */,
 				CB3390841E4C6C8D007D29A1 /* TEUserUtil.m in Sources */,
-				CB4F62CE1E6D6151006204BF /* TEPurchaseManager.m in Sources */,
 				CB4F62E31E6E9A5E006204BF /* TEGetGoodsApi.m in Sources */,
 				CB338FDF1E4C551A007D29A1 /* NIMGroupedUsrInfo.m in Sources */,
 				CB338FE21E4C551A007D29A1 /* NIMContactSelectConfig.m in Sources */,
@@ -2400,9 +2436,11 @@
 				CB338FFC1E4C551A007D29A1 /* NIMNotificationContentConfig.m in Sources */,
 				CB3390001E4C551A007D29A1 /* NIMVideoContentConfig.m in Sources */,
 				CB3391EE1E5D7E7B007D29A1 /* TEResetPasswordViewController.m in Sources */,
+				CB4F62F51E6FA98B006204BF /* TEPayWayCell.m in Sources */,
 				CB3391D51E5C1450007D29A1 /* TESettingViewController.m in Sources */,
 				CB338FFE1E4C551A007D29A1 /* NIMTipContentConfig.m in Sources */,
 				CB338FC81E4C551A007D29A1 /* M80AttributedLabel+NIMKit.m in Sources */,
+				CB4F62FF1E6FECC4006204BF /* TEOrderLessonManager.m in Sources */,
 				CB3390331E4C551A007D29A1 /* NIMPinyinConverter.m in Sources */,
 				CB338FD61E4C551A007D29A1 /* NIMBadgeView.m in Sources */,
 				CB3391FA1E5E912C007D29A1 /* TEUser.m in Sources */,
@@ -2425,18 +2463,20 @@
 				CB3390E91E4DB291007D29A1 /* UIScrollView+TEPullToRefresh.m in Sources */,
 				CB3391FD1E5E9143007D29A1 /* TELessonCell.m in Sources */,
 				CB3390781E4C6A69007D29A1 /* TEDevice.m in Sources */,
-				CB4F62EF1E6EB3B8006204BF /* TEPurchaseActionViewController.m in Sources */,
+				CB4F62EF1E6EB3B8006204BF /* TEPayViewController.m in Sources */,
 				CB3390101E4C551A007D29A1 /* NIMSessionFileTransContentView.m in Sources */,
 				CB33901F1E4C551A007D29A1 /* NIMTeamCardOperationItem.m in Sources */,
 				CB338FE61E4C551A007D29A1 /* NIMGrowingTextView.m in Sources */,
 				CB33906B1E4C65C8007D29A1 /* TEClientUtil.m in Sources */,
 				CB33901A1E4C551A007D29A1 /* NIMSessionViewController.m in Sources */,
 				CB4F62DA1E6E81ED006204BF /* TECourseContentViewController.m in Sources */,
+				CB4F630C1E7011F4006204BF /* TENIMCloseMeetingTask.m in Sources */,
 				CB338FCD1E4C551A007D29A1 /* UIView+NIM.m in Sources */,
 				CB3390031E4C551A007D29A1 /* NIMKitMessageAtModel.m in Sources */,
 				CB3390D71E4DA618007D29A1 /* UIActionSheet+TEBlock.m in Sources */,
 				CB338FEB1E4C551A007D29A1 /* NIMInputEmoticonManager.m in Sources */,
 				CB338FF21E4C551A007D29A1 /* NIMKitInfo.m in Sources */,
+				CB4F63001E6FECC4006204BF /* TEPurchaseManager.m in Sources */,
 				CB3392171E63C926007D29A1 /* TEOrderTimeCell.m in Sources */,
 				CB3392521E694BF5007D29A1 /* TEUnit.m in Sources */,
 				CB3392201E6435D1007D29A1 /* TELessonHeaderView.m in Sources */,
@@ -2456,6 +2496,7 @@
 				CB338FD71E4C551A007D29A1 /* NIMCustomLeftBarView.m in Sources */,
 				CB3390051E4C551A007D29A1 /* NIMMessageMaker.m in Sources */,
 				CB33920B1E6025AD007D29A1 /* TEChooseLessonTopHeaderView.m in Sources */,
+				CB4F62F81E6FB3AA006204BF /* TEPayOrderApi.m in Sources */,
 				CB338FED1E4C551A007D29A1 /* NIMInputEmoticonTabView.m in Sources */,
 				CB338FE71E4C551A007D29A1 /* NIMInputAtCache.m in Sources */,
 				CB3390D41E4DA5B1007D29A1 /* NSString+TE.m in Sources */,
@@ -2505,6 +2546,7 @@
 				CB3390081E4C551A007D29A1 /* NIMSessionDataSourceImpl.m in Sources */,
 				CB33902E1E4C551A007D29A1 /* NIMTimePickerView.m in Sources */,
 				CB33907B1E4C6A78007D29A1 /* TEFileLocationHelper.m in Sources */,
+				CB4F63061E6FEE14006204BF /* TENIMRegisterTask.m in Sources */,
 				CB338FD11E4C551A007D29A1 /* NIMKitDataProviderImpl.m in Sources */,
 				CB3390BC1E4C7543007D29A1 /* NSMutableAttributedString+NIM.m in Sources */,
 				CB3391E21E5C38D0007D29A1 /* TESettingPortraitCell.m in Sources */,
@@ -2519,6 +2561,7 @@
 				CB338FE31E4C551A007D29A1 /* NIMContactSelectTabView.m in Sources */,
 				CB338FEA1E4C551A007D29A1 /* NIMInputEmoticonContainerView.m in Sources */,
 				CB3390161E4C551A007D29A1 /* NIMSessionTextContentView.m in Sources */,
+				CB4F630F1E7012DF006204BF /* TENIMService.m in Sources */,
 				CB3391DB1E5C1475007D29A1 /* TEMessagesViewController.m in Sources */,
 				CB338FF71E4C551A007D29A1 /* NIMAudioContentConfig.m in Sources */,
 				CB338FF11E4C551A007D29A1 /* NIMKitEvent.m in Sources */,
@@ -2529,6 +2572,7 @@
 				CB3390B91E4C7543007D29A1 /* NIMAttributedLabel.m in Sources */,
 				CB3390BA1E4C7543007D29A1 /* NIMAttributedLabelAttachment.m in Sources */,
 				CB33902F1E4C551A007D29A1 /* NIMKitDevice.m in Sources */,
+				CB4F63091E6FFFDE006204BF /* TENIMCreatMeetingTask.m in Sources */,
 				CB3392111E603DE9007D29A1 /* TEChooseTeacherCell.m in Sources */,
 				CB3390F31E4DC1A5007D29A1 /* TECustomAttachmentDecoder.m in Sources */,
 				CB338FDD1E4C551A007D29A1 /* NIMContactDataCell.m in Sources */,
@@ -2540,7 +2584,6 @@
 				CB338FF41E4C551A007D29A1 /* NIMMediaItem.m in Sources */,
 				CB3391B21E5BE8E1007D29A1 /* TENavigationViewController.m in Sources */,
 				CB338FE11E4C551A007D29A1 /* NIMContactPickedView.m in Sources */,
-				CB3392401E681CD3007D29A1 /* TEViewManager.m in Sources */,
 				CB33902A1E4C551A007D29A1 /* NIMTeamAnnouncementListCell.m in Sources */,
 				CB3392051E5FFC37007D29A1 /* TEChooseLessonCell.m in Sources */,
 				CB3390C01E4C7543007D29A1 /* NIMWebImageDownloader.m in Sources */,
@@ -2549,7 +2592,6 @@
 				CB33922A1E658639007D29A1 /* TEBuyClassViewController.m in Sources */,
 				CB3391EB1E5D6681007D29A1 /* TEUserInfoAvatarCell.m in Sources */,
 				CB3390651E4C5644007D29A1 /* TEBundleSetting.m in Sources */,
-				CB4F62C51E6D3137006204BF /* TEOrderLessonManager.m in Sources */,
 				CB338FF31E4C551A007D29A1 /* NIMKitInfoFetchOption.m in Sources */,
 				CB33900C1E4C551A007D29A1 /* NIMSessionTableAdapter.m in Sources */,
 				CB33900A1E4C551A007D29A1 /* NIMSessionLayoutImpl.m in Sources */,

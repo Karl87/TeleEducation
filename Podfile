@@ -4,5 +4,7 @@ pod ‘SDWebImage’
 pod ‘YTKNetwork’
 pod ‘Reachability’
 pod ‘Masonry’
+pod ‘AFNetworking‘
+pod ‘MBProgressHUD‘
 pod ‘TZImagePickerController’
 end

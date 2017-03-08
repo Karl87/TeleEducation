@@ -8,5 +8,5 @@
 
 #import "TECommonViewController.h"
 
-@interface TEPurchaseActionViewController : TECommonViewController
+@interface TEPayViewController : TECommonViewController
 @end

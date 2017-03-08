@@ -46,7 +46,7 @@
 
 - (void)setupMainTabbarController{
         TEMainTabBarViewController *mainTab = [[TEMainTabBarViewController alloc] init];
-        TENavigationViewController *classList = [[TENavigationViewController alloc] initWithRootViewController:[[TEClassListViewController alloc] initWithTitle:@"课程" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
+        TENavigationViewController *classList = [[TENavigationViewController alloc] initWithRootViewController:[[TEClassListViewController alloc] initWithTitle:@"课程" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskAll]];
         TENavigationViewController *userCenter = [[TENavigationViewController alloc] initWithRootViewController:[[TESettingViewController alloc] initWithTitle:@"我" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
     
         TENavigationViewController *messages =[[TENavigationViewController alloc] initWithRootViewController:[[TEMessagesViewController alloc] initWithTitle:@"消息" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];

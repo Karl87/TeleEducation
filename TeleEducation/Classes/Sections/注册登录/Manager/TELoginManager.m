@@ -12,6 +12,11 @@
 #import "TERegisterApi.h"
 #import "TEUserInfoApi.h"
 
+#import "TENIMService.h"
+#import "MBProgressHUD.h"
+
+#import "TEService.h"
+#import "NSString+TE.h"
 #define TELoginDataPath @"te_login_data"
 
 @interface TELoginManager ()
@@ -92,6 +97,11 @@
                 data.vipStart = userInfo[@"vipstartdateline"];
                 data.vipEnd = userInfo[@"vipenddateline"];
                 data.classCount = [userInfo[@"classcount"]integerValue];
+                
+                
+                data.nimAccount = [NSString stringWithFormat:@"te%@",data.phone];
+                data.nimToken = password;
+                
                 [self setCurrentTEUser:data];
                 
                 NSLog(@"Logindelegates count %ld",_delegates.count);
@@ -108,6 +118,8 @@
                     }
                 }
                 
+                [self nimLogin];
+                [[TEServiceManager sharedManger] start];
             }
             
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -115,7 +127,19 @@
         }];
     }
 }
-
+- (void)nimLogin{
+    
+    NSLog(@"%@\n%@",_currentTEUser.nimAccount,_currentTEUser.nimToken);
+    
+    [[[NIMSDK sharedSDK] loginManager] login:_currentTEUser.nimAccount token:_currentTEUser.nimToken completion:^(NSError * _Nullable error) {
+        NSLog(@"%ld,%@",error.code,error.description);
+        if (error == nil) {
+            NSLog(@"NIM登录成功");
+        }else{
+            NSLog(@"NIM登录失败");
+        }
+    }];
+}
 - (void)logout{
     [self setCurrentTEUser:nil];
     for (id<TELoginManagerDelegate> delegate in _delegates) {
@@ -123,6 +147,9 @@
             [delegate logout];
         }
     }
+    [[NIMSDK sharedSDK].loginManager logout:^(NSError * _Nullable error) {
+        
+    }];
 
 }
 
@@ -131,13 +158,61 @@
     NSLog(@"username:%@,password:%@,phone:%@",username,password,phone);
     
     if (username.length && password.length && phone.length) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        hud.label.text = @"注册TE账户";
+        
         TERegisterApi *api = [[TERegisterApi alloc] initWithUsername:username phone:phone password:password];
         [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
             NSLog(@"%@",request.responseJSONObject);
+            [hud hideAnimated:YES];
+            if (![request.responseJSONObject isKindOfClass:[NSDictionary class]]) {
+                return;
+            }
+            NSDictionary *dic = (NSDictionary *)request.responseJSONObject;
+            NSInteger code = [dic[@"code"] integerValue];
+            if (code !=1) {
+                return;
+            }
+            NSDictionary *content =dic[@"content"];
+            NSInteger status = [content[@"status"] integerValue];
+
+            if (status == 1) {
+                [self registerNIMWithAccount:[NSString stringWithFormat:@"te%@",phone] nickname:username token:password];
+            }
+            
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+            if (hud) {
+                [hud hideAnimated:YES];
+            }
             NSLog(@"%@",request.error.description);
         }];
     }
+}
+
+- (void)registerNIMWithAccount:(NSString *)acconut nickname:(NSString *)nickname token:(NSString *)token{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.label.text = @"注册NIM账户";
+    
+    TENIMRegisterData *data = [[TENIMRegisterData alloc] init];
+    data.account = acconut;
+    data.nickname = nickname;
+    data.token = token;
+    
+    [[TENIMService sharedService] registerUser:data comletion:^(NSError *error, NSString *errorMsg) {
+        if (error == nil) {
+            NSLog(@"注册NIM成功");
+            hud.label.text = @"注册NIM成功";
+            
+        }else{
+            NSLog(@"注册NIM失败");
+            hud.label.text = @"注册NIM失败";
+
+        }
+        [hud hideAnimated:YES afterDelay:2.0];
+    }];
 }
 
 - (void)refreshUserInfo{
@@ -150,6 +225,8 @@
         TELoginData *data = [[TELoginData alloc] init];
         data.token = _currentTEUser.token;
         data.account = _currentTEUser.account;
+        data.nimAccount = _currentTEUser.nimAccount;
+        data.nimToken = _currentTEUser.nimToken;
         data.type = _currentTEUser.type;
         data.name = userInfo[@"name"];
         data.phone = userInfo[@"phone"];

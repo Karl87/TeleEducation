@@ -34,7 +34,7 @@
     
     NSString *NIMKey = [[TEAppConfig sharedConfig] NIMAppKey];
     NSString *cerName = [[TEAppConfig sharedConfig] NIMCerName];
-    
+    NSLog(@"%@,%@",NIMKey,cerName);
     [[NIMSDK sharedSDK] registerWithAppID:NIMKey cerName:cerName];
     
     [NIMCustomObject registerCustomDecoder:[TECustomAttachmentDecoder new]];
@@ -52,6 +52,9 @@
     
     TELoginData *data = [[TELoginManager sharedManager] currentTEUser];
     if ([[data token]length]) {
+        [[TELoginManager sharedManager] nimLogin];
+        [[TEServiceManager sharedManger] start];
+
         [[TEViewManager sharedManager] setupMainTabbarController];
     }else{
         [[TEViewManager sharedManager] setupLoginViewController];

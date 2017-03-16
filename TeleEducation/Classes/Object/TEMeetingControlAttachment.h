@@ -2,14 +2,14 @@
 //  TEMeetingControlAttachment.h
 //  TeleEducation
 //
-//  Created by Karl on 2017/2/10.
+//  Created by Karl on 2017/3/9.
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "TECustomAttachmentDefines.h"
 
-typedef NS_ENUM(NSInteger,CustomMeetingCommand) {
+typedef NS_ENUM(NSInteger, CustomMeetingCommand) {
     CustomMeetingCommandNotifyActorsList     = 1,//主持人通知所有有权限发言的用户列表，聊天室消息，需要携带uids
     CustomMeetingCommandAskForActors         = 2,//参与者询问其他人是否有权限发言，聊天室消息
     CustomMeetingCommandActorReply           = 3,//有发言权限的人反馈，点对点消息，需要携带uids
@@ -20,7 +20,9 @@ typedef NS_ENUM(NSInteger,CustomMeetingCommand) {
 };
 
 @interface TEMeetingControlAttachment : NSObject<NIMCustomAttachment>
+
 @property (nonatomic,copy) NSString *roomID;
 @property (nonatomic,assign) CustomMeetingCommand command;
 @property (nonatomic,strong) NSArray *uids;
+
 @end

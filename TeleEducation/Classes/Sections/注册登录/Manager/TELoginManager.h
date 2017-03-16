@@ -25,10 +25,12 @@
 @property (nonatomic,strong) TELoginData *currentTEUser;
 
 + (instancetype)sharedManager;
+- (void)nimLogin;
 - (void)loginWithUserName:(NSString *)username password:(NSString *)password userType:(TEUserType)type;
 
 - (void)logout;
 - (void)registerWithUserName:(NSString *)username phone:(NSString *)phone password:(NSString *)password;
+- (void)registerNIMWithAccount:(NSString *)acconut nickname:(NSString *)nickname token:(NSString *)token;
 
 - (void)refreshUserInfo;
 

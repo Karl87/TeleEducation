@@ -8,9 +8,10 @@
 
 #import "TELesson.h"
 #import "TETeacher.h"
+#import "TEUser.h"
 
 @implementation TELesson
-- (instancetype)initWithDictionary:(NSDictionary *)dic{
+- (instancetype)initWithDictionary:(NSDictionary *)dic userType:(TEUserType)usertype{
     self = [super init];
     if (self) {
         _book = dic[@"book"];
@@ -24,12 +25,18 @@
         _period = dic[@"period"];
         _periodTime = [dic[@"periodtime"] integerValue];
         
+        _nimID = dic[@"nimid"];
+        
         _status = TELessonStatusNormal;
         if (![dic[@"status"] isEqualToString:@"open"]) {
             _status = TELessonStatusCancel;
         }
         
-        _teacher = [[TETeacher alloc] initWithDictionary:dic[@"teacherinfo"]];
+        if (usertype == TEUserTypeStudent) {
+            _teacher = [[TETeacher alloc] initWithDictionary:dic[@"teacherinfo"]];
+        }else if (usertype == TEUserTypeTeacher){
+            _user = [[TEUser alloc] initWithDictionary:dic[@"memberinfo"]];
+        }
     }
     return self;
 }

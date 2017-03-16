@@ -202,7 +202,6 @@
 		CB3390F31E4DC1A5007D29A1 /* TECustomAttachmentDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3390F21E4DC1A5007D29A1 /* TECustomAttachmentDecoder.m */; };
 		CB3390F71E4DC343007D29A1 /* TEJanKenPonAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3390F61E4DC343007D29A1 /* TEJanKenPonAttachment.m */; };
 		CB3390FA1E4DC556007D29A1 /* TEChartletAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3390F91E4DC556007D29A1 /* TEChartletAttachment.m */; };
-		CB3390FD1E4DC600007D29A1 /* TEMeetingControlAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3390FC1E4DC600007D29A1 /* TEMeetingControlAttachment.m */; };
 		CB3391011E519C78007D29A1 /* TEMeetingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391001E519C78007D29A1 /* TEMeetingManager.m */; };
 		CB3391A71E5AC0FC007D29A1 /* TELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391A61E5AC0FC007D29A1 /* TELoginViewController.m */; };
 		CB3391AD1E5AC2C0007D29A1 /* TERegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3391AC1E5AC2C0007D29A1 /* TERegisterViewController.m */; };
@@ -269,6 +268,42 @@
 		CB4F63091E6FFFDE006204BF /* TENIMCreatMeetingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63081E6FFFDE006204BF /* TENIMCreatMeetingTask.m */; };
 		CB4F630C1E7011F4006204BF /* TENIMCloseMeetingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F630B1E7011F4006204BF /* TENIMCloseMeetingTask.m */; };
 		CB4F630F1E7012DF006204BF /* TENIMService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F630E1E7012DF006204BF /* TENIMService.m */; };
+		CB4F63121E70FEBE006204BF /* TEMeetingRolesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63111E70FEBE006204BF /* TEMeetingRolesManager.m */; };
+		CB4F63151E70FF9C006204BF /* TEMeetingRole.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63141E70FF9C006204BF /* TEMeetingRole.m */; };
+		CB4F63181E7101E6006204BF /* TEMeetingControlAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63171E7101E6006204BF /* TEMeetingControlAttachment.m */; };
+		CB4F631B1E71027C006204BF /* TEMeetingMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F631A1E71027C006204BF /* TEMeetingMessageHandler.m */; };
+		CB4F631E1E71039D006204BF /* TESessionMsgConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F631D1E71039D006204BF /* TESessionMsgConverter.m */; };
+		CB4F63211E7103CB006204BF /* TELocationPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63201E7103CB006204BF /* TELocationPoint.m */; };
+		CB4F63251E72A6C5006204BF /* TELessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63241E72A6C5006204BF /* TELessonViewController.m */; };
+		CB4F63281E72A80D006204BF /* TEMeetingNetCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63271E72A80D006204BF /* TEMeetingNetCallManager.m */; };
+		CB4F632B1E7644E0006204BF /* TELessonVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F632A1E7644E0006204BF /* TELessonVideoView.m */; };
+		CB4F63581E7645B2006204BF /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F632E1E7645B2006204BF /* color.c */; };
+		CB4F63591E7645B2006204BF /* common.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F632F1E7645B2006204BF /* common.c */; };
+		CB4F635A1E7645B2006204BF /* rgb.fsh.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63311E7645B2006204BF /* rgb.fsh.c */; };
+		CB4F635B1E7645B2006204BF /* yuv420p.fsh.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63321E7645B2006204BF /* yuv420p.fsh.c */; };
+		CB4F635C1E7645B2006204BF /* yuv420sp.fsh.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63331E7645B2006204BF /* yuv420sp.fsh.c */; };
+		CB4F635D1E7645B2006204BF /* yuv444p10le.fsh.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63341E7645B2006204BF /* yuv444p10le.fsh.c */; };
+		CB4F635E1E7645B2006204BF /* renderer.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63361E7645B2006204BF /* renderer.c */; };
+		CB4F635F1E7645B2006204BF /* renderer_rgb.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63371E7645B2006204BF /* renderer_rgb.c */; };
+		CB4F63601E7645B2006204BF /* renderer_yuv420p.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63381E7645B2006204BF /* renderer_yuv420p.c */; };
+		CB4F63611E7645B2006204BF /* renderer_yuv420sp.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63391E7645B2006204BF /* renderer_yuv420sp.c */; };
+		CB4F63621E7645B2006204BF /* renderer_yuv420sp_vtb.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F633A1E7645B2006204BF /* renderer_yuv420sp_vtb.m */; };
+		CB4F63631E7645B2006204BF /* renderer_yuv444p10le.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F633B1E7645B2006204BF /* renderer_yuv444p10le.c */; };
+		CB4F63641E7645B2006204BF /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F633C1E7645B2006204BF /* shader.c */; };
+		CB4F63651E7645B2006204BF /* mvp.vsh.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F633E1E7645B2006204BF /* mvp.vsh.c */; };
+		CB4F63661E7645B3006204BF /* ijksdl_mutex.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63481E7645B2006204BF /* ijksdl_mutex.c */; };
+		CB4F63671E7645B3006204BF /* ijksdl_stdinc.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F634A1E7645B2006204BF /* ijksdl_stdinc.c */; };
+		CB4F63681E7645B3006204BF /* ijksdl_timer.c in Sources */ = {isa = PBXBuildFile; fileRef = CB4F634D1E7645B2006204BF /* ijksdl_timer.c */; };
+		CB4F63691E7645B3006204BF /* ijksdl_vout_overlay_videotoolbox.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63551E7645B2006204BF /* ijksdl_vout_overlay_videotoolbox.m */; };
+		CB4F636A1E7645B3006204BF /* IJKSDLGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63571E7645B2006204BF /* IJKSDLGLView.m */; };
+		CB4F63701E764842006204BF /* TEGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F636F1E764842006204BF /* TEGLView.m */; };
+		CB4F63721E76A6B3006204BF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB4F63711E76A6B3006204BF /* Settings.bundle */; };
+		CB4F63751E7918D6006204BF /* TEWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63741E7918D6006204BF /* TEWhiteboardViewController.m */; };
+		CB4F63781E791945006204BF /* TEMeetingRTSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63771E791945006204BF /* TEMeetingRTSManager.m */; };
+		CB4F637B1E79545D006204BF /* TEWhiteboardCmdHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F637A1E79545D006204BF /* TEWhiteboardCmdHandler.m */; };
+		CB4F637E1E7954A2006204BF /* TEWhiteboardPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F637D1E7954A2006204BF /* TEWhiteboardPoint.m */; };
+		CB4F63811E79552E006204BF /* TEWhiteboardCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63801E79552E006204BF /* TEWhiteboardCommand.m */; };
+		CB4F63841E7A38A0006204BF /* TEWhiteboardDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F63831E7A38A0006204BF /* TEWhiteboardDrawView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -718,8 +753,6 @@
 		CB3390F61E4DC343007D29A1 /* TEJanKenPonAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEJanKenPonAttachment.m; sourceTree = "<group>"; };
 		CB3390F81E4DC556007D29A1 /* TEChartletAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEChartletAttachment.h; sourceTree = "<group>"; };
 		CB3390F91E4DC556007D29A1 /* TEChartletAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEChartletAttachment.m; sourceTree = "<group>"; };
-		CB3390FB1E4DC600007D29A1 /* TEMeetingControlAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingControlAttachment.h; sourceTree = "<group>"; };
-		CB3390FC1E4DC600007D29A1 /* TEMeetingControlAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingControlAttachment.m; sourceTree = "<group>"; };
 		CB3390FF1E519C78007D29A1 /* TEMeetingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingManager.h; sourceTree = "<group>"; };
 		CB3391001E519C78007D29A1 /* TEMeetingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingManager.m; sourceTree = "<group>"; };
 		CB3391A51E5AC0FC007D29A1 /* TELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELoginViewController.h; sourceTree = "<group>"; };
@@ -852,6 +885,78 @@
 		CB4F630B1E7011F4006204BF /* TENIMCloseMeetingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMCloseMeetingTask.m; sourceTree = "<group>"; };
 		CB4F630D1E7012DF006204BF /* TENIMService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENIMService.h; sourceTree = "<group>"; };
 		CB4F630E1E7012DF006204BF /* TENIMService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENIMService.m; sourceTree = "<group>"; };
+		CB4F63101E70FEBE006204BF /* TEMeetingRolesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingRolesManager.h; sourceTree = "<group>"; };
+		CB4F63111E70FEBE006204BF /* TEMeetingRolesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingRolesManager.m; sourceTree = "<group>"; };
+		CB4F63131E70FF9C006204BF /* TEMeetingRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingRole.h; sourceTree = "<group>"; };
+		CB4F63141E70FF9C006204BF /* TEMeetingRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingRole.m; sourceTree = "<group>"; };
+		CB4F63161E7101E6006204BF /* TEMeetingControlAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingControlAttachment.h; sourceTree = "<group>"; };
+		CB4F63171E7101E6006204BF /* TEMeetingControlAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingControlAttachment.m; sourceTree = "<group>"; };
+		CB4F63191E71027C006204BF /* TEMeetingMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingMessageHandler.h; sourceTree = "<group>"; };
+		CB4F631A1E71027C006204BF /* TEMeetingMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingMessageHandler.m; sourceTree = "<group>"; };
+		CB4F631C1E71039D006204BF /* TESessionMsgConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TESessionMsgConverter.h; path = ../Manager/TESessionMsgConverter.h; sourceTree = "<group>"; };
+		CB4F631D1E71039D006204BF /* TESessionMsgConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TESessionMsgConverter.m; path = ../Manager/TESessionMsgConverter.m; sourceTree = "<group>"; };
+		CB4F631F1E7103CB006204BF /* TELocationPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELocationPoint.h; sourceTree = "<group>"; };
+		CB4F63201E7103CB006204BF /* TELocationPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELocationPoint.m; sourceTree = "<group>"; };
+		CB4F63231E72A6C5006204BF /* TELessonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELessonViewController.h; sourceTree = "<group>"; };
+		CB4F63241E72A6C5006204BF /* TELessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELessonViewController.m; sourceTree = "<group>"; };
+		CB4F63261E72A80D006204BF /* TEMeetingNetCallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingNetCallManager.h; sourceTree = "<group>"; };
+		CB4F63271E72A80D006204BF /* TEMeetingNetCallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingNetCallManager.m; sourceTree = "<group>"; };
+		CB4F63291E7644E0006204BF /* TELessonVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELessonVideoView.h; sourceTree = "<group>"; };
+		CB4F632A1E7644E0006204BF /* TELessonVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELessonVideoView.m; sourceTree = "<group>"; };
+		CB4F632E1E7645B2006204BF /* color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = color.c; sourceTree = "<group>"; };
+		CB4F632F1E7645B2006204BF /* common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = common.c; sourceTree = "<group>"; };
+		CB4F63311E7645B2006204BF /* rgb.fsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rgb.fsh.c; sourceTree = "<group>"; };
+		CB4F63321E7645B2006204BF /* yuv420p.fsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yuv420p.fsh.c; sourceTree = "<group>"; };
+		CB4F63331E7645B2006204BF /* yuv420sp.fsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yuv420sp.fsh.c; sourceTree = "<group>"; };
+		CB4F63341E7645B2006204BF /* yuv444p10le.fsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yuv444p10le.fsh.c; sourceTree = "<group>"; };
+		CB4F63351E7645B2006204BF /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = internal.h; sourceTree = "<group>"; };
+		CB4F63361E7645B2006204BF /* renderer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer.c; sourceTree = "<group>"; };
+		CB4F63371E7645B2006204BF /* renderer_rgb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_rgb.c; sourceTree = "<group>"; };
+		CB4F63381E7645B2006204BF /* renderer_yuv420p.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_yuv420p.c; sourceTree = "<group>"; };
+		CB4F63391E7645B2006204BF /* renderer_yuv420sp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_yuv420sp.c; sourceTree = "<group>"; };
+		CB4F633A1E7645B2006204BF /* renderer_yuv420sp_vtb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = renderer_yuv420sp_vtb.m; sourceTree = "<group>"; };
+		CB4F633B1E7645B2006204BF /* renderer_yuv444p10le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderer_yuv444p10le.c; sourceTree = "<group>"; };
+		CB4F633C1E7645B2006204BF /* shader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
+		CB4F633E1E7645B2006204BF /* mvp.vsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mvp.vsh.c; sourceTree = "<group>"; };
+		CB4F633F1E7645B2006204BF /* ijksdl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl.h; sourceTree = "<group>"; };
+		CB4F63401E7645B2006204BF /* ijksdl_class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_class.h; sourceTree = "<group>"; };
+		CB4F63411E7645B2006204BF /* ijksdl_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_endian.h; sourceTree = "<group>"; };
+		CB4F63421E7645B2006204BF /* ijksdl_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_error.h; sourceTree = "<group>"; };
+		CB4F63431E7645B2006204BF /* ijksdl_fourcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_fourcc.h; sourceTree = "<group>"; };
+		CB4F63441E7645B2006204BF /* ijksdl_gles2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_gles2.h; sourceTree = "<group>"; };
+		CB4F63451E7645B2006204BF /* ijksdl_inc_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_inc_internal.h; sourceTree = "<group>"; };
+		CB4F63461E7645B2006204BF /* ijksdl_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_log.h; sourceTree = "<group>"; };
+		CB4F63471E7645B2006204BF /* ijksdl_misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_misc.h; sourceTree = "<group>"; };
+		CB4F63481E7645B2006204BF /* ijksdl_mutex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ijksdl_mutex.c; sourceTree = "<group>"; };
+		CB4F63491E7645B2006204BF /* ijksdl_mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_mutex.h; sourceTree = "<group>"; };
+		CB4F634A1E7645B2006204BF /* ijksdl_stdinc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ijksdl_stdinc.c; sourceTree = "<group>"; };
+		CB4F634B1E7645B2006204BF /* ijksdl_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_stdinc.h; sourceTree = "<group>"; };
+		CB4F634C1E7645B2006204BF /* ijksdl_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_thread.h; sourceTree = "<group>"; };
+		CB4F634D1E7645B2006204BF /* ijksdl_timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ijksdl_timer.c; sourceTree = "<group>"; };
+		CB4F634E1E7645B2006204BF /* ijksdl_timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_timer.h; sourceTree = "<group>"; };
+		CB4F634F1E7645B2006204BF /* ijksdl_video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_video.h; sourceTree = "<group>"; };
+		CB4F63501E7645B2006204BF /* ijksdl_vout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_vout.h; sourceTree = "<group>"; };
+		CB4F63511E7645B2006204BF /* ijksdl_vout_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_vout_internal.h; sourceTree = "<group>"; };
+		CB4F63531E7645B2006204BF /* ijksdl_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_ios.h; sourceTree = "<group>"; };
+		CB4F63541E7645B2006204BF /* ijksdl_vout_overlay_videotoolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ijksdl_vout_overlay_videotoolbox.h; sourceTree = "<group>"; };
+		CB4F63551E7645B2006204BF /* ijksdl_vout_overlay_videotoolbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ijksdl_vout_overlay_videotoolbox.m; sourceTree = "<group>"; };
+		CB4F63561E7645B2006204BF /* IJKSDLGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJKSDLGLView.h; sourceTree = "<group>"; };
+		CB4F63571E7645B2006204BF /* IJKSDLGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJKSDLGLView.m; sourceTree = "<group>"; };
+		CB4F636E1E764842006204BF /* TEGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEGLView.h; sourceTree = "<group>"; };
+		CB4F636F1E764842006204BF /* TEGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEGLView.m; sourceTree = "<group>"; };
+		CB4F63711E76A6B3006204BF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CB4F63731E7918D6006204BF /* TEWhiteboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardViewController.h; sourceTree = "<group>"; };
+		CB4F63741E7918D6006204BF /* TEWhiteboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardViewController.m; sourceTree = "<group>"; };
+		CB4F63761E791945006204BF /* TEMeetingRTSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEMeetingRTSManager.h; sourceTree = "<group>"; };
+		CB4F63771E791945006204BF /* TEMeetingRTSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEMeetingRTSManager.m; sourceTree = "<group>"; };
+		CB4F63791E79545D006204BF /* TEWhiteboardCmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardCmdHandler.h; sourceTree = "<group>"; };
+		CB4F637A1E79545D006204BF /* TEWhiteboardCmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardCmdHandler.m; sourceTree = "<group>"; };
+		CB4F637C1E7954A2006204BF /* TEWhiteboardPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardPoint.h; sourceTree = "<group>"; };
+		CB4F637D1E7954A2006204BF /* TEWhiteboardPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardPoint.m; sourceTree = "<group>"; };
+		CB4F637F1E79552E006204BF /* TEWhiteboardCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardCommand.h; sourceTree = "<group>"; };
+		CB4F63801E79552E006204BF /* TEWhiteboardCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardCommand.m; sourceTree = "<group>"; };
+		CB4F63821E7A38A0006204BF /* TEWhiteboardDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardDrawView.h; sourceTree = "<group>"; };
+		CB4F63831E7A38A0006204BF /* TEWhiteboardDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardDrawView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -974,6 +1079,7 @@
 		CB338E401E4C5064007D29A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CB4F63711E76A6B3006204BF /* Settings.bundle */,
 				CB338E411E4C5064007D29A1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -1032,6 +1138,7 @@
 		CB338E591E4C5519007D29A1 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				CB4F63221E72A6A1006204BF /* 在线教学 */,
 				CB3391C11E5C1384007D29A1 /* 个人中心视图 */,
 				CB3391C61E5C1384007D29A1 /* 课程视图 */,
 				CB3391CB1E5C1384007D29A1 /* 消息视图 */,
@@ -1831,6 +1938,8 @@
 		CB3390F01E4DC17E007D29A1 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				CB4F631C1E71039D006204BF /* TESessionMsgConverter.h */,
+				CB4F631D1E71039D006204BF /* TESessionMsgConverter.m */,
 				CB3390F11E4DC1A5007D29A1 /* TECustomAttachmentDecoder.h */,
 				CB3390F21E4DC1A5007D29A1 /* TECustomAttachmentDecoder.m */,
 				CB3390F41E4DC21E007D29A1 /* TECustomAttachmentDefines.h */,
@@ -1838,8 +1947,16 @@
 				CB3390F61E4DC343007D29A1 /* TEJanKenPonAttachment.m */,
 				CB3390F81E4DC556007D29A1 /* TEChartletAttachment.h */,
 				CB3390F91E4DC556007D29A1 /* TEChartletAttachment.m */,
-				CB3390FB1E4DC600007D29A1 /* TEMeetingControlAttachment.h */,
-				CB3390FC1E4DC600007D29A1 /* TEMeetingControlAttachment.m */,
+				CB4F63131E70FF9C006204BF /* TEMeetingRole.h */,
+				CB4F63141E70FF9C006204BF /* TEMeetingRole.m */,
+				CB4F63161E7101E6006204BF /* TEMeetingControlAttachment.h */,
+				CB4F63171E7101E6006204BF /* TEMeetingControlAttachment.m */,
+				CB4F631F1E7103CB006204BF /* TELocationPoint.h */,
+				CB4F63201E7103CB006204BF /* TELocationPoint.m */,
+				CB4F637C1E7954A2006204BF /* TEWhiteboardPoint.h */,
+				CB4F637D1E7954A2006204BF /* TEWhiteboardPoint.m */,
+				CB4F637F1E79552E006204BF /* TEWhiteboardCommand.h */,
+				CB4F63801E79552E006204BF /* TEWhiteboardCommand.m */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -1855,6 +1972,16 @@
 				CB4F62FE1E6FECC4006204BF /* TEViewManager.m */,
 				CB3390FF1E519C78007D29A1 /* TEMeetingManager.h */,
 				CB3391001E519C78007D29A1 /* TEMeetingManager.m */,
+				CB4F63101E70FEBE006204BF /* TEMeetingRolesManager.h */,
+				CB4F63111E70FEBE006204BF /* TEMeetingRolesManager.m */,
+				CB4F63191E71027C006204BF /* TEMeetingMessageHandler.h */,
+				CB4F631A1E71027C006204BF /* TEMeetingMessageHandler.m */,
+				CB4F63261E72A80D006204BF /* TEMeetingNetCallManager.h */,
+				CB4F63271E72A80D006204BF /* TEMeetingNetCallManager.m */,
+				CB4F63761E791945006204BF /* TEMeetingRTSManager.h */,
+				CB4F63771E791945006204BF /* TEMeetingRTSManager.m */,
+				CB4F63791E79545D006204BF /* TEWhiteboardCmdHandler.h */,
+				CB4F637A1E79545D006204BF /* TEWhiteboardCmdHandler.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2251,6 +2378,102 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		CB4F63221E72A6A1006204BF /* 在线教学 */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F632C1E7645B2006204BF /* ijksdl */,
+				CB4F63231E72A6C5006204BF /* TELessonViewController.h */,
+				CB4F63241E72A6C5006204BF /* TELessonViewController.m */,
+				CB4F63291E7644E0006204BF /* TELessonVideoView.h */,
+				CB4F632A1E7644E0006204BF /* TELessonVideoView.m */,
+				CB4F636E1E764842006204BF /* TEGLView.h */,
+				CB4F636F1E764842006204BF /* TEGLView.m */,
+				CB4F63731E7918D6006204BF /* TEWhiteboardViewController.h */,
+				CB4F63741E7918D6006204BF /* TEWhiteboardViewController.m */,
+				CB4F63821E7A38A0006204BF /* TEWhiteboardDrawView.h */,
+				CB4F63831E7A38A0006204BF /* TEWhiteboardDrawView.m */,
+			);
+			path = "在线教学";
+			sourceTree = "<group>";
+		};
+		CB4F632C1E7645B2006204BF /* ijksdl */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F632D1E7645B2006204BF /* gles2 */,
+				CB4F633F1E7645B2006204BF /* ijksdl.h */,
+				CB4F63401E7645B2006204BF /* ijksdl_class.h */,
+				CB4F63411E7645B2006204BF /* ijksdl_endian.h */,
+				CB4F63421E7645B2006204BF /* ijksdl_error.h */,
+				CB4F63431E7645B2006204BF /* ijksdl_fourcc.h */,
+				CB4F63441E7645B2006204BF /* ijksdl_gles2.h */,
+				CB4F63451E7645B2006204BF /* ijksdl_inc_internal.h */,
+				CB4F63461E7645B2006204BF /* ijksdl_log.h */,
+				CB4F63471E7645B2006204BF /* ijksdl_misc.h */,
+				CB4F63481E7645B2006204BF /* ijksdl_mutex.c */,
+				CB4F63491E7645B2006204BF /* ijksdl_mutex.h */,
+				CB4F634A1E7645B2006204BF /* ijksdl_stdinc.c */,
+				CB4F634B1E7645B2006204BF /* ijksdl_stdinc.h */,
+				CB4F634C1E7645B2006204BF /* ijksdl_thread.h */,
+				CB4F634D1E7645B2006204BF /* ijksdl_timer.c */,
+				CB4F634E1E7645B2006204BF /* ijksdl_timer.h */,
+				CB4F634F1E7645B2006204BF /* ijksdl_video.h */,
+				CB4F63501E7645B2006204BF /* ijksdl_vout.h */,
+				CB4F63511E7645B2006204BF /* ijksdl_vout_internal.h */,
+				CB4F63521E7645B2006204BF /* ios */,
+			);
+			path = ijksdl;
+			sourceTree = "<group>";
+		};
+		CB4F632D1E7645B2006204BF /* gles2 */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F632E1E7645B2006204BF /* color.c */,
+				CB4F632F1E7645B2006204BF /* common.c */,
+				CB4F63301E7645B2006204BF /* fsh */,
+				CB4F63351E7645B2006204BF /* internal.h */,
+				CB4F63361E7645B2006204BF /* renderer.c */,
+				CB4F63371E7645B2006204BF /* renderer_rgb.c */,
+				CB4F63381E7645B2006204BF /* renderer_yuv420p.c */,
+				CB4F63391E7645B2006204BF /* renderer_yuv420sp.c */,
+				CB4F633A1E7645B2006204BF /* renderer_yuv420sp_vtb.m */,
+				CB4F633B1E7645B2006204BF /* renderer_yuv444p10le.c */,
+				CB4F633C1E7645B2006204BF /* shader.c */,
+				CB4F633D1E7645B2006204BF /* vsh */,
+			);
+			path = gles2;
+			sourceTree = "<group>";
+		};
+		CB4F63301E7645B2006204BF /* fsh */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F63311E7645B2006204BF /* rgb.fsh.c */,
+				CB4F63321E7645B2006204BF /* yuv420p.fsh.c */,
+				CB4F63331E7645B2006204BF /* yuv420sp.fsh.c */,
+				CB4F63341E7645B2006204BF /* yuv444p10le.fsh.c */,
+			);
+			path = fsh;
+			sourceTree = "<group>";
+		};
+		CB4F633D1E7645B2006204BF /* vsh */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F633E1E7645B2006204BF /* mvp.vsh.c */,
+			);
+			path = vsh;
+			sourceTree = "<group>";
+		};
+		CB4F63521E7645B2006204BF /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				CB4F63531E7645B2006204BF /* ijksdl_ios.h */,
+				CB4F63541E7645B2006204BF /* ijksdl_vout_overlay_videotoolbox.h */,
+				CB4F63551E7645B2006204BF /* ijksdl_vout_overlay_videotoolbox.m */,
+				CB4F63561E7645B2006204BF /* IJKSDLGLView.h */,
+				CB4F63571E7645B2006204BF /* IJKSDLGLView.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2320,6 +2543,7 @@
 				CB3390361E4C551A007D29A1 /* NIMKitResource.bundle in Resources */,
 				CB338E4B1E4C5064007D29A1 /* Main.storyboard in Resources */,
 				CB3390351E4C551A007D29A1 /* NIMKitEmoticon.bundle in Resources */,
+				CB4F63721E76A6B3006204BF /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2410,7 +2634,9 @@
 				CB4F63011E6FECC4006204BF /* TEViewManager.m in Sources */,
 				CB4F62E91E6EAC36006204BF /* NSString+TEPrice.m in Sources */,
 				CB3390BF1E4C7543007D29A1 /* NIMWebImageDecoder.m in Sources */,
+				CB4F63751E7918D6006204BF /* TEWhiteboardViewController.m in Sources */,
 				CB3391E51E5D3444007D29A1 /* TESettingSwitchCell.m in Sources */,
+				CB4F635D1E7645B2006204BF /* yuv444p10le.fsh.c in Sources */,
 				CB33902C1E4C551A007D29A1 /* NIMTeamMemberCardHeaderCell.m in Sources */,
 				CB338FCE1E4C551A007D29A1 /* NIMCommonTableData.m in Sources */,
 				CB3390DD1E4DA71F007D29A1 /* UIImage+TE.m in Sources */,
@@ -2426,9 +2652,12 @@
 				CB3391BA1E5C099E007D29A1 /* TELoginData.m in Sources */,
 				CB338FD21E4C551A007D29A1 /* NIMKitSwitcherCell.m in Sources */,
 				CB3390841E4C6C8D007D29A1 /* TEUserUtil.m in Sources */,
+				CB4F63691E7645B3006204BF /* ijksdl_vout_overlay_videotoolbox.m in Sources */,
 				CB4F62E31E6E9A5E006204BF /* TEGetGoodsApi.m in Sources */,
 				CB338FDF1E4C551A007D29A1 /* NIMGroupedUsrInfo.m in Sources */,
 				CB338FE21E4C551A007D29A1 /* NIMContactSelectConfig.m in Sources */,
+				CB4F637B1E79545D006204BF /* TEWhiteboardCmdHandler.m in Sources */,
+				CB4F63661E7645B3006204BF /* ijksdl_mutex.c in Sources */,
 				CB338E451E4C5064007D29A1 /* AppDelegate.m in Sources */,
 				CB3391AD1E5AC2C0007D29A1 /* TERegisterViewController.m in Sources */,
 				CB3390BD1E4C7543007D29A1 /* NIMImageCache.m in Sources */,
@@ -2439,8 +2668,10 @@
 				CB4F62F51E6FA98B006204BF /* TEPayWayCell.m in Sources */,
 				CB3391D51E5C1450007D29A1 /* TESettingViewController.m in Sources */,
 				CB338FFE1E4C551A007D29A1 /* NIMTipContentConfig.m in Sources */,
+				CB4F63211E7103CB006204BF /* TELocationPoint.m in Sources */,
 				CB338FC81E4C551A007D29A1 /* M80AttributedLabel+NIMKit.m in Sources */,
 				CB4F62FF1E6FECC4006204BF /* TEOrderLessonManager.m in Sources */,
+				CB4F635E1E7645B2006204BF /* renderer.c in Sources */,
 				CB3390331E4C551A007D29A1 /* NIMPinyinConverter.m in Sources */,
 				CB338FD61E4C551A007D29A1 /* NIMBadgeView.m in Sources */,
 				CB3391FA1E5E912C007D29A1 /* TEUser.m in Sources */,
@@ -2448,6 +2679,7 @@
 				CB338FE01E4C551A007D29A1 /* NIMContactDataItem.m in Sources */,
 				CB3390251E4C551A007D29A1 /* NIMNormalTeamCardViewController.m in Sources */,
 				CB4F62E01E6E87F1006204BF /* TECourseContentCell.m in Sources */,
+				CB4F631E1E71039D006204BF /* TESessionMsgConverter.m in Sources */,
 				CB3391A71E5AC0FC007D29A1 /* TELoginViewController.m in Sources */,
 				CB3390EF1E4DB854007D29A1 /* UIViewController+TE.m in Sources */,
 				CB3390181E4C551A007D29A1 /* NIMSessionVideoContentView.m in Sources */,
@@ -2459,6 +2691,8 @@
 				CB4F62EC1E6EB191006204BF /* TEGetPurchaseOrderApi.m in Sources */,
 				CB338FFF1E4C551A007D29A1 /* NIMUnsupportContentConfig.m in Sources */,
 				CB3390281E4C551A007D29A1 /* NIMTeamMemberListViewController.m in Sources */,
+				CB4F635B1E7645B2006204BF /* yuv420p.fsh.c in Sources */,
+				CB4F637E1E7954A2006204BF /* TEWhiteboardPoint.m in Sources */,
 				CB3392551E694BFF007D29A1 /* TECourse.m in Sources */,
 				CB3390E91E4DB291007D29A1 /* UIScrollView+TEPullToRefresh.m in Sources */,
 				CB3391FD1E5E9143007D29A1 /* TELessonCell.m in Sources */,
@@ -2475,21 +2709,25 @@
 				CB3390031E4C551A007D29A1 /* NIMKitMessageAtModel.m in Sources */,
 				CB3390D71E4DA618007D29A1 /* UIActionSheet+TEBlock.m in Sources */,
 				CB338FEB1E4C551A007D29A1 /* NIMInputEmoticonManager.m in Sources */,
+				CB4F63811E79552E006204BF /* TEWhiteboardCommand.m in Sources */,
 				CB338FF21E4C551A007D29A1 /* NIMKitInfo.m in Sources */,
 				CB4F63001E6FECC4006204BF /* TEPurchaseManager.m in Sources */,
 				CB3392171E63C926007D29A1 /* TEOrderTimeCell.m in Sources */,
 				CB3392521E694BF5007D29A1 /* TEUnit.m in Sources */,
+				CB4F63181E7101E6006204BF /* TEMeetingControlAttachment.m in Sources */,
 				CB3392201E6435D1007D29A1 /* TELessonHeaderView.m in Sources */,
 				CB338FFA1E4C551A007D29A1 /* NIMImageContentConfig.m in Sources */,
 				CB3390301E4C551A007D29A1 /* NIMKitFileLocationHelper.m in Sources */,
 				CB3391011E519C78007D29A1 /* TEMeetingManager.m in Sources */,
 				CB4F62D41E6D78E7006204BF /* TEPurchaseCell.m in Sources */,
+				CB4F63701E764842006204BF /* TEGLView.m in Sources */,
 				CB338FD31E4C551A007D29A1 /* NIMKitUIConfig.m in Sources */,
 				CB3390201E4C551A007D29A1 /* NIMTeamCardRowItem.m in Sources */,
 				CB3392341E66C6DA007D29A1 /* TELoginApi.m in Sources */,
 				CB338FCB1E4C551A007D29A1 /* UIImage+NIM.m in Sources */,
 				CB3390C51E4C7543007D29A1 /* UIImage+NIMGIF.m in Sources */,
 				CB338FDA1E4C551A007D29A1 /* NIMLoadProgressView.m in Sources */,
+				CB4F63121E70FEBE006204BF /* TEMeetingRolesManager.m in Sources */,
 				CB3390C91E4C7543007D29A1 /* NIMProgressHUD.m in Sources */,
 				CB3390061E4C551A007D29A1 /* NIMKitAudioCenter.m in Sources */,
 				CB338FDE1E4C551A007D29A1 /* NIMGroupedDataCollection.m in Sources */,
@@ -2497,13 +2735,20 @@
 				CB3390051E4C551A007D29A1 /* NIMMessageMaker.m in Sources */,
 				CB33920B1E6025AD007D29A1 /* TEChooseLessonTopHeaderView.m in Sources */,
 				CB4F62F81E6FB3AA006204BF /* TEPayOrderApi.m in Sources */,
+				CB4F63151E70FF9C006204BF /* TEMeetingRole.m in Sources */,
 				CB338FED1E4C551A007D29A1 /* NIMInputEmoticonTabView.m in Sources */,
+				CB4F635F1E7645B2006204BF /* renderer_rgb.c in Sources */,
 				CB338FE71E4C551A007D29A1 /* NIMInputAtCache.m in Sources */,
 				CB3390D41E4DA5B1007D29A1 /* NSString+TE.m in Sources */,
 				CB33901D1E4C551A007D29A1 /* NIMSessionListCell.m in Sources */,
+				CB4F635C1E7645B2006204BF /* yuv420sp.fsh.c in Sources */,
+				CB4F63611E7645B2006204BF /* renderer_yuv420sp.c in Sources */,
 				CB4F62DD1E6E82C5006204BF /* TECourseContentApi.m in Sources */,
+				CB4F63631E7645B2006204BF /* renderer_yuv444p10le.c in Sources */,
+				CB4F636A1E7645B3006204BF /* IJKSDLGLView.m in Sources */,
 				CB33901B1E4C551A007D29A1 /* NIMSessionListDefaultConfig.m in Sources */,
 				CB338FE41E4C551A007D29A1 /* NIMContactSelectViewController.m in Sources */,
+				CB4F63621E7645B2006204BF /* renderer_yuv420sp_vtb.m in Sources */,
 				CB3390341E4C551A007D29A1 /* NIMSpellingCenter.m in Sources */,
 				CB3390171E4C551A007D29A1 /* NIMSessionUnknowContentView.m in Sources */,
 				CB4F62D71E6D7907006204BF /* TEPurchaseHeaderView.m in Sources */,
@@ -2515,6 +2760,7 @@
 				CB33921A1E63EF2A007D29A1 /* TEOrderManager.m in Sources */,
 				CB338FCA1E4C551A007D29A1 /* NSString+NIMKit.m in Sources */,
 				CB33924C1E69460E007D29A1 /* TECommonPostTokenApi.m in Sources */,
+				CB4F631B1E71027C006204BF /* TEMeetingMessageHandler.m in Sources */,
 				CB4F62E61E6E9B49006204BF /* TEGoods.m in Sources */,
 				CB33921D1E64079A007D29A1 /* TEOrderTimeHeaderView.m in Sources */,
 				CB338FF61E4C551A007D29A1 /* NIMTimestampModel.m in Sources */,
@@ -2528,7 +2774,9 @@
 				CB3391BD1E5C0AB0007D29A1 /* TELoginManager.m in Sources */,
 				CB3392141E63C6F2007D29A1 /* TEChooseTimeViewController.m in Sources */,
 				CB4F62F21E6EC6C9006204BF /* TEPurchaseOrder.m in Sources */,
+				CB4F63671E7645B3006204BF /* ijksdl_stdinc.c in Sources */,
 				CB338FCF1E4C551A007D29A1 /* NIMCommonTableDelegate.m in Sources */,
+				CB4F63251E72A6C5006204BF /* TELessonViewController.m in Sources */,
 				CB33901C1E4C551A007D29A1 /* NIMSessionListViewController.m in Sources */,
 				CB338FEE1E4C551A007D29A1 /* NIMInputMoreContainerView.m in Sources */,
 				CB3390F71E4DC343007D29A1 /* TEJanKenPonAttachment.m in Sources */,
@@ -2538,7 +2786,9 @@
 				CB3390E61E4DB174007D29A1 /* UIScrollView+TEDirection.m in Sources */,
 				CB338FDB1E4C551A007D29A1 /* NIMMemberGroupView.m in Sources */,
 				CB4F62C81E6D5587006204BF /* TEUserInfoApi.m in Sources */,
+				CB4F63681E7645B3006204BF /* ijksdl_timer.c in Sources */,
 				CB338FE51E4C551A007D29A1 /* NIMGrowingInternalTextView.m in Sources */,
+				CB4F63651E7645B2006204BF /* mvp.vsh.c in Sources */,
 				CB3390C31E4C7543007D29A1 /* NIMWebImagePrefetcher.m in Sources */,
 				CB3390111E4C551A007D29A1 /* NIMSessionImageContentView.m in Sources */,
 				CB3390811E4C6C81007D29A1 /* TETimerHolder.m in Sources */,
@@ -2551,9 +2801,11 @@
 				CB3390BC1E4C7543007D29A1 /* NSMutableAttributedString+NIM.m in Sources */,
 				CB3391E21E5C38D0007D29A1 /* TESettingPortraitCell.m in Sources */,
 				CB338FEC1E4C551A007D29A1 /* NIMInputEmoticonParser.m in Sources */,
+				CB4F63781E791945006204BF /* TEMeetingRTSManager.m in Sources */,
 				CB3392021E5FDC8E007D29A1 /* TEChooseLessonViewController.m in Sources */,
 				CB3390271E4C551A007D29A1 /* NIMTeamMemberCardViewController.m in Sources */,
 				CB338FF51E4C551A007D29A1 /* NIMMessageModel.m in Sources */,
+				CB4F63581E7645B2006204BF /* color.c in Sources */,
 				CB33920E1E60335C007D29A1 /* TEChooseTeacherViewController.m in Sources */,
 				CB3390231E4C551A007D29A1 /* NIMAdvancedTeamCardViewController.m in Sources */,
 				CB3390041E4C551A007D29A1 /* NIMMessageCellFactory.m in Sources */,
@@ -2576,13 +2828,18 @@
 				CB3392111E603DE9007D29A1 /* TEChooseTeacherCell.m in Sources */,
 				CB3390F31E4DC1A5007D29A1 /* TECustomAttachmentDecoder.m in Sources */,
 				CB338FDD1E4C551A007D29A1 /* NIMContactDataCell.m in Sources */,
+				CB4F63281E72A80D006204BF /* TEMeetingNetCallManager.m in Sources */,
 				CB33923A1E67ECE9007D29A1 /* TELoginInput.m in Sources */,
 				CB3390071E4C551A007D29A1 /* NIMSessionConfigurator.m in Sources */,
 				CB3391F41E5D9C89007D29A1 /* TEResetMobileViewController.m in Sources */,
+				CB4F63641E7645B2006204BF /* shader.c in Sources */,
+				CB4F63601E7645B2006204BF /* renderer_yuv420p.c in Sources */,
 				CB3390021E4C551A007D29A1 /* NIMKitLocationPoint.m in Sources */,
 				CB3392581E69748E007D29A1 /* TEPeriod.m in Sources */,
 				CB338FF41E4C551A007D29A1 /* NIMMediaItem.m in Sources */,
+				CB4F635A1E7645B2006204BF /* rgb.fsh.c in Sources */,
 				CB3391B21E5BE8E1007D29A1 /* TENavigationViewController.m in Sources */,
+				CB4F632B1E7644E0006204BF /* TELessonVideoView.m in Sources */,
 				CB338FE11E4C551A007D29A1 /* NIMContactPickedView.m in Sources */,
 				CB33902A1E4C551A007D29A1 /* NIMTeamAnnouncementListCell.m in Sources */,
 				CB3392051E5FFC37007D29A1 /* TEChooseLessonCell.m in Sources */,
@@ -2595,12 +2852,13 @@
 				CB338FF31E4C551A007D29A1 /* NIMKitInfoFetchOption.m in Sources */,
 				CB33900C1E4C551A007D29A1 /* NIMSessionTableAdapter.m in Sources */,
 				CB33900A1E4C551A007D29A1 /* NIMSessionLayoutImpl.m in Sources */,
-				CB3390FD1E4DC600007D29A1 /* TEMeetingControlAttachment.m in Sources */,
 				CB3391D81E5C145D007D29A1 /* TEClassListViewController.m in Sources */,
+				CB4F63591E7645B2006204BF /* common.c in Sources */,
 				CB3390291E4C551A007D29A1 /* NIMAdvancedTeamMemberCell.m in Sources */,
 				CB3390C81E4C7543007D29A1 /* NIMIndefiniteAnimatedView.m in Sources */,
 				CB338FD41E4C551A007D29A1 /* NIMKit.m in Sources */,
 				CB3390C11E4C7543007D29A1 /* NIMWebImageDownloaderOperation.m in Sources */,
+				CB4F63841E7A38A0006204BF /* TEWhiteboardDrawView.m in Sources */,
 				CB338FF91E4C551A007D29A1 /* NIMFileContentConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2734,6 +2992,8 @@
 					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMSDK/ExportHeaders/**",
 					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMAVChat/ExportHeaders/**",
 					/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMKit/NIMKit/Vendors,
+					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Sections/在线教学/ijksdl",
+					"/Users/Karl/Code/NIMMeetingDemo/NIMMeetingDemo/Classes/Sections/MeetingRoom/View/ijksdl/gles2/**",
 				);
 				INFOPLIST_FILE = TeleEducation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2768,6 +3028,8 @@
 					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMSDK/ExportHeaders/**",
 					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMAVChat/ExportHeaders/**",
 					/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Vendors/NIMKit/NIMKit/Vendors,
+					"/Users/Karl/Code/TeleEducation/TeleEducation/Classes/Sections/在线教学/ijksdl",
+					"/Users/Karl/Code/NIMMeetingDemo/NIMMeetingDemo/Classes/Sections/MeetingRoom/View/ijksdl/gles2/**",
 				);
 				INFOPLIST_FILE = TeleEducation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

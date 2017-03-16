@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger,TEUserType){
 
 @property (nonatomic,copy) NSString *account;
 @property (nonatomic,copy) NSString *token;
+@property (nonatomic,copy) NSString *nimAccount;
+@property (nonatomic,copy) NSString *nimToken;
 
 @property (nonatomic,assign) TEUserType type;
 @property (nonatomic,copy) NSString *name;

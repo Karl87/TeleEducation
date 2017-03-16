@@ -12,70 +12,37 @@
 
 @interface TEBundleSetting : NSObject
 
-+ (instancetype) sharedConfig;
-/*
- 服务器录制语音
- */
-- (BOOL)serverRecordAudio;
-/*
- 服务器录制视频
- */
-- (BOOL)serverRecordVideo;
-/*
- 自动裁剪画面
- */
-- (BOOL)videochatAutoCropping;
-/*
- 自动旋转视频聊天远端画面
- */
-- (BOOL)videochatAudoRotateRemoteVideo;
-/*
- 视频发送清晰度
- */
-- (NIMNetCallVideoQuality)preferredVideoQuality;
-/*
- 使用后置摄像头开始视频通话
- */
-- (BOOL)startWithBackCamera;
-/*
- 期望的视频编码器
- */
-- (NIMNetCallVideoCodec)preferredVideoEncoder;
-/*
- 期望的视频解码器
- */
-- (NIMNetCallVideoCodec)preferredVideoDecoder;
-/*
- 最大发送视频编码码率
- */
-- (NSUInteger)videoMaxEncodeKbps;
-/*
- 本地录制视频编码码率
- */
-- (NSUInteger)localRecordVideoKbps;
-/*
- 自动结束AudioSession
- */
-- (BOOL)autoDeactivateAudioSession;
-/*
- 降噪开关
- */
-- (BOOL)audioDenoise;
-/*
- 语音检测开关
- */
-- (BOOL)voiceDetect;
-/*
- 是否高清语音
- */
-- (BOOL)preferHDAudio;
-/*
- 互动直播推流混屏模式
- */
-- (NSUInteger)bypassVideoMixMode;
-/*
- 服务器录制白板数据
- */
-- (BOOL)serverRecordWhiteboardData;
-//- (BOOL)testerToolUI;
++ (instancetype)sharedConfig;
+
+- (BOOL)serverRecordAudio;                          //服务器录制语音
+
+- (BOOL)serverRecordVideo;                          //服务器录制视频
+
+- (BOOL)videochatAutoCropping;                      //自动裁剪画面
+
+- (BOOL)videochatAutoRotateRemoteVideo;             //自动旋转视频聊天远端画面
+
+- (NIMNetCallVideoQuality)preferredVideoQuality;    //期望的视频发送清晰度
+
+- (BOOL)startWithBackCamera;                        //使用后置摄像头开始视频通话
+
+- (NIMNetCallVideoCodec)perferredVideoEncoder;      //期望的视频编码器
+
+- (NIMNetCallVideoCodec)perferredVideoDecoder;      //期望的视频解码器
+
+- (NSUInteger)videoMaxEncodeKbps;                   //最大发送视频编码码率
+
+- (NSUInteger)localRecordVideoKbps;                 //本地录制视频码率
+
+- (BOOL)autoDeactivateAudioSession;                 //自动结束AudioSession
+
+- (NSUInteger)audioDenoise;                         //降噪开关
+
+- (NSUInteger)voiceDetect;                          //语音检测开关
+
+- (NSUInteger)bypassVideoMixMode;                   //互动直播推流混屏模式
+
+- (BOOL)serverRecordWhiteboardData;                 //服务器录制白板数据
+
+- (BOOL)testerToolUI;                               //打开测试者菜单@end
 @end

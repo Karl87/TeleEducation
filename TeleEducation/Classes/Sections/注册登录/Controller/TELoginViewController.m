@@ -23,6 +23,9 @@
 @property (nonatomic,strong) UIButton *registerBtn;
 @property (nonatomic,strong) UIImageView *logoView;
 @property (nonatomic,strong) UIImageView *titleView;
+
+@property (nonatomic,strong) UISwitch * teacherSwitch;
+
 @end
 
 @implementation TELoginViewController
@@ -103,6 +106,12 @@
     [_resetPasswordBtn sizeToFit];
     [_resetPasswordBtn addTarget:self action:@selector(resetPasswordBtnHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_resetPasswordBtn];
+    
+    _teacherSwitch = [UISwitch new];
+    _teacherSwitch.on = NO;
+    [_teacherSwitch sizeToFit];
+    [self.view addSubview:_teacherSwitch];
+    
 }
 
 - (void)viewDidLayoutSubviews{
@@ -112,6 +121,9 @@
     _userInput.width = self.view.width - 40;
     _userInput.height = 44;
     _userInput.top = (self.view.height - _userInput.height)/2;
+    
+    _teacherSwitch.left = 20;
+    _teacherSwitch.top = _userInput.top - _teacherSwitch.height - 20;
     
     
     _passwordInput.left = _userInput.left;
@@ -144,7 +156,7 @@
 
 #pragma mark - EventHandler
 - (void)loginBtnActionHandler:(id)sender{
-    [[TELoginManager sharedManager] loginWithUserName:_userInput.text.copy password:[_passwordInput.text.copy MD5String] userType:TEUserTypeStudent];
+    [[TELoginManager sharedManager] loginWithUserName:_userInput.text.copy password:[_passwordInput.text.copy MD5String] userType:_teacherSwitch.on?TEUserTypeTeacher:TEUserTypeStudent];
 }
 - (void)resetPasswordBtnHandler:(UIButton *)button{
     TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] init];

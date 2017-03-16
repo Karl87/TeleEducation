@@ -48,37 +48,54 @@
 - (NSURLRequest *)taskRequest{
     if (![self validate]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSError *error = [NSError errorWithDomain:@"ntes domain" code:NIMLocalErrorCodeInvalidParam userInfo:nil];
+            
+            NSError *error = [NSError errorWithDomain:@"ntes domain"
+                                                 code:NIMLocalErrorCodeInvalidParam
+                                             userInfo:nil];
+            
             self.handler(error,nil);
         });
+        return nil;
+        
     }
     
-    NSString *urlString = [[[TEAppConfig sharedConfig] NIMApiURL] stringByAppendingString:@"/chatroom/creat"];
+    NSString *urlString = [[[TEAppConfig sharedConfig] NIMApiURL] stringByAppendingString:@"/chatroom/create"];
     NSURL *url = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url
+                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                            timeoutInterval:30];
     [request setHTTPMethod:@"Post"];
+    
     [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request addValue:[[NIMSDK sharedSDK] appKey] forHTTPHeaderField:@"appKey"];
     
     NSData *data = [self encodedBody];
+    
     [request setHTTPBody:data];
+    
     return request;
 }
 
 - (void)onGetResponse:(id)jsonObject error:(NSError *)error{
     NSError *resultError = error;
-    NSString *meetinRoomID;
-    if (error == nil &&[jsonObject isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dic = (NSDictionary *)jsonObject;
-        NSInteger code = [dic[@"res"] integerValue];
-        resultError = code == 200 ? nil : [NSError errorWithDomain:@"ntes domain" code:code userInfo:nil];
-        if (resultError == nil) {
-            meetinRoomID = dic[@"msg"];
+    NSString *meetingRoomID;
+    
+    if (error == nil && [jsonObject isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *dict = (NSDictionary *)jsonObject;
+        NSInteger code = [dict jsonInteger:@"res"];
+        resultError = code == 200 ? nil : [NSError errorWithDomain:@"ntes domain"
+                                                              code:code
+                                                          userInfo:nil];
+        if (resultError == nil)
+        {
+            meetingRoomID = [dict jsonString:@"msg"];
         }
     }
+    
     if (self.handler) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.handler(error,meetinRoomID);
+            self.handler(error,meetingRoomID);
         });
     }
 }

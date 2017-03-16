@@ -2,13 +2,14 @@
 //  TEMeetingControlAttachment.m
 //  TeleEducation
 //
-//  Created by Karl on 2017/2/10.
+//  Created by Karl on 2017/3/9.
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
 #import "TEMeetingControlAttachment.h"
 
 @implementation TEMeetingControlAttachment
+
 - (NSString *)encodeAttachment
 {
     

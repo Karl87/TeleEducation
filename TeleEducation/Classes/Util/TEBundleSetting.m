@@ -8,10 +8,10 @@
 
 #import "TEBundleSetting.h"
 
-
 @implementation TEBundleSetting
 
-+ (instancetype)sharedConfig{
++ (instancetype)sharedConfig
+{
     static TEBundleSetting *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -37,7 +37,7 @@
 
 - (BOOL)videochatAutoRotateRemoteVideo
 {
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_auto_rotate_remote_video"] boolValue];
+    return YES;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_auto_rotate_remote_video"] boolValue];
 }
 
 - (NIMNetCallVideoQuality)preferredVideoQuality
@@ -100,7 +100,7 @@
     }
 }
 
-- (BOOL)audioDenoise
+- (NSUInteger)audioDenoise
 {
     id setting = [[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_audio_denoise"];
     
@@ -113,7 +113,7 @@
     
 }
 
-- (BOOL)voiceDetect
+- (NSUInteger)voiceDetect
 {
     id setting = [[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_voice_detect"];
     
@@ -126,28 +126,10 @@
     
 }
 
-- (BOOL)preferHDAudio
-{
-    id setting = [[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_prefer_hd_audio"];
-    
-    if (setting) {
-        return [setting boolValue];
-    }
-    else {
-        return NO;
-    }
-}
 
 - (NSUInteger)bypassVideoMixMode
 {
-    id setting = [[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_bypass_mix_mode"];
-    
-    if (setting) {
-        return [setting integerValue];
-    }
-    else {
-        return NIMNetCallVideoMixModeLatticeAspectFit;
-    }
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"videochat_bypass_mix_mode"] integerValue];
 }
 
 - (BOOL)serverRecordWhiteboardData
@@ -177,7 +159,6 @@
             "videochat_auto_disable_audiosession %zd\n" \
             "videochat_audio_denoise %zd\n" \
             "videochat_voice_detect %zd\n" \
-            "videochat_prefer_hd_audio %zd\n" \
             "videochat_bypass_mix_mode %zd\n" \
             "server_record_rts_data %zd\n" \
             "tester_tool_ui %zd\n" \
@@ -195,11 +176,11 @@
             [self autoDeactivateAudioSession],
             [self audioDenoise],
             [self voiceDetect],
-            [self preferHDAudio],
             [self bypassVideoMixMode],
             [self serverRecordWhiteboardData],
             [self testerToolUI]
             ];
 }
+
 
 @end

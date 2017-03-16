@@ -10,6 +10,8 @@
 
 #define TEAccount      @"account"
 #define TEToken        @"token"
+#define NIMAccount      @"nimaccount"
+#define NIMToken        @"nimtoken"
 
 #define TEType @"type"
 #define TEName @"name"
@@ -27,6 +29,9 @@
     if (self = [super init]) {
         _account = [aDecoder decodeObjectForKey:TEAccount];
         _token = [aDecoder decodeObjectForKey:TEToken];
+        
+        _nimAccount = [aDecoder decodeObjectForKey:NIMAccount];
+        _nimToken = [aDecoder decodeObjectForKey:NIMToken];
         
         _type = [aDecoder decodeIntegerForKey:TEType];
         _name = [aDecoder decodeObjectForKey:TEName];
@@ -47,6 +52,9 @@
     [aCoder encodeObject:[_account length]?_account:@"" forKey:TEAccount];
     [aCoder encodeObject:[_token length]?_token:@"" forKey:TEToken];
     
+    [aCoder encodeObject:[_nimAccount length]?_nimAccount:@"" forKey:NIMAccount];
+    [aCoder encodeObject:[_nimToken length]?_nimToken:@"" forKey:NIMToken];
+    
     [aCoder encodeInteger:_type forKey:TEType];
     [aCoder encodeObject:[_name length]?_name:@"" forKey:TEName];
     [aCoder encodeObject:[_phone length]?_phone:@"" forKey:TEPhone];
@@ -62,7 +70,8 @@
     TELoginData *data = [[[self class] allocWithZone:zone] init];
     data.account = self.account;
     data.token = self.token;
-    
+    data.nimAccount = self.nimAccount;
+    data.nimToken = self.nimToken;
     data.type = self.type;
     data.name = self.name;
     data.phone = self.phone;

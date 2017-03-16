@@ -7,17 +7,21 @@
 //
 
 #import <YTKNetwork/YTKNetwork.h>
+#import "TELoginManager.h"
 
 typedef NS_ENUM(NSInteger,TETokenApiType) {
     TETokenApiTypeGetReservedLessons,
     TETokenApiTypeGetCourses,
     TETokenApiTypeGetTeacheres,
     TETokenApiTypeGetPeriods,
-    TETokenApiTypeOrderLesson
+    TETokenApiTypeOrderLesson,
+    TETokenApiTypeGetLessonsBeReserved,
+    TETokenApiTypeSetNIMID
 };
 
 @interface TECommonPostTokenApi : YTKRequest
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type;
+- (id)initWithToken:(NSString *)token type:(TETokenApiType)type userType:(TEUserType)userType lessonID:(NSInteger)lessonID nimID:(NSString *)nimID;
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type unit:(NSInteger)unit course:(NSInteger)course;
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type teacher:(NSInteger)teacher;
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type unit:(NSInteger)unit course:(NSInteger)course pid:(NSInteger)pid teacher:(NSInteger)teacher date:(NSString*)date period:(NSString *)period timeStamp:(NSTimeInterval)stamp;

@@ -12,6 +12,8 @@
 #import "UIImage+TEColor.h"
 #import "TELesson.h"
 #import "TETeacher.h"
+#import "TEUser.h"
+
 #import "UIImageView+WebCache.h"
 
 @interface TELessonCell ()
@@ -110,8 +112,11 @@
     }
     
     TELesson *lesson = _data;
-    [_teacherName setText:lesson.teacher.name];
-    [_teacherAvatar sd_setImageWithURL:[NSURL URLWithString:lesson.teacher.avatar] placeholderImage:nil];
+    
+    BOOL isStudent = [TELoginManager sharedManager].currentTEUser.type == TEUserTypeStudent?YES:NO;
+    
+    [_teacherName setText:isStudent?lesson.teacher.name:lesson.user.name];
+    [_teacherAvatar sd_setImageWithURL:[NSURL URLWithString:isStudent?lesson.teacher.avatar:lesson.user.avatar] placeholderImage:nil];
     [_teacherName sizeToFit];
     [_titleLab setText:lesson.book];
     [_subTitleLab setText:[NSString stringWithFormat:@"%@ - %@",lesson.unit,lesson.lesson]];

@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TELoginManager.h"
 
 @class TETeacher;
+@class TEUser;
 
 typedef NS_ENUM(NSInteger,TELessonStatus){
     TELessonStatusNormal,
@@ -18,7 +20,7 @@ typedef NS_ENUM(NSInteger,TELessonStatus){
 
 
 @interface TELesson : NSObject
-- (instancetype)initWithDictionary:(NSDictionary *)dic;
+- (instancetype)initWithDictionary:(NSDictionary *)dic userType:(TEUserType)usertype;
 
 @property (nonatomic,copy) NSString *book;
 @property (nonatomic,copy) NSString *unit;
@@ -34,5 +36,7 @@ typedef NS_ENUM(NSInteger,TELessonStatus){
 @property (nonatomic,assign) TELessonStatus status;
 
 @property (nonatomic,strong) TETeacher *teacher;
+@property (nonatomic,strong) TEUser *user;
 
+@property (nonatomic,copy) NSString *nimID;
 @end

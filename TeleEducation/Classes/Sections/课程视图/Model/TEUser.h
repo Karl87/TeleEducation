@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface TEUser : NSObject
-
+- (instancetype)initWithDictionary:(NSDictionary *)dic;
+@property (nonatomic,assign) NSInteger userID;
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *avatar;
 @end

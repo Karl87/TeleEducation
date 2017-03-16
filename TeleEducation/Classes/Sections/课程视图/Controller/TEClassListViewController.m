@@ -23,6 +23,14 @@
 #import "TECourseContentViewController.h"
 #import "TENavigationViewController.h"
 
+#import "TENIMService.h"
+#import "TENIMCreatMeetingTask.h"
+#import "TEMeetingManager.h"
+#import "TEMeetingRolesManager.h"
+#import "NIMAVChat.h"
+
+#import "TELessonViewController.h"
+
 @interface TEClassListViewController ()<UITableViewDelegate,UITableViewDataSource,TELessonCellDelegate>
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *lessonData;
@@ -102,10 +110,94 @@
 //        TENavigationViewController *navi = [[TENavigationViewController alloc] initWithRootViewController:vc];
         [self presentViewController:vc animated:NO completion:nil];
 //        [self.navigationController pushViewController:vc animated:YES];
+    }else if (type == LessonActionTypeStartLesson){
+        TELesson* lesson = _lessonData[indexPath.section][indexPath.row];
+        if ([[TELoginManager sharedManager] currentTEUser].type == TEUserTypeTeacher) {
+            [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:lesson.lessonID];
+        }else{
+            
+            if (lesson.nimID.length) {
+                [self reserveNetCallMeeting:lesson.nimID];
+            }else{
+                NSLog(@"教师尚未开始授课");
+                [self refreshData];
+            }
+            
+        }
+        
     }
     
 }
-#pragma mark - 
+
+- (void)requestChatroomWithLesson:(NSString *)lesson lessonID:(NSInteger)lessonID{
+    [[TENIMService sharedService] requestMeeting:lesson completion:^(NSError *error, NSString *meetingRoomID) {
+        if (!error) {
+            NSLog(@"meetingRoomID:%@",meetingRoomID);
+            
+            TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token type:TETokenApiTypeSetNIMID userType:[TELoginManager sharedManager].currentTEUser.type lessonID:lessonID nimID:meetingRoomID];
+            [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+                NSDictionary *dic = request.responseJSONObject;
+                NSDictionary *content = dic[@"content"];
+                NSInteger status = [content[@"status"] integerValue];
+                
+                if (status == 1) {
+                    [self reserveNetCallMeeting:meetingRoomID];
+                }else{
+                    NSLog(@"修改nim失败");
+                }
+                
+            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                
+            }];
+            
+        }else{
+            NSLog(@"创建聊天室失败");
+        }
+    }];
+}
+- (void)reserveNetCallMeeting:(NSString *)roomId{
+    NIMNetCallMeeting *meeting = [[NIMNetCallMeeting alloc] init];
+    meeting.name = roomId;
+    meeting.type = NIMNetCallTypeVideo;
+    meeting.ext = @"text extend meetingmessage";
+    
+    [[NIMSDK sharedSDK].netCallManager reserveMeeting:meeting completion:^(NIMNetCallMeeting * _Nonnull meeting, NSError * _Nonnull error) {
+        if (!error) {
+            NSLog(@"预约会议成功，%@",meeting.name);
+            [self enterChatRoom:meeting.name];
+        }else{
+            NSLog(@"预约会议失败%ld,%@",error.code,error.description);
+            //417重复操作
+            if (error.code == NIMRemoteErrorCodeExist) {
+                [self enterChatRoom:meeting.name];
+            }
+        }
+    }];
+}
+- (void)enterChatRoom:(NSString *)roomId{
+    NIMChatroomEnterRequest *request = [[NIMChatroomEnterRequest alloc] init];
+    request.roomId = roomId;
+    //允许自定义昵称头像
+    
+    [[[NIMSDK sharedSDK] chatroomManager] enterChatroom:request completion:^(NSError * _Nullable error, NIMChatroom * _Nullable chatroom, NIMChatroomMember * _Nullable me) {
+        if (!error) {
+            NSLog(@"加入会议成功！Chatroom:%@ ,me:%@, creator:%@",chatroom.roomId,me.roomNickname,chatroom.creator);
+            
+            [[TEMeetingManager sharedService] cacheMyInfo:me roomID:request.roomId];
+            [[TEMeetingRolesManager sharedService] startNewMeeting:me withChatroom:chatroom newCreated:[TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher?YES:NO];
+            
+            TELessonViewController *vc = [[TELessonViewController alloc] initWithNIMChatroom:chatroom];
+            [self presentViewController:vc animated:YES completion:nil];
+            
+        }else{
+            NSLog(@"加入会议失败%ld,%@",error.code,error.description);
+            
+            //404对象不存在
+        }
+    }];
+    
+}
+#pragma mark -
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [_lessonData[section] count];
 }
@@ -142,7 +234,15 @@
 }
 - (void)buildData{
     
-    TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token]type:TETokenApiTypeGetReservedLessons];
+    TETokenApiType apiType;
+    
+    if ([TELoginManager sharedManager].currentTEUser.type == TEUserTypeStudent) {
+        apiType = TETokenApiTypeGetReservedLessons;
+    }else if ([TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher){
+        apiType = TETokenApiTypeGetLessonsBeReserved;
+    }
+    
+    TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token]type:apiType];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSLog(@"%@",(NSDictionary *)request.responseJSONObject);
         NSDictionary *dic = request.responseJSONObject;
@@ -175,7 +275,7 @@
                 }];
                 
                 [jsonAry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    TELesson *lesson = [[TELesson alloc] initWithDictionary:(NSDictionary*)obj];
+                    TELesson *lesson = [[TELesson alloc] initWithDictionary:(NSDictionary*)obj userType:[TELoginManager sharedManager].currentTEUser.type];
                     for (NSString *dateStr in _dateData) {
                         if ([dateStr isEqualToString:lesson.date]) {
                             NSMutableArray *lessonAry = [_lessonData objectAtIndex:[_dateData indexOfObject:dateStr]];

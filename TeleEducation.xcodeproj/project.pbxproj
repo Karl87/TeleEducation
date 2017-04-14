@@ -257,7 +257,6 @@
 		CBA3DC401EA0C226007DF4A3 /* TELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB721EA0C226007DF4A3 /* TELoginViewController.m */; };
 		CBA3DC411EA0C226007DF4A3 /* TENavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB741EA0C226007DF4A3 /* TENavigationViewController.m */; };
 		CBA3DC421EA0C226007DF4A3 /* TERegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB761EA0C226007DF4A3 /* TERegisterViewController.m */; };
-		CBA3DC431EA0C226007DF4A3 /* TEResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB781EA0C226007DF4A3 /* TEResetPasswordViewController.m */; };
 		CBA3DC441EA0C226007DF4A3 /* TELoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB7B1EA0C226007DF4A3 /* TELoginManager.m */; };
 		CBA3DC451EA0C226007DF4A3 /* TELoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB7E1EA0C226007DF4A3 /* TELoginData.m */; };
 		CBA3DC461EA0C226007DF4A3 /* TELoginInput.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DB811EA0C226007DF4A3 /* TELoginInput.m */; };
@@ -313,7 +312,6 @@
 		CBA3DC791EA0C226007DF4A3 /* ijksdl_vout_overlay_videotoolbox.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC021EA0C226007DF4A3 /* ijksdl_vout_overlay_videotoolbox.m */; };
 		CBA3DC7A1EA0C226007DF4A3 /* IJKSDLGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC041EA0C226007DF4A3 /* IJKSDLGLView.m */; };
 		CBA3DC7B1EA0C226007DF4A3 /* TEGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC071EA0C226007DF4A3 /* TEGLView.m */; };
-		CBA3DC7C1EA0C226007DF4A3 /* TEIJKSDLGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC091EA0C226007DF4A3 /* TEIJKSDLGLView.m */; };
 		CBA3DC7D1EA0C226007DF4A3 /* TELessonVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC0B1EA0C226007DF4A3 /* TELessonVideoView.m */; };
 		CBA3DC7E1EA0C226007DF4A3 /* TEWhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC0F1EA0C226007DF4A3 /* TEWhiteboardViewController.m */; };
 		CBA3DC7F1EA0C226007DF4A3 /* TEWhiteboardCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC121EA0C226007DF4A3 /* TEWhiteboardCommand.m */; };
@@ -875,8 +873,6 @@
 		CBA3DB741EA0C226007DF4A3 /* TENavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENavigationViewController.m; sourceTree = "<group>"; };
 		CBA3DB751EA0C226007DF4A3 /* TERegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERegisterViewController.h; sourceTree = "<group>"; };
 		CBA3DB761EA0C226007DF4A3 /* TERegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TERegisterViewController.m; sourceTree = "<group>"; };
-		CBA3DB771EA0C226007DF4A3 /* TEResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEResetPasswordViewController.h; sourceTree = "<group>"; };
-		CBA3DB781EA0C226007DF4A3 /* TEResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEResetPasswordViewController.m; sourceTree = "<group>"; };
 		CBA3DB7A1EA0C226007DF4A3 /* TELoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELoginManager.h; sourceTree = "<group>"; };
 		CBA3DB7B1EA0C226007DF4A3 /* TELoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELoginManager.m; sourceTree = "<group>"; };
 		CBA3DB7D1EA0C226007DF4A3 /* TELoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELoginData.h; sourceTree = "<group>"; };
@@ -990,8 +986,6 @@
 		CBA3DC041EA0C226007DF4A3 /* IJKSDLGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJKSDLGLView.m; sourceTree = "<group>"; };
 		CBA3DC061EA0C226007DF4A3 /* TEGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEGLView.h; sourceTree = "<group>"; };
 		CBA3DC071EA0C226007DF4A3 /* TEGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEGLView.m; sourceTree = "<group>"; };
-		CBA3DC081EA0C226007DF4A3 /* TEIJKSDLGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEIJKSDLGLView.h; sourceTree = "<group>"; };
-		CBA3DC091EA0C226007DF4A3 /* TEIJKSDLGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEIJKSDLGLView.m; sourceTree = "<group>"; };
 		CBA3DC0A1EA0C226007DF4A3 /* TELessonVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TELessonVideoView.h; sourceTree = "<group>"; };
 		CBA3DC0B1EA0C226007DF4A3 /* TELessonVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TELessonVideoView.m; sourceTree = "<group>"; };
 		CBA3DC0E1EA0C226007DF4A3 /* TEWhiteboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardViewController.h; sourceTree = "<group>"; };
@@ -2245,8 +2239,6 @@
 				CBA3DB741EA0C226007DF4A3 /* TENavigationViewController.m */,
 				CBA3DB751EA0C226007DF4A3 /* TERegisterViewController.h */,
 				CBA3DB761EA0C226007DF4A3 /* TERegisterViewController.m */,
-				CBA3DB771EA0C226007DF4A3 /* TEResetPasswordViewController.h */,
-				CBA3DB781EA0C226007DF4A3 /* TEResetPasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2578,8 +2570,6 @@
 			children = (
 				CBA3DC061EA0C226007DF4A3 /* TEGLView.h */,
 				CBA3DC071EA0C226007DF4A3 /* TEGLView.m */,
-				CBA3DC081EA0C226007DF4A3 /* TEIJKSDLGLView.h */,
-				CBA3DC091EA0C226007DF4A3 /* TEIJKSDLGLView.m */,
 				CBA3DC0A1EA0C226007DF4A3 /* TELessonVideoView.h */,
 				CBA3DC0B1EA0C226007DF4A3 /* TELessonVideoView.m */,
 			);
@@ -2798,7 +2788,6 @@
 				CB3390DD1E4DA71F007D29A1 /* UIImage+TE.m in Sources */,
 				CB3390721E4C6A31007D29A1 /* TEService.m in Sources */,
 				CBA3DC571EA0C226007DF4A3 /* TESessionChartletContentView.m in Sources */,
-				CBA3DC7C1EA0C226007DF4A3 /* TEIJKSDLGLView.m in Sources */,
 				CB338E481E4C5064007D29A1 /* ViewController.m in Sources */,
 				CBA3D9861E9B63D9007DF4A3 /* UIView+NIMWebCacheOperation.m in Sources */,
 				CB3390841E4C6C8D007D29A1 /* TEUserUtil.m in Sources */,
@@ -2880,7 +2869,6 @@
 				CBA3D9261E9B63D8007DF4A3 /* NIMContactSelectViewController.m in Sources */,
 				CBA3D9881E9B63D9007DF4A3 /* NIMProgressHUD.m in Sources */,
 				CBA3DC651EA0C226007DF4A3 /* TESettingPortraitCell.m in Sources */,
-				CBA3DC431EA0C226007DF4A3 /* TEResetPasswordViewController.m in Sources */,
 				CBA3DC761EA0C226007DF4A3 /* ijksdl_mutex.c in Sources */,
 				CBA3D92E1E9B63D8007DF4A3 /* NIMInputEmoticonParser.m in Sources */,
 				CBA3DC771EA0C226007DF4A3 /* ijksdl_stdinc.c in Sources */,

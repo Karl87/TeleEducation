@@ -126,7 +126,7 @@
 
 - (void)callEnterBackground
 {
-    [self callSelector:@selector(onEnterBackground)];
+//    [self callSelector:@selector(onEnterBackground)];
 }
 
 - (void)callEnterForeground

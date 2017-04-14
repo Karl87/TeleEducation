@@ -18,6 +18,9 @@
 
 #import "YTKNetworkConfig.h"
 #import "TENetworkConfig.h"
+
+#import "TECellLayoutConfig.h"
+
 @interface AppDelegate ()
 
 @end
@@ -37,7 +40,8 @@
     NSLog(@"%@,%@",NIMKey,cerName);
     [[NIMSDK sharedSDK] registerWithAppID:NIMKey cerName:cerName];
     
-    [NIMCustomObject registerCustomDecoder:[TECustomAttachmentDecoder new]];
+    [NIMCustomObject registerCustomDecoder:[[TECustomAttachmentDecoder alloc] init]];
+    [[NIMKit sharedKit] registerLayoutConfig:[TECellLayoutConfig class]];
     [[NIMKit sharedKit] setProvider:[TEDataManager sharedManager]];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

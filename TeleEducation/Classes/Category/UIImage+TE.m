@@ -29,9 +29,9 @@
     if ([chartletId isEqualToString:EmojiCatalog]) {
         return [UIImage imageNamed:imageName];
     }
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"NIMKitResouce" ofType:@"bundle"];
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"NIMKitEmoticon" ofType:@"bundle"];
     
-    NSString *subDirectory = [NSString stringWithFormat:@"%@/%@/%@/%@",EmoticonPath,ChartletChartletCatalogPath,chartletId,ChartletChartletCatalogContentPath];
+    NSString *subDirectory = [NSString stringWithFormat:@"%@/%@/%@",ChartletChartletCatalogPath,chartletId,ChartletChartletCatalogContentPath];
     //先拿2倍图
     NSString *doubleImage  = [imageName stringByAppendingString:@"@2x"];
     NSString *tribleImage  = [imageName stringByAppendingString:@"@3x"];

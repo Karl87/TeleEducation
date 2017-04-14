@@ -17,9 +17,11 @@
 
 - (void)onReceiveCmd:(TEWhiteboardCmdType)type from:(NSString *)sender;
 
-- (void)onReceiveCancelLineIndex:(int)index from:(NSString *)sender;
+- (void)onReceiveCancelLinePage:(int)page from:(NSString *)sender;
 
-- (void)onReceiveClearLineIndex:(int)index from:(NSString *)sender;
+- (void)onReceiveClearLinePage:(int)page from:(NSString *)sender;
+
+- (void)onReceiveClearLineAckPage:(int)page from:(NSString *)sender;
 
 - (void)onReceiveSyncRequestFrom:(NSString *)sender;
 
@@ -34,7 +36,7 @@
 
 - (void)sendMyPoint:(TEWhiteboardPoint *)point;
 
-- (void)sendPureCmd:(TEWhiteboardCmdType)type extraInfo:(id)info to:(NSString *)uid;
+- (void)sendPureCmd:(TEWhiteboardCmdType)type page:(NSInteger)page to:(NSString *)uid;
 
 - (void)sendPureCmd:(TEWhiteboardCmdType)type to:(NSString *)uid;
 

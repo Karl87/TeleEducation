@@ -278,7 +278,7 @@
     NSDictionary *userInfo = notification.userInfo;
     CGRect endFrame   = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect beginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    self.keyBoardFrameTop = endFrame.origin.y;
+    self.keyBoardFrameTop = endFrame.origin.y-44;
     [self willShowKeyboardFromFrame:beginFrame toFrame:endFrame];
 }
 

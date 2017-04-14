@@ -53,8 +53,8 @@
     }
 }
 
-- (void)sendPureCmd:(TEWhiteboardCmdType)type extraInfo:(id)info to:(NSString *)uid{
-    NSString *cmd = [TEWhiteboardCommand pureCommand:type extraInfo:info];
+- (void)sendPureCmd:(TEWhiteboardCmdType)type page:(NSInteger)page to:(NSString *)uid{
+    NSString *cmd = [TEWhiteboardCommand pureCommand:type page:page];
     if (uid == nil) {
         [_cmdsSendBuffer appendString:cmd];
         [self doSendCmds];
@@ -154,7 +154,7 @@
                     point.xScale = [cmd[1] floatValue];
                     point.yScale = [cmd[2] floatValue];
                     point.colorRGB = [cmd[3] intValue];
-                    point.index = [cmd[4] intValue];
+                    point.page = [cmd[4] intValue];
                     if (_delegate) {
                         [_delegate onReceivePoint:point from:sender];
                     }
@@ -168,7 +168,7 @@
             {
                 if (cmd.count == 2) {
                     if(_delegate){
-                        [_delegate onReceiveCancelLineIndex:[cmd[1] intValue] from:sender];
+                        [_delegate onReceiveCancelLinePage:[cmd[1] intValue] from:sender];
                     }
                 }
                 break;
@@ -177,12 +177,20 @@
             {
                 if (cmd.count == 2) {
                     if(_delegate){
-                        [_delegate onReceiveClearLineIndex:[cmd[1] intValue] from:sender];
+                        [_delegate onReceiveClearLinePage:[cmd[1] intValue] from:sender];
                     }
                 }
                 break;
             }
             case TEWhiteboardCmdTypeClearLinesAck:
+            {
+                if (cmd.count == 2) {
+                    if(_delegate){
+                        [_delegate onReceiveClearLineAckPage:[cmd[1] intValue] from:sender];
+                    }
+                }
+                break;
+            }
             case TEWhiteboardCmdTypeSyncPrepare:
             {
                 if (_delegate) {
@@ -235,7 +243,7 @@
                     point.xScale = [cmd[1] floatValue];
                     point.yScale = [cmd[2] floatValue];
                     point.colorRGB = [cmd[3] intValue];
-                    point.index = [cmd[4] intValue];
+                    point.page = [cmd[4] intValue];
                     [points addObject:point];
                 }
                 else {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NIMMessageModel.h"
 
 @class NIMSessionMessageContentView;
 @class NIMMessageModel;

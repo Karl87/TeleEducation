@@ -15,7 +15,10 @@
  *  消息数据
  */
 @property (nonatomic,strong) NIMMessage *message;
-
+/**
+ *  消息对应的布局配置
+ */
+@property (nonatomic,strong) id<NIMCellLayoutConfig> layoutConfig;
 /**
  *  时间戳
  *

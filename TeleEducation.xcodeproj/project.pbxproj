@@ -10,6 +10,10 @@
 		ACEF6F7F6F06305083D6BA1D /* libPods-TeleEducation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 062130AB1ADCA2C4BE60626B /* libPods-TeleEducation.a */; };
 		CB0A5EE11E83A35200F54E19 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0A5EE01E83A35200F54E19 /* 11.png */; };
 		CB0A5EE31E83A35600F54E19 /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0A5EE21E83A35600F54E19 /* 12.png */; };
+		CB1B89081EC16468003EADC5 /* TEWhiteboardColorSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B89071EC16468003EADC5 /* TEWhiteboardColorSelectView.m */; };
+		CB1B890B1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B890A1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m */; };
+		CB1B890E1EC2FFF2003EADC5 /* NSString+TEDate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B890D1EC2FFF2003EADC5 /* NSString+TEDate.m */; };
+		CB1B89141EC5A16E003EADC5 /* TEClassroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B89131EC5A16E003EADC5 /* TEClassroomViewController.m */; };
 		CB338E421E4C5064007D29A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB338E411E4C5064007D29A1 /* main.m */; };
 		CB338E451E4C5064007D29A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB338E441E4C5064007D29A1 /* AppDelegate.m */; };
 		CB338E481E4C5064007D29A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB338E471E4C5064007D29A1 /* ViewController.m */; };
@@ -87,6 +91,9 @@
 		CB4F63011E6FECC4006204BF /* TEViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F62FE1E6FECC4006204BF /* TEViewManager.m */; };
 		CB4F63721E76A6B3006204BF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB4F63711E76A6B3006204BF /* Settings.bundle */; };
 		CB4F637B1E79545D006204BF /* TEWhiteboardCmdHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4F637A1E79545D006204BF /* TEWhiteboardCmdHandler.m */; };
+		CB7240E51ECC16C100016C11 /* TEUploadAvatarApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7240E41ECC16C100016C11 /* TEUploadAvatarApi.m */; };
+		CB7240E81ECEBE7C00016C11 /* TEClassroomRole.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7240E71ECEBE7B00016C11 /* TEClassroomRole.m */; };
+		CB7240EE1ECEC26200016C11 /* TEClassroomRolesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7240ED1ECEC26200016C11 /* TEClassroomRolesManager.m */; };
 		CBA3D90A1E9B63D8007DF4A3 /* M80AttributedLabel+NIMKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3D7D51E9B63D8007DF4A3 /* M80AttributedLabel+NIMKit.m */; };
 		CBA3D90B1E9B63D8007DF4A3 /* NIMExtensionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3D7D71E9B63D8007DF4A3 /* NIMExtensionHelper.m */; };
 		CBA3D90C1E9B63D8007DF4A3 /* NSString+NIMKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3D7D91E9B63D8007DF4A3 /* NSString+NIMKit.m */; };
@@ -327,6 +334,14 @@
 		9670BA84425677E72FAB15D8 /* Pods-TeleEducation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeleEducation.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeleEducation/Pods-TeleEducation.release.xcconfig"; sourceTree = "<group>"; };
 		CB0A5EE01E83A35200F54E19 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
 		CB0A5EE21E83A35600F54E19 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
+		CB1B89061EC16468003EADC5 /* TEWhiteboardColorSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardColorSelectView.h; sourceTree = "<group>"; };
+		CB1B89071EC16468003EADC5 /* TEWhiteboardColorSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardColorSelectView.m; sourceTree = "<group>"; };
+		CB1B89091EC169A6003EADC5 /* TEWhiteboardWidthSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardWidthSelectView.h; sourceTree = "<group>"; };
+		CB1B890A1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardWidthSelectView.m; sourceTree = "<group>"; };
+		CB1B890C1EC2FFF2003EADC5 /* NSString+TEDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TEDate.h"; sourceTree = "<group>"; };
+		CB1B890D1EC2FFF2003EADC5 /* NSString+TEDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TEDate.m"; sourceTree = "<group>"; };
+		CB1B89121EC5A16E003EADC5 /* TEClassroomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEClassroomViewController.h; sourceTree = "<group>"; };
+		CB1B89131EC5A16E003EADC5 /* TEClassroomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEClassroomViewController.m; sourceTree = "<group>"; };
 		CB338E3D1E4C5064007D29A1 /* TeleEducation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleEducation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB338E411E4C5064007D29A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB338E431E4C5064007D29A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -520,6 +535,12 @@
 		CB4F63711E76A6B3006204BF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CB4F63791E79545D006204BF /* TEWhiteboardCmdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardCmdHandler.h; sourceTree = "<group>"; };
 		CB4F637A1E79545D006204BF /* TEWhiteboardCmdHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardCmdHandler.m; sourceTree = "<group>"; };
+		CB7240E31ECC16C100016C11 /* TEUploadAvatarApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEUploadAvatarApi.h; sourceTree = "<group>"; };
+		CB7240E41ECC16C100016C11 /* TEUploadAvatarApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEUploadAvatarApi.m; sourceTree = "<group>"; };
+		CB7240E61ECEBE7B00016C11 /* TEClassroomRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEClassroomRole.h; sourceTree = "<group>"; };
+		CB7240E71ECEBE7B00016C11 /* TEClassroomRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEClassroomRole.m; sourceTree = "<group>"; };
+		CB7240EC1ECEC26200016C11 /* TEClassroomRolesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEClassroomRolesManager.h; sourceTree = "<group>"; };
+		CB7240ED1ECEC26200016C11 /* TEClassroomRolesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEClassroomRolesManager.m; sourceTree = "<group>"; };
 		CBA3D7D41E9B63D8007DF4A3 /* M80AttributedLabel+NIMKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel+NIMKit.h"; sourceTree = "<group>"; };
 		CBA3D7D51E9B63D8007DF4A3 /* M80AttributedLabel+NIMKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "M80AttributedLabel+NIMKit.m"; sourceTree = "<group>"; };
 		CBA3D7D61E9B63D8007DF4A3 /* NIMExtensionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIMExtensionHelper.h; sourceTree = "<group>"; };
@@ -1174,6 +1195,8 @@
 				CB3390EE1E4DB854007D29A1 /* UIViewController+TE.m */,
 				CB4F62E71E6EAC36006204BF /* NSString+TEPrice.h */,
 				CB4F62E81E6EAC36006204BF /* NSString+TEPrice.m */,
+				CB1B890C1EC2FFF2003EADC5 /* NSString+TEDate.h */,
+				CB1B890D1EC2FFF2003EADC5 /* NSString+TEDate.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1454,6 +1477,8 @@
 				CB4F62EB1E6EB191006204BF /* TEGetPurchaseOrderApi.m */,
 				CB4F62F61E6FB3AA006204BF /* TEPayOrderApi.h */,
 				CB4F62F71E6FB3AA006204BF /* TEPayOrderApi.m */,
+				CB7240E31ECC16C100016C11 /* TEUploadAvatarApi.h */,
+				CB7240E41ECC16C100016C11 /* TEUploadAvatarApi.m */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -2082,6 +2107,8 @@
 				CBA3DB301EA0C226007DF4A3 /* TELessonViewController.h */,
 				CBA3DB311EA0C226007DF4A3 /* TELessonViewController.m */,
 				CBA3DB321EA0C226007DF4A3 /* View */,
+				CB1B89121EC5A16E003EADC5 /* TEClassroomViewController.h */,
+				CB1B89131EC5A16E003EADC5 /* TEClassroomViewController.m */,
 			);
 			path = Classroom;
 			sourceTree = "<group>";
@@ -2099,6 +2126,8 @@
 				CBA3DB281EA0C226007DF4A3 /* TEMeetingRolesManager.m */,
 				CBA3DB291EA0C226007DF4A3 /* TEMeetingRTSManager.h */,
 				CBA3DB2A1EA0C226007DF4A3 /* TEMeetingRTSManager.m */,
+				CB7240EC1ECEC26200016C11 /* TEClassroomRolesManager.h */,
+				CB7240ED1ECEC26200016C11 /* TEClassroomRolesManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2108,6 +2137,8 @@
 			children = (
 				CBA3DB2C1EA0C226007DF4A3 /* TEMeetingRole.h */,
 				CBA3DB2D1EA0C226007DF4A3 /* TEMeetingRole.m */,
+				CB7240E61ECEBE7B00016C11 /* TEClassroomRole.h */,
+				CB7240E71ECEBE7B00016C11 /* TEClassroomRole.m */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -2621,6 +2652,10 @@
 			children = (
 				CBA3DC191EA0C226007DF4A3 /* TEWhiteboardDrawView.h */,
 				CBA3DC1A1EA0C226007DF4A3 /* TEWhiteboardDrawView.m */,
+				CB1B89061EC16468003EADC5 /* TEWhiteboardColorSelectView.h */,
+				CB1B89071EC16468003EADC5 /* TEWhiteboardColorSelectView.m */,
+				CB1B89091EC169A6003EADC5 /* TEWhiteboardWidthSelectView.h */,
+				CB1B890A1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2786,6 +2821,7 @@
 				CBA3D9321E9B63D8007DF4A3 /* NIMInputView.m in Sources */,
 				CBA3D9181E9B63D8007DF4A3 /* NIMBadgeView.m in Sources */,
 				CB3390DD1E4DA71F007D29A1 /* UIImage+TE.m in Sources */,
+				CB1B89141EC5A16E003EADC5 /* TEClassroomViewController.m in Sources */,
 				CB3390721E4C6A31007D29A1 /* TEService.m in Sources */,
 				CBA3DC571EA0C226007DF4A3 /* TESessionChartletContentView.m in Sources */,
 				CB338E481E4C5064007D29A1 /* ViewController.m in Sources */,
@@ -2844,6 +2880,7 @@
 				CBA3DC541EA0C226007DF4A3 /* TENIMCreatMeetingTask.m in Sources */,
 				CBA3DC561EA0C226007DF4A3 /* TENIMService.m in Sources */,
 				CBA3DC7F1EA0C226007DF4A3 /* TEWhiteboardCommand.m in Sources */,
+				CB1B890B1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m in Sources */,
 				CBA3DC511EA0C226007DF4A3 /* TEMeetingControlAttachment.m in Sources */,
 				CBA3DC281EA0C226007DF4A3 /* TECommonViewController.m in Sources */,
 				CBA3D9691E9B63D9007DF4A3 /* NIMTeamAnnouncementListViewController.m in Sources */,
@@ -2859,9 +2896,11 @@
 				CBA3DC6A1EA0C226007DF4A3 /* rgb.fsh.c in Sources */,
 				CBA3DC5A1EA0C226007DF4A3 /* TEPurchaseDetailViewController.m in Sources */,
 				CBA3D91B1E9B63D8007DF4A3 /* NIMKitNotificationFirer.m in Sources */,
+				CB1B890E1EC2FFF2003EADC5 /* NSString+TEDate.m in Sources */,
 				CBA3D9681E9B63D9007DF4A3 /* NIMNormalTeamCardViewController.m in Sources */,
 				CBA3D9101E9B63D8007DF4A3 /* NIMCommonTableData.m in Sources */,
 				CB3390E91E4DB291007D29A1 /* UIScrollView+TEPullToRefresh.m in Sources */,
+				CB7240E51ECC16C100016C11 /* TEUploadAvatarApi.m in Sources */,
 				CBA3DC2F1EA0C226007DF4A3 /* TEOrderManager.m in Sources */,
 				CBA3DC241EA0C226007DF4A3 /* TELessonViewController.m in Sources */,
 				CBA3D9801E9B63D9007DF4A3 /* NIMWebImageDownloaderOperation.m in Sources */,
@@ -2922,6 +2961,7 @@
 				CBA3DC5E1EA0C226007DF4A3 /* TEUserInfoViewController.m in Sources */,
 				CBA3D93D1E9B63D8007DF4A3 /* NIMImageContentConfig.m in Sources */,
 				CB3390CE1E4DA4F5007D29A1 /* NSData+TE.m in Sources */,
+				CB7240EE1ECEC26200016C11 /* TEClassroomRolesManager.m in Sources */,
 				CBA3DC251EA0C226007DF4A3 /* TELessonManuItem.m in Sources */,
 				CBA3D97F1E9B63D9007DF4A3 /* NIMWebImageDownloader.m in Sources */,
 				CBA3D9301E9B63D8007DF4A3 /* NIMInputMoreContainerView.m in Sources */,
@@ -2940,6 +2980,7 @@
 				CBA3D91E1E9B63D8007DF4A3 /* NIMPageView.m in Sources */,
 				CBA3DC1C1EA0C226007DF4A3 /* TEChatroomViewController.m in Sources */,
 				CBA3D9601E9B63D8007DF4A3 /* NIMSessionListCell.m in Sources */,
+				CB1B89081EC16468003EADC5 /* TEWhiteboardColorSelectView.m in Sources */,
 				CBA3D9201E9B63D8007DF4A3 /* NIMGroupedDataCollection.m in Sources */,
 				CBA3D9701E9B63D9007DF4A3 /* NIMTeamSwitchTableViewCell.m in Sources */,
 				CBA3DC4A1EA0C226007DF4A3 /* TECellLayoutConfig.m in Sources */,
@@ -3007,6 +3048,7 @@
 				CBA3D97B1E9B63D9007DF4A3 /* NSMutableAttributedString+NIM.m in Sources */,
 				CBA3D9391E9B63D8007DF4A3 /* NIMAudioContentConfig.m in Sources */,
 				CBA3D9411E9B63D8007DF4A3 /* NIMTipContentConfig.m in Sources */,
+				CB7240E81ECEBE7C00016C11 /* TEClassroomRole.m in Sources */,
 				CBA3DC381EA0C226007DF4A3 /* TEChooseLessonHeaderView.m in Sources */,
 				CBA3D9841E9B63D9007DF4A3 /* UIImage+NIMGIF.m in Sources */,
 				CBA3DC271EA0C226007DF4A3 /* TELessonMenuCell.m in Sources */,

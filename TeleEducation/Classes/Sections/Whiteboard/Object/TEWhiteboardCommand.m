@@ -7,19 +7,19 @@
 //
 
 #import "TEWhiteboardCommand.h"
-#define TEWhiteboardCmdFormatPoint @"%zd:%.4f,%.4f,%d,%ld;"
+#define TEWhiteboardCmdFormatPoint @"%zd:%.4f,%.4f,%d,%d,%.1f;"
 #define TEWhiteboardCmdFormatPacketID @"%zd:%llu;"
 #define TEWhiteboardCmdFormatSync @"%zd:%@,%d;"
 #define TEWhiteboardCmdFormatPureCmd @"%zd:;"
-#define TEWhiteboardCmdFormatPureCmdWithExtra @"%zd:%ld;"
+#define TEWhiteboardCmdFormatPureCmdWithExtra @"%zd:%d;"
 
 @implementation TEWhiteboardCommand
 
 + (NSString *)pointCommand:(TEWhiteboardPoint *)point
 {
-    return [NSString stringWithFormat:TEWhiteboardCmdFormatPoint, point.type, point.xScale, point.yScale, point.colorRGB,point.page];
+    return [NSString stringWithFormat:TEWhiteboardCmdFormatPoint, point.type, point.xScale, point.yScale, point.colorRGB,point.page,point.lineWidth];
 }
-+ (NSString *)pureCommand:(TEWhiteboardCmdType)type page:(NSInteger)page{
++ (NSString *)pureCommand:(TEWhiteboardCmdType)type page:(int)page{
     return [NSString stringWithFormat:TEWhiteboardCmdFormatPureCmdWithExtra,type,page];
 }
 

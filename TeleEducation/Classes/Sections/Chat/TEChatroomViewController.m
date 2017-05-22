@@ -134,7 +134,7 @@
     }
 }
 
--(void)sendMessage:(NIMMessage *)message progress:(CGFloat)progress
+-(void)sendMessage:(NIMMessage *)message progress:(float)progress
 {
     if (![self isMeetingControlMessage:message]) {
         [super sendMessage:message progress:progress];

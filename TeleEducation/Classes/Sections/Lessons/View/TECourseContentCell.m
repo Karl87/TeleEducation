@@ -14,9 +14,10 @@
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+//        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _imageView = [UIImageView new];
         [_imageView setClipsToBounds:YES];
-        [_imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [_imageView setContentMode:UIViewContentModeScaleAspectFit];
         [self.contentView addSubview:_imageView];
     }
     return self;

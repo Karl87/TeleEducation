@@ -21,5 +21,6 @@ typedef NS_ENUM(NSUInteger,TEWhiteboardPointType) {
 @property (nonatomic,assign) float xScale;
 @property (nonatomic,assign) float yScale;
 @property (nonatomic,assign) int colorRGB;
-@property (nonatomic,assign) NSInteger page;
+@property (nonatomic,assign) float lineWidth;
+@property (nonatomic,assign) int page;
 @end

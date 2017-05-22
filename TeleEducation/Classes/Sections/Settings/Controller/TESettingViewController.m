@@ -17,6 +17,7 @@
 #import "TEBuyClassViewController.h"
 
 #import "TELoginManager.h"
+#import "TENetworkConfig.h"
 
 @interface TESettingViewController ()<TELoginManagerDelegate>
 @property (nonatomic,strong) UITableView *tableView;
@@ -85,7 +86,7 @@
                                       ForbidSelect  :@(YES),
                                       ExtraInfo     : @{@"userID":@"000001",
                                                         @"userName":[[[TELoginManager sharedManager] currentTEUser] name],
-                                                        @"userAvatar":[[[TELoginManager sharedManager] currentTEUser] avatar],
+                                                        @"userAvatar":[[TENetworkConfig sharedConfig].baseURL stringByAppendingString:[[[TELoginManager sharedManager] currentTEUser] avatar]],
                                                         @"balanceCount":@([[[TELoginManager sharedManager] currentTEUser] classCount]),
                                                         @"rebookAction":@"onActionTouchRebook:",
                                                         @"recordAction":@"onActionTouchRecord:"
@@ -166,23 +167,29 @@
 }
 - (void)onTouchChangeUserInfo:(id)sender{
     [self setHidesBottomBarWhenPushed:YES];
-    TEUserInfoViewController *vc = [[TEUserInfoViewController alloc] init];
+    TEUserInfoViewController *vc = [[TEUserInfoViewController alloc] initWithTitle:@"修改资料" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
     [self setHidesBottomBarWhenPushed:NO];
 }
 - (void)onTouchResetPassword:(id)sender{
     [self setHidesBottomBarWhenPushed:YES];
-    TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] init];
+    TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] initWithTitle:@"修改密码" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
     [self setHidesBottomBarWhenPushed:NO];
 }
 #pragma mark - 旋转处理 (iOS7)
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    }
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
     self.tableView.left = 0;
     self.tableView.top = 0;
     self.tableView.width = self.view.width;
     self.tableView.height = self.view.height;
     [self.tableView reloadData];
+
 }
+
 @end

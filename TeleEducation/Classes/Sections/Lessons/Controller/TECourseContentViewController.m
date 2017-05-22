@@ -34,6 +34,7 @@
         [ary enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self.data addObject:obj[@"url"]];
         }];
+        [_collectionView reloadData];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
     }];
@@ -58,6 +59,7 @@
     [_collectionView setPagingEnabled:YES];
     [_collectionView setDelegate:self];
     [_collectionView setDataSource:self];
+    
     [_collectionView registerClass:[TECourseContentCell class] forCellWithReuseIdentifier:@"cell"];
     [self.view addSubview:_collectionView];
     

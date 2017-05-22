@@ -89,7 +89,7 @@
             {
                 info.showName = name;
             }
-            info.avatarUrlString = userInfo.thumbAvatarUrl;
+            info.avatarUrlString = userInfo.avatarUrl;
             info.avatarImage = self.defaultUserAvatar;
             
             if (userInfo == nil)
@@ -120,7 +120,7 @@
     info.showName    = team.teamName;
     info.infoId      = teamId;
     info.avatarImage = self.defaultTeamAvatar;
-    info.avatarUrlString = team.thumbAvatarUrl;
+    info.avatarUrlString = team.avatarUrl;
     return info;
 }
 
@@ -135,7 +135,7 @@
         if ([userId isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount]) {
             NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:userId];
             info.showName        = user.userInfo.nickName;
-            info.avatarUrlString = user.userInfo.thumbAvatarUrl;
+            info.avatarUrlString = user.userInfo.avatarUrl;
         }else{
             NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ?
             (NIMMessageChatroomExtension *)message.messageExt : nil;

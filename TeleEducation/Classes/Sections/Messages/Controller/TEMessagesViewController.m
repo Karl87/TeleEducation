@@ -9,7 +9,7 @@
 #import "TEMessagesViewController.h"
 
 @interface TEMessagesViewController ()
-
+@property (nonatomic,strong) UILabel *emptyDataLab;
 @end
 
 @implementation TEMessagesViewController
@@ -25,6 +25,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.emptyDataLab = [[UILabel alloc] initWithFrame:self.view.bounds];
+    [self.emptyDataLab setFont:[UIFont systemFontOfSize:17.0]];
+    [self.emptyDataLab setText:@"目前没有消息"];
+    [self.view addSubview:self.emptyDataLab];
+    [self.emptyDataLab setTextAlignment:NSTextAlignmentCenter];
+    [self.emptyDataLab setNumberOfLines:0];
+    [self.emptyDataLab setTextColor:SystemBlueColor];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +45,13 @@
     [super configNav];
 }
 
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    _emptyDataLab.left = 0;
+    _emptyDataLab.top = 0;
+    _emptyDataLab.width = self.view.width;
+    _emptyDataLab.height = self.view.height;
+}
 
 
 @end

@@ -30,13 +30,13 @@
 }
 
 
-//- (NSArray<NSNumber *> *)inputBarItemTypes{
-//    return @[
-//             @(NIMInputBarItemTypeTextAndRecord),
-//             @(NIMInputBarItemTypeEmoticon),
-//             @(NIMInputBarItemTypeMore)
-//             ];
-//}
+- (NSArray<NSNumber *> *)inputBarItemTypes{
+    return @[
+             @(NIMInputBarItemTypeTextAndRecord),
+             @(NIMInputBarItemTypeEmoticon)
+//             ,@(NIMInputBarItemTypeMore)
+             ];
+}
 
 
 - (NSArray *)mediaItems

@@ -21,21 +21,33 @@
 @end
 
 @implementation TEMeetingNetCallManager
+
+
+//加入会议
+
 - (void)joinMeeting:(NSString *)name delegate:(id<TEMeetingNetCallManagerDelegate>)delegate{
+    
+    //退出已加入会议
     if (_meeting) {
         [self leaveMeeting];
     }
+    
+    //添加NIMNetCallManagerDelegate
     [TENetcallManager addDelegate:self];
+    
+    //初始化会议
     _meeting = [[NIMNetCallMeeting alloc] init];
     _meeting.name = name;
     _meeting.type = NIMNetCallTypeVideo;
     _meeting.actor = [[[TEMeetingRolesManager sharedService] myRole]isActor];
     [self fillNetCallOption:_meeting];
     
+    //添加TEMeetingNetCallManagerDelegate
     _delegate = delegate;
     
     __weak typeof(self) wself = self;
     
+    //加入会议
     [[NIMSDK sharedSDK].netCallManager joinMeeting:_meeting completion:^(NIMNetCallMeeting *meeting, NSError *error) {
         if (error) {
             NSLog(@"Join meeting %@error: %zd.", meeting.name, error.code);
@@ -161,7 +173,7 @@
     //会议的观众这里默认用低清发送视频
     if (option.preferredVideoQuality == NIMNetCallVideoQualityDefault) {
         if (!isManager) {
-            option.preferredVideoQuality = NIMNetCallVideoQualityDefault;
+            option.preferredVideoQuality = NIMNetCallVideoQualityLow;
         }
     }
     

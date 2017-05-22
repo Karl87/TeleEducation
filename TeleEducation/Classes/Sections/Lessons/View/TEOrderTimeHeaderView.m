@@ -8,6 +8,7 @@
 
 #import "TEOrderTimeHeaderView.h"
 #import "UIView+TE.h"
+#import "NSString+TEDate.h"
 
 @interface TEOrderTimeHeaderView ()
 @property (nonatomic,strong) NSMutableArray *dateLabAry;
@@ -45,7 +46,7 @@
 //    [_dateStrAry addObjectsFromArray:dateStrAry];
     [_dateLabAry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UILabel *lab = obj;
-        [lab setText:_dateStrAry[idx]];
+        [lab setText:[NSString stringWithDateString:_dateStrAry[idx]]];
     }];
 }
 

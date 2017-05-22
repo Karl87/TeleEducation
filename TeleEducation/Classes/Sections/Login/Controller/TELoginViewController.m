@@ -24,8 +24,8 @@
 @property (nonatomic,strong) UIImageView *logoView;
 @property (nonatomic,strong) UIImageView *titleView;
 
-@property (nonatomic,strong) UISwitch * teacherSwitch;
-
+//@property (nonatomic,strong) UISwitch * teacherSwitch;
+@property (nonatomic,strong) UISegmentedControl *userTypeSeg;
 @end
 
 @implementation TELoginViewController
@@ -64,6 +64,7 @@
     [self.view addSubview:_titleView];
     
     _userInput = [[TELoginInput alloc] initWithPlaceHolder:@"请输入手机号/邮箱" image:[UIImage imageNamed:@"loginPhoneIcon"] isSecureTextEntry:NO];
+    _userInput.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:_userInput];
     
     _passwordInput = [[TELoginInput alloc] initWithPlaceHolder:@"请输入密码" image:[UIImage imageNamed:@"loginPswIcon"] isSecureTextEntry:YES];
@@ -107,11 +108,17 @@
     [_resetPasswordBtn addTarget:self action:@selector(resetPasswordBtnHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_resetPasswordBtn];
     
-    _teacherSwitch = [UISwitch new];
-    _teacherSwitch.on = NO;
-    [_teacherSwitch sizeToFit];
-    [self.view addSubview:_teacherSwitch];
+//    _teacherSwitch = [UISwitch new];
+//    _teacherSwitch.on = NO;
+//    [_teacherSwitch sizeToFit];
+//    [self.view addSubview:_teacherSwitch];
     
+    
+    _userTypeSeg = [[UISegmentedControl alloc] initWithItems:@[@"I'm Student",@"I'm Teacher"]];
+    [_userTypeSeg setTintColor:SystemBlueColor];
+    [_userTypeSeg setSelectedSegmentIndex:0];
+    [_userTypeSeg sizeToFit];
+    [self.view addSubview:_userTypeSeg];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -122,9 +129,12 @@
     _userInput.height = 44;
     _userInput.top = (self.view.height - _userInput.height)/2;
     
-    _teacherSwitch.left = 20;
-    _teacherSwitch.top = _userInput.top - _teacherSwitch.height - 20;
+//    _teacherSwitch.left = 20;
+//    _teacherSwitch.top = _userInput.top - _teacherSwitch.height - 20;
+
     
+    _userTypeSeg.centerX = self.view.width/2;
+    _userTypeSeg.bottom = _userInput.top - 20;
     
     _passwordInput.left = _userInput.left;
     _passwordInput.top = _userInput.bottom + 20;
@@ -156,7 +166,7 @@
 
 #pragma mark - EventHandler
 - (void)loginBtnActionHandler:(id)sender{
-    [[TELoginManager sharedManager] loginWithUserName:_userInput.text.copy password:[_passwordInput.text.copy MD5String] userType:_teacherSwitch.on?TEUserTypeTeacher:TEUserTypeStudent];
+    [[TELoginManager sharedManager] loginWithUserName:_userInput.text.copy password:[_passwordInput.text.copy MD5String] userType:_userTypeSeg.selectedSegmentIndex == 1?TEUserTypeTeacher:TEUserTypeStudent];
 }
 - (void)resetPasswordBtnHandler:(UIButton *)button{
     TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] init];

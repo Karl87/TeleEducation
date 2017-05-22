@@ -1,35 +1,32 @@
 //
-//  TEMeetingRolesManager.h
+//  TEClassroomRolesManager.h
 //  TeleEducation
 //
-//  Created by Karl on 2017/3/9.
+//  Created by Karl on 2017/5/19.
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
-#import <Foundation/Foundation.h>
-#import "TEMeetingRole.h"
-#import "TEService.h"
 
-@protocol TEMeetingRoloseManagerDelegate <NSObject>
+#import "TEService.h"
+#import "TEClassroomRole.h"
+
+@protocol TEClassroomRoloseManagerDelegate <NSObject>
 
 @required
 //更新教室成员角色
-- (void)meetingRolesUpdate;
-//成员举手
-- (void)meetingMemberRaiseHand;
+- (void)classroomRolesUpdate;
 //允许成员互动
-- (void)meetingActorBeenEnabled;
+- (void)classroomActorBeenEnabled;
 //禁止成员互动
-- (void)meetingActorBeenDisabled;
+- (void)classroomActorBeenDisabled;
 //更新成员音量
-- (void)meetingVolumesUpdate;
+- (void)classroomVolumesUpdate;
 //教室成员列表更新
-- (void)chatroomMembersUpdated:(NSArray*)members entered:(BOOL)entered;
+- (void)classroomMembersUpdated:(NSArray*)members entered:(BOOL)entered;
 
 @end
 
-@interface TEMeetingRolesManager : TEService
-
-@property (nonatomic,weak) id<TEMeetingRoloseManagerDelegate> delegate;
+@interface TEClassroomRolesManager : TEService
+@property (nonatomic,weak) id<TEClassroomRoloseManagerDelegate> delegate;
 @property (nonatomic,copy) NSString *livePushUrl;
 @property (nonatomic,copy) NSString *livePlayUrl;
 
@@ -37,26 +34,27 @@
 - (void)startNewMeeting:(NIMChatroomMember *)me
            withChatroom:(NIMChatroom *)chatroom
              newCreated:(BOOL)newCreated;
+
+- (void)enterClassroom:(NIMChatroom *)classroom user:(NIMChatroomMember *)me;
+
 //踢出
 - (BOOL)kick:(NSString *)user;
 //成员身份
-- (TEMeetingRole *)role:(NSString *)user;
+- (TEClassroomRole *)role:(NSString *)user;
 //成员身份
-- (TEMeetingRole *)memberRole:(NIMChatroomMember *)user;
+- (TEClassroomRole *)memberRole:(NIMChatroomMember *)user;
 //我的身份
-- (TEMeetingRole *)myRole;
+- (TEClassroomRole *)myRole;
 //功能开关
 - (void)setMyVideo:(BOOL)on;
 - (void)setMyAudio:(BOOL)on;
 - (void)setMyWhiteBoard:(BOOL)on;
 //全部成员
 - (NSArray *)allActorsByName:(BOOL)name;
-//举手
-- (void)changeRaiseHand;
 //更改成员身份
 - (void)changeMemberActorRole:(NSString *)user;
 //更新信息
-- (void)updateMeetingUser:(NSString *)user
+- (void)updateClassroomUser:(NSString *)user
                  isJoined:(BOOL)joined;
 //更新音量
 - (void)updateVolumes:(NSDictionary<NSString *,NSNumber*>*)volumes;

@@ -21,7 +21,7 @@ typedef void (^NIMKitDataProvideHandler)(NSError *error, NSArray<NIMMessage *> *
 @protocol NIMKitMessageProvider <NSObject>
 
 @optional
-
+ 
 /**
  *  下拉加载数据
  *  @param hanlder 返回消息结果集的回调

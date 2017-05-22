@@ -42,6 +42,8 @@
 
 - (void)loginWithUserName:(NSString *)username password:(NSString *)password userType:(TEUserType)type{
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    
     NSLog(@"username:%@,password:%@,type:%ld",username,password,type);
     
     if (username.length && password.length &&type) {
@@ -63,6 +65,8 @@
                 switch (apiCode) {
                     case 0:
                         NSLog(@"登录失败");
+                        hud.label.text = @"登录失败";
+                        [hud hideAnimated:YES afterDelay:2];
                         if (_delegates.count >0) {
                             for (id<TELoginManagerDelegate> delegate in _delegates) {
                                 [delegate respondsToSelector:@selector(loginFailed)];
@@ -73,17 +77,25 @@
                         NSLog(@"登录成功");
                         break;
                     case 2:
+                        hud.label.text = @"该用户尚未注册";
+                        [hud hideAnimated:YES afterDelay:2];
                         NSLog(@"用户未注册");
                         return;
                     case 3:
+                        hud.label.text = @"账号或密码错误";
+                        [hud hideAnimated:YES afterDelay:2];
                         NSLog(@"账号密码错误");
                         return;
                     case 4:
+                        hud.label.text = @"未知错误，请联系客服";
+                        [hud hideAnimated:YES afterDelay:2];
                         NSLog(@"其他");
                         return;
                     default:
                         break;
                 }
+                
+                [hud hideAnimated:YES];
                 NSDictionary *userInfo = content[@"userInfo"];
                 TELoginData *data = [[TELoginData alloc] init];
                 data.token = content[@"token"];
@@ -131,14 +143,26 @@
     
     NSLog(@"%@\n%@",_currentTEUser.nimAccount,_currentTEUser.nimToken);
     
-    [[[NIMSDK sharedSDK] loginManager] login:_currentTEUser.nimAccount token:_currentTEUser.nimToken completion:^(NSError * _Nullable error) {
-        NSLog(@"%ld,%@",error.code,error.description);
-        if (error == nil) {
-            NSLog(@"NIM登录成功");
-        }else{
-            NSLog(@"NIM登录失败");
+    if (![[NIMSDK sharedSDK] loginManager].isLogined) {
+        [[[NIMSDK sharedSDK] loginManager] login:_currentTEUser.nimAccount token:_currentTEUser.nimToken completion:^(NSError * _Nullable error) {
+            NSLog(@"%ld,%@",error.code,error.description);
+            if (error == nil) {
+                NSLog(@"NIM登录成功");
+            }else{
+                NSLog(@"NIM登录失败");
+                NSLog(@"%@,%@,%@",_currentTEUser.phone,_currentTEUser.name,_currentTEUser.nimToken);
+                if(error.code == NIMRemoteErrorCodeUserNotExist || error.code == NIMRemoteErrorCodeInvalidPass){
+                    [self registerNIMWithAccount:[NSString stringWithFormat:@"te%@",_currentTEUser.phone] nickname:_currentTEUser.name token:_currentTEUser.nimToken];
+                }
+            }
+        }];
+    }else{
+        if (![_currentTEUser.nimAccount isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount]) {
+            [[NIMSDK sharedSDK].loginManager logout:^(NSError * _Nullable error) {
+                [self nimLogin];
+            }];
         }
-    }];
+    }
 }
 - (void)logout{
     [self setCurrentTEUser:nil];
@@ -191,6 +215,8 @@
     }
 }
 
+
+
 - (void)registerNIMWithAccount:(NSString *)acconut nickname:(NSString *)nickname token:(NSString *)token{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -205,6 +231,7 @@
         if (error == nil) {
             NSLog(@"注册NIM成功");
             hud.label.text = @"注册NIM成功";
+            [self nimLogin];
             
         }else{
             NSLog(@"注册NIM失败");

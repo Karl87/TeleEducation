@@ -47,12 +47,12 @@
         if (period.status == TEPeriodStatusAvaliable) {
             [self setUserInteractionEnabled:YES];
             [self.timeLab setBackgroundColor:[UIColor clearColor]];
-            [self.timeLab setTextColor:[UIColor grayColor]];
+            [self.timeLab setTextColor:[UIColor darkGrayColor]];
         }else{
             [self setUserInteractionEnabled:NO];
             if (period.status == TEPeriodStatusInAvaliable) {
                 [self.timeLab setBackgroundColor:[UIColor clearColor]];
-                [self.timeLab setTextColor:UIColorFromRGB(0xaaaaaa)];
+                [self.timeLab setTextColor:[UIColor lightGrayColor]];//UIColorFromRGB(0xaaaaaa)];
             }else{
                 [self.timeLab setBackgroundColor:UIColorFromRGB(0x777777)];
                 [self.timeLab setTextColor:[UIColor whiteColor]];
@@ -71,7 +71,7 @@
     if ([_data isKindOfClass:[TEPeriod class]]) {
         TEPeriod *period = _data;
         if (highlighted) {
-            [_timeLab setText:[NSString stringWithFormat:@"%@\n已预约",period.period]];
+            [_timeLab setText:[NSString stringWithFormat:@"%@\n预约",period.period]];
         }else{
             [_timeLab setText:period.period];
         }
@@ -82,7 +82,7 @@
     if ([_data isKindOfClass:[TEPeriod class]]) {
         TEPeriod *period = _data;
         if (selected) {
-            [_timeLab setText:[NSString stringWithFormat:@"%@\n已预约",period.period]];
+            [_timeLab setText:[NSString stringWithFormat:@"%@\n预约",period.period]];
         }else{
             [_timeLab setText:period.period];
         }

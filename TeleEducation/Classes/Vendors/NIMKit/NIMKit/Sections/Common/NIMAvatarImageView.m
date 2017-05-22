@@ -118,6 +118,12 @@ CGRect NIMKit_CGRectWithCenterAndSize(CGPoint center, CGSize size){
 
 - (void)setAvatarByMessage:(NIMMessage *)message
 {
+    if (message.session.sessionType == NIMSessionTypeChatroom) {
+        NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)message.messageExt : nil;
+        NSLog(@"%@,%@,%@,%@",message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
+    
+    }
+
     NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
     option.message = message;
     NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:message.from option:option];

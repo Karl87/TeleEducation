@@ -34,13 +34,13 @@
 //        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
         _otherVideo = [[TEGLView alloc] initWithFrame:self.bounds];
-        [_otherVideo setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        [_otherVideo setBackgroundColor:[UIColor darkGrayColor]];
         _otherVideo.contentMode = UIViewContentModeScaleAspectFill;
         [_otherVideo render:nil width:0 height:0];
         [self addSubview:_otherVideo];
         
         _selfVideo = [[TEGLView alloc] initWithFrame:self.bounds];
-        [_selfVideo setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        [_selfVideo setBackgroundColor:[UIColor darkGrayColor]];
         _selfVideo.contentMode = UIViewContentModeScaleAspectFill;
         [_selfVideo render:nil width:0 height:0];
         [self addSubview:_selfVideo];
@@ -71,6 +71,14 @@
         
         [self updateActors];
         [[NIMSDK sharedSDK].netCallManager addDelegate:self];
+        
+        
+        UITapGestureRecognizer *doubleClick=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(fullScreenAction:)];
+        doubleClick.numberOfTapsRequired = 2;
+        doubleClick.delaysTouchesBegan = YES;
+        [self addGestureRecognizer:doubleClick];
+        
+        self.backgroundColor = [UIColor darkGrayColor];
         
         }
     return self;
@@ -117,10 +125,10 @@
 //    [self startLocalPreview:layer];
 }
 - (void)onRemoteYUVReady:(NSData *)yuvData width:(NSUInteger)width height:(NSUInteger)height from:(NSString *)user{
-//    NSLog(@"%ld",_actors.count);
-    if (_actors.count == 0) {
-        return;
-    }
+    NSLog(@"%ld",_actors.count);
+//    if (_actors.count == 0) {
+//        return;
+//    }
     [_otherVideo render:yuvData width:width height:height];
 }
 

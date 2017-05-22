@@ -8,6 +8,7 @@
 
 #import "TELessonHeaderView.h"
 #import "UIView+TE.h"
+#import "NSString+TEDate.h"
 
 @interface TELessonHeaderView ()
 @property (nonatomic,strong) UILabel *titleLab;
@@ -29,7 +30,7 @@
 
 - (void)setHeaderStr:(NSString *)headerStr{
     _headerStr = headerStr;
-    [_titleLab setText:_headerStr];
+    [_titleLab setText:[NSString stringWithFormat:@"%@ %@",[NSString stringWithDateString:_headerStr],_headerStr]];
 }
 
 - (void)layoutSubviews{

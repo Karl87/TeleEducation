@@ -7,14 +7,15 @@
 //
 
 #import "TEChatroomMemberCell.h"
-#import "NIMAvatarImageView.h"
+#import "UIImageView+WebCache.h"
 #import "TEDataManager.h"
 #import "TEMeetingRolesManager.h"
 #import "UIAlertView+TEBlock.h"
+#import "TENetworkConfig.h"
 
 @interface TEChatroomMemberCell ()
 
-@property (nonatomic,strong) NIMAvatarImageView *avatarImageView;
+@property (nonatomic,strong) UIImageView *avatarImageView;
 @property (nonatomic,strong) UIImageView *roleImageView;
 @property (nonatomic,strong) UIButton *selfAudioButton;
 @property (nonatomic,strong) UIButton *selfVideoButton;
@@ -41,8 +42,17 @@
 }
 
 - (void)refresh:(NIMChatroomMember *)member{
+    
+//    NSLog(@"%@\n%@\n%@\n%@",member.userId,member.roomNickname,member.roomAvatar,member.roomExt);
+    
+    NSString *avater = member.roomAvatar;
+    
+    if ([member.roomAvatar hasPrefix:@"https://"]) {
+        avater = [member.roomAvatar stringByReplacingOccurrencesOfString:@"https://" withString:@"http://"];
+    }
+    
     self.userId = member.userId;
-    [self.avatarImageView nim_setImageWithURL:[NSURL URLWithString:member.roomAvatarThumbnail] placeholderImage:[TEDataManager sharedManager].defaultUserAvatar];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avater] placeholderImage:[TEDataManager sharedManager].defaultUserAvatar];
     self.textLabel.text = member.roomNickname;
     [self.textLabel sizeToFit];
     [self refreshRole:member];
@@ -133,9 +143,9 @@
     self.meetingRoleLabel.centerY   = self.height * .5f;
 }
 #pragma mark - Get
-- (NIMAvatarImageView *)avatarImageView{
+- (UIImageView *)avatarImageView{
     if (!_avatarImageView) {
-        _avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     }
     return _avatarImageView;
 }

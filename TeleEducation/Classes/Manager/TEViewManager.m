@@ -50,10 +50,10 @@
         TENavigationViewController *userCenter = [[TENavigationViewController alloc] initWithRootViewController:[[TESettingViewController alloc] initWithTitle:@"我" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
     
         TENavigationViewController *messages =[[TENavigationViewController alloc] initWithRootViewController:[[TEMessagesViewController alloc] initWithTitle:@"消息" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
-        mainTab.viewControllers = @[classList,userCenter,messages];
+        mainTab.viewControllers = @[classList,messages,userCenter];
         [mainTab.tabBar setTintColor:SystemBlueColor];
-        NSArray *titles = @[@"课程",@"我",@"消息"];
-        NSArray *images = @[@"tabbarLesson",@"tabbarSetting",@"tabbarMessage"];
+        NSArray *titles = @[@"课程",@"消息",@"我"];
+        NSArray *images = @[@"tabbarLesson",@"tabbarMessage",@"tabbarSetting"];
         for (int i = 0; i<mainTab.viewControllers.count; i++) {
             UITabBarItem *item = [mainTab.tabBar.items objectAtIndex:i];
             item.title = titles[i];

@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface TELessonViewController : UIViewController
+
+@property (nonatomic,assign) NSInteger lessonID;
+@property (nonatomic,assign) NSInteger unitID;
+
 - (instancetype)initWithNIMChatroom:(NIMChatroom *)room;
 @end

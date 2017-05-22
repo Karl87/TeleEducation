@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger,TEWhiteboardCmdType){
 
 + (NSString *)pureCommand:(TEWhiteboardCmdType)type;
 
-+ (NSString *)pureCommand:(TEWhiteboardCmdType)type page:(NSInteger)page;
++ (NSString *)pureCommand:(TEWhiteboardCmdType)type page:(int)page;
 
 + (NSString *)syncCommand:(NSString *)uid end:(int)end;
 

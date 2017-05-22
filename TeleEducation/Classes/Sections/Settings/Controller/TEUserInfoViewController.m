@@ -13,6 +13,8 @@
 #import "UIActionSheet+TEBlock.h"
 #import "UIImage+TE.h"
 #import "TEFileLocationHelper.h"
+#import "TELoginManager.h"
+#import "TEUploadAvatarApi.h"
 
 @interface TEUserInfoViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -104,28 +106,28 @@
                                       },
                                   @{
                                       Title      :@"姓名",
-                                      DetailTitle:@"JENNY",
+                                      DetailTitle:[TELoginManager sharedManager].currentTEUser.name,
                                       CellAction :@"onTouchChangeUserName:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
                                       Title      :@"绑定手机",
-                                      DetailTitle:@"13567890214",
+                                      DetailTitle:[TELoginManager sharedManager].currentTEUser.phone,
                                       CellAction :@"onTouchChangeUserMobile:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
                                       Title      :@"QQ",
-                                      DetailTitle:@"1234567890",
+                                      DetailTitle:[TELoginManager sharedManager].currentTEUser.qq,
                                       CellAction :@"onTouchChangeUserQQ:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
                                       Title      :@"Skype",
-                                      DetailTitle:@"0987654321",
+                                      DetailTitle:[TELoginManager sharedManager].currentTEUser.skype,
                                       CellAction :@"onTouchChangeUserSkype:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
@@ -206,15 +208,40 @@
 }
 #pragma mark - Private
 - (void)uploadImage:(UIImage *)image{
-    UIImage *imageForAvatarUpload = [image imageForAvatarUpload];
-    NSString *fileName = [TEFileLocationHelper genFilenameWithExt:@"jpg"];
-    NSString *filePath = [[TEFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
-    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
-    BOOL success = data && [data writeToFile:filePath atomically:YES];
+    
+    TEUploadAvatarApi *api = [[TEUploadAvatarApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token userType:[TELoginManager sharedManager].currentTEUser.type image:image];
+    
+    NSLog(@"%@",image);
     __weak typeof(self) wself = self;
-    if (success) {
-        [wself refreshData];
-    }
+
+    [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSLog(@"%@",request.responseJSONObject);
+        
+        NSDictionary *dic = request.responseJSONObject;
+        if ([[dic objectForKey:@"code"] integerValue] == 1) {
+            NSDictionary *content = [dic objectForKey:@"content"];
+            if ([[content objectForKey:@"status"] integerValue]==1 ) {
+                NSString *avatarURL = [content objectForKey:@"imageurl"];
+                [TELoginManager sharedManager].currentTEUser.avatar = avatarURL;
+                [wself refreshData];
+            }
+        }
+        
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSLog(@"%@",request.responseJSONObject);
+    }];
+    
+    
+//    UIImage *imageForAvatarUpload = [image imageForAvatarUpload];
+//    NSString *fileName = [TEFileLocationHelper genFilenameWithExt:@"jpg"];
+//    NSString *filePath = [[TEFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+//    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
+//    BOOL success = data && [data writeToFile:filePath atomically:YES];
+//    __weak typeof(self) wself = self;
+//    if (success) {
+//        [wself refreshData];
+//    }
 }
 #pragma mark - 旋转处理 (iOS7)
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation

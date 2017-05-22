@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TEWhiteboardViewController : UIViewController
+@property (nonatomic,assign) NSInteger lessonID;
+@property (nonatomic,assign) NSInteger unitID;
 - (instancetype)initWithChatroom:(NIMChatroom *)chatroom;
 - (void)checkPermission;
 @end

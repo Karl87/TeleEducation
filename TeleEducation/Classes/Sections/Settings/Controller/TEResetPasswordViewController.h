@@ -6,8 +6,7 @@
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface TEResetPasswordViewController : UIViewController
+#import "TECommonViewController.h"
+@interface TEResetPasswordViewController : TECommonViewController
 
 @end

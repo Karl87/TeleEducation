@@ -10,6 +10,9 @@
 #import "NIMCommonTableData.h"
 #import "UIView+TE.h"
 #import "TEFileLocationHelper.h"
+#import "UIImageView+WebCache.h"
+#import "TELoginManager.h"
+#import "TENetworkConfig.h"
 
 @interface TEUserInfoAvatarCell ()
 @property (nonatomic,strong) UIImageView *avatar;
@@ -29,15 +32,18 @@
 - (void)refreshData:(NIMCommonTableRow *)rowData tableView:(UITableView *)tableView{
     self.textLabel.text = rowData.title;
     self.detailTextLabel.text = rowData.detailTitle;
-    NSString *fileName = [TEFileLocationHelper genFilenameWithExt:@"jpg"];
-    NSString *filePath = [[TEFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSLog(@"avatar image file exist");
-        UIImage *avatarImage = [UIImage imageWithContentsOfFile:filePath];
-        [_avatar setImage:avatarImage];
-    }else{
-        NSLog(@"avatar image file not exist");
-    }
+
+    [_avatar sd_setImageWithURL:[NSURL URLWithString:[[TENetworkConfig sharedConfig].baseURL stringByAppendingString:[TELoginManager sharedManager].currentTEUser.avatar]]];
+    
+    //    NSString *fileName = [TEFileLocationHelper genFilenameWithExt:@"jpg"];
+//    NSString *filePath = [[TEFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+//        NSLog(@"avatar image file exist");
+//        UIImage *avatarImage = [UIImage imageWithContentsOfFile:filePath];
+//        [_avatar setImage:avatarImage];
+//    }else{
+//        NSLog(@"avatar image file not exist");
+//    }
 }
 #define AvatarRight 40
 #define AvatarSize 44

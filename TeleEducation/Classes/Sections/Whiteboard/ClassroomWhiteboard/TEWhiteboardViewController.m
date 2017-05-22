@@ -13,17 +13,25 @@
 #import "TEWhiteboardCmdHandler.h"
 #import "TEWhiteboardLines.h"
 #import "TEWhiteboardDrawView.h"
+#import "TEWhiteboardColorSelectView.h"
+#import "TEWhiteboardWidthSelectView.h"
 
-@interface TEWhiteboardViewController ()<TEMeetingRTSManagerDelegate,TEWhiteboardCmdHandlerDelegate,NIMLoginManagerDelegate>{
+#import "TECourseContentApi.h"
+#import "TELoginManager.h"
+#import "UIImageView+WebCache.h"
+#import "TENetworkConfig.h"
+
+@interface TEWhiteboardViewController ()<TEMeetingRTSManagerDelegate,TEWhiteboardCmdHandlerDelegate,NIMLoginManagerDelegate,TEWhiteboardWidthSelectViewDelegate,TEWhiteboardColorSelectViewDelegate>{
     BOOL _isManager;
     NSString *_name;
     NSString *_managerUid;
     int _myDrawColorRGB;
+    float _myDrawLineWidth;
     BOOL _isJoined;
 }
 
 @property (nonatomic,strong) TEWhiteboardDrawView *drawView;
-@property (nonatomic,strong) NSArray *contents;
+@property (nonatomic,strong) NSMutableArray *contents;
 @property (nonatomic,strong) UIImageView *contentView;
 @property (nonatomic, strong) NSMutableArray *allLines;
 @property (nonatomic,strong) TEWhiteboardLines *lines;
@@ -37,9 +45,13 @@
 @property (nonatomic,strong) UIButton *clearBtn;
 @property (nonatomic,strong) UIButton *cancelBtn;
 @property (nonatomic,strong) UIButton *colorBtn;
+@property (nonatomic,strong) UIButton *widthBtn;
 @property (nonatomic,strong) NSArray *colors;
+@property (nonatomic,strong) NSArray *widths;
+@property (nonatomic,strong) TEWhiteboardWidthSelectView *widthView;
+@property (nonatomic,strong) TEWhiteboardColorSelectView *colorView;
 
-@property (nonatomic,assign) NSInteger currentPage;
+@property (nonatomic,assign) int currentPage;
 
 @end
 
@@ -56,23 +68,57 @@
 {
     return YES;
 }
+
+- (void)buildData{
+    TECourseContentApi *api = [[TECourseContentApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token] unit:_unitID lesson:_lessonID];
+    [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSLog(@"%@",request.responseJSONObject);
+        NSDictionary *dic = request.responseJSONObject;
+        if ([dic[@"code"]integerValue] != 1) {
+            return;
+        }
+        if (![dic[@"content"] isKindOfClass:[NSArray class]]) {
+            return;
+        }
+        NSArray *ary = dic[@"content"];
+        [ary enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.contents addObject:obj[@"url"]];
+        }];
+        
+        for (int i = 0; i<_contents.count; i++) {
+            TEWhiteboardLines *lines = [[TEWhiteboardLines alloc] init];
+            [_allLines addObject:lines];
+        }
+        
+//        [_pageLab setText:[NSString stringWithFormat:@"%d/%ld",_currentPage+1,(unsigned long)_contents.count]];
+
+        self.currentPage = 0;
+        _drawView.dataSource = _allLines[_currentPage];
+
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+
 - (instancetype)initWithChatroom:(NIMChatroom *)chatroom{
     self = [super init];
     if (self) {
-        _contents = @[@"11.png",@"12.png"];
+        
+        _contents = [NSMutableArray array];
+//        _contents = @[@"11.png",@"12.png"];
         _name = chatroom.roomId;
         _managerUid = chatroom.creator;
         _cmdHandler = [[TEWhiteboardCmdHandler alloc] initWithDelegate:self];
         [[TEMeetingRTSManager sharedService] setDataHandler:_cmdHandler];
         _colors = @[@(0x000000), @(0xd1021c), @(0xfddc01), @(0x7dd21f), @(0x228bf7), @(0x9b0df5)];
+        _widths = @[@(2.0),@(4.0),@(8.0),@(16.0)];
         _myDrawColorRGB = [_colors[0] intValue];
+        _myDrawLineWidth = [_widths[0] floatValue];
+        
 //        _lines = [[TEWhiteboardLines alloc] init];
         
         _allLines = [NSMutableArray array];
-        for (int i = 0; i<_contents.count; i++) {
-            TEWhiteboardLines *lines = [[TEWhiteboardLines alloc] init];
-            [_allLines addObject:lines];
-        }
+        
         _currentPage = 0;
         _myUid = [[NIMSDK sharedSDK].loginManager currentAccount];
     }
@@ -104,6 +150,7 @@
     }
     
     [self initUI];
+    [self buildData];
 }
 - (void)initUI{
     
@@ -111,11 +158,10 @@
     [_contentView setBackgroundColor:[UIColor whiteColor]];
     [_contentView setContentMode:UIViewContentModeScaleAspectFit];
     [_contentView setClipsToBounds:YES];
-    [_contentView setImage:[UIImage imageNamed:_contents[_currentPage]]];
+//    [_contentView setImage:[UIImage imageNamed:_contents[_currentPage]]];
     [self.view addSubview:_contentView];
     
     [self.view addSubview:self.drawView];
-    _drawView.dataSource = _allLines[_currentPage];
     
     _pannel = [UIView new];
     [self.view addSubview:_pannel];
@@ -128,7 +174,7 @@
     
     _pageLab = [UILabel new];
     [_pageLab setTextAlignment:NSTextAlignmentCenter];
-    [_pageLab setText:[NSString stringWithFormat:@"%ld/%ld",_currentPage+1,_contents.count]];
+    [_pageLab setText:@"0/0"];
     [_pannel addSubview:_pageLab];
     
     _nextBtn = [UIButton new];
@@ -136,6 +182,78 @@
     [_nextBtn addTarget:self action:@selector(onNextPressed:) forControlEvents:UIControlEventTouchUpInside];
     [_nextBtn setImage:[[UIImage imageNamed:@"pageNext"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [_pannel addSubview:_nextBtn];
+    
+    [_pannel addSubview:self.colorBtn];
+    [_pannel addSubview:self.widthBtn];
+    [_pannel addSubview:self.cancelBtn];
+    [_pannel addSubview:self.clearBtn];
+    
+    [self.view addSubview:self.colorView];
+    [self.view addSubview:self.widthView];
+}
+
+- (UIButton *)cancelBtn{
+    if (!_cancelBtn) {
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _cancelBtn.layer.cornerRadius = 35/2;
+        [_cancelBtn addTarget:self action:@selector(onCancelLinePressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelBtn setBackgroundColor:SystemBlueColor];
+        [_cancelBtn setTitle:@"撤" forState:UIControlStateNormal];
+    }
+    return _cancelBtn;
+}
+
+- (UIButton *)clearBtn{
+    if (!_clearBtn) {
+        _clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _clearBtn.layer.cornerRadius = 35/2;
+        [_clearBtn addTarget:self action:@selector(onClearAllPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_clearBtn setBackgroundColor:SystemBlueColor];
+        [_clearBtn setTitle:@"清" forState:UIControlStateNormal];
+    }
+    return _clearBtn;
+}
+
+- (UIButton *)colorBtn{
+    if (!_colorBtn) {
+        _colorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _colorBtn.layer.cornerRadius = 35/2;
+        [_colorBtn setBackgroundColor:UIColorFromRGB(_myDrawColorRGB)];
+        [_colorBtn addTarget:self action:@selector(onColorSelectPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(9.f, 9.f, 17.f, 17.f)];
+        circle.layer.cornerRadius = 17.f / 2.f;
+        circle.layer.borderColor = [UIColor whiteColor].CGColor;
+        circle.layer.borderWidth = 1;
+        [circle setUserInteractionEnabled:NO];
+        [_colorBtn addSubview:circle];
+    }
+    return _colorBtn;
+}
+
+- (TEWhiteboardColorSelectView *)colorView{
+    if (!_colorView) {
+        _colorView = [[TEWhiteboardColorSelectView alloc] initWithFrame:CGRectZero colors:_colors delegate:self];
+    }
+    return _colorView;
+}
+
+- (UIButton *)widthBtn{
+    if (!_widthBtn) {
+        _widthBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _widthBtn.layer.cornerRadius = 35/2;
+        [_widthBtn setBackgroundColor:SystemBlueColor];
+        [_widthBtn setTitle:[NSString stringWithFormat:@"%.1f",_myDrawLineWidth] forState:UIControlStateNormal];
+        [_widthBtn addTarget:self action:@selector(onWidthSelectPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _widthBtn;
+}
+
+- (TEWhiteboardWidthSelectView *)widthView{
+    if (!_widthView) {
+        _widthView = [[TEWhiteboardWidthSelectView alloc] initWithFrame:CGRectZero widths:_widths delegate:self];
+    }
+    return _widthView;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -165,25 +283,49 @@
     
     _pannel.left = dLeft;
     _pannel.width = dWidth;
-    _pannel.top = dHeight - 30;
-    _pannel.height = 30;
+    _pannel.top = dHeight - 34;
+    _pannel.height = 34;
     
     
     
     _pageLab.centerY = _pannel.height/2;
     _pageLab.centerX  =_pannel.width/2;
     _pageLab.width = 50;
-    _pageLab.height = 30;
+    _pageLab.height = 34;
     
     _lastBtn.centerY = _pannel.height/2;
     _lastBtn.right = _pageLab.left - 20;
-    _lastBtn.width = 30;
-    _lastBtn.height = 30;
+    _lastBtn.width = 34;
+    _lastBtn.height = 34;
     
     _nextBtn.centerY = _pannel.height/2;
     _nextBtn.left = _pageLab.right +10;
-    _nextBtn.width = 30;
-    _nextBtn.height = 30;
+    _nextBtn.width = 34;
+    _nextBtn.height = 34;
+    
+    _colorBtn.left = _nextBtn.right + 20;
+    _colorBtn.centerY = _nextBtn.centerY;
+    
+    _widthBtn.left = _colorBtn.right + 20;
+    _widthBtn.centerY = _colorBtn.centerY;
+    
+    _cancelBtn.right = _lastBtn.left - 20;
+    _cancelBtn.centerY = _colorBtn.centerY;
+    
+    _clearBtn.right = _cancelBtn.left -20;
+    _clearBtn.centerY = _colorBtn.centerY;
+    
+    
+    self.colorView.width = 34;
+    self.colorView.height = self.colorView.width*_colors.count;
+    self.colorView.centerX = self.colorBtn.centerX;
+    self.colorView.bottom = self.pannel.top - 3.5;
+    
+    self.widthView.width = 34;
+    self.widthView.height = self.widthView.width*_widths.count;
+    self.widthView.centerX = self.widthBtn.centerX;
+    self.widthView.bottom = self.pannel.top - 3.5;
+
 }
 
 - (void)checkPermission{
@@ -220,15 +362,31 @@
 
 - (void)onColorSelectPressed:(id)sender
 {
-//    [self.colorSelectView setHidden:!(self.colorSelectView.hidden)];
+    [self.colorView setHidden:!(self.colorView.hidden)];
 }
 
-- (void)onColorSeclected:(int)rgbColor
+
+- (void)onColorSelected:(int)rgbColor
 {
-//    [self.colorSelectButton setBackgroundColor:UIColorFromRGB(rgbColor)];
-//    _myDrawColorRGB = rgbColor;
-//    [self.colorSelectView setHidden:YES];
+    [self.colorBtn setBackgroundColor:UIColorFromRGB(rgbColor)];
+    _myDrawColorRGB = rgbColor;
+    [self.colorView setHidden:YES];
 }
+
+- (void)onWidthSelectPressed:(id)sender
+{
+    [self.widthView setHidden:!(self.widthView.hidden)];
+}
+
+
+- (void)onWidthSelected:(float)width
+{
+    [_widthBtn setTitle:[NSString stringWithFormat:@"%.1f",width] forState:UIControlStateNormal];
+    _myDrawLineWidth = width;
+    [self.widthView setHidden:YES];
+}
+
+
 - (void)onLastPressed:(id)sender{
     if (self.contents.count != 0) {
         if (self.currentPage != 0) {
@@ -244,11 +402,11 @@
         }
     }
 }
-- (void)setCurrentPage:(NSInteger)currentPage{
+- (void)setCurrentPage:(int)currentPage{
     _currentPage = currentPage;
-    [_pageLab setText:[NSString stringWithFormat:@"%ld/%ld",_currentPage+1,self.contents.count]];
+    [_pageLab setText:[NSString stringWithFormat:@"%d/%ld",_currentPage+1,self.contents.count]];
     
-    [_contentView setImage:[UIImage imageNamed:_contents[_currentPage]]];
+    [_contentView sd_setImageWithURL:[NSURL URLWithString:[[[TENetworkConfig sharedConfig] baseURL] stringByAppendingString:_contents[_currentPage]]] placeholderImage:nil];
     
     TEWhiteboardLines *lines = _allLines[_currentPage];
     lines.hasUpdate = YES;
@@ -258,7 +416,8 @@
 #pragma mark  - UIResponder
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    self.colorSelectView.hidden = YES;
+    self.colorView.hidden = YES;
+    self.widthView.hidden = YES;
     CGPoint p = [[touches anyObject] locationInView:_drawView];
     [self onPointCollected:p type:TEWhiteboardPointTypeStart];
 }
@@ -297,6 +456,7 @@
     point.xScale = p.x/_drawView.frame.size.width;
     point.yScale = p.y/_drawView.frame.size.height;
     point.colorRGB = _myDrawColorRGB;
+    point.lineWidth = _myDrawLineWidth;
     point.page = _currentPage;
     [_cmdHandler sendMyPoint:point];
     [[self currentLines] addPoint:point uid:_myUid];

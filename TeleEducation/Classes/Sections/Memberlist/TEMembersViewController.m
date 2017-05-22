@@ -10,6 +10,7 @@
 #import "TETimerHolder.h"
 #import "TEChatroomMemberCell.h"
 #import "TEMeetingRolesManager.h"
+#import "UIScrollView+TEPullToRefresh.h"
 
 @interface TEMembersViewController ()<UITableViewDelegate,UITableViewDataSource,NIMChatManagerDelegate,TETimeHolderDelegate>
 
@@ -72,7 +73,31 @@
 }
 
 - (void)prepareData{
-    __weak typeof(self) ws = self;
+    __weak typeof(self) wself = self;
+    [self requestTeamMembers:nil handler:^(NSError *error, NSArray *members) {
+        if (!error)
+        {
+            [wself.members removeAllObjects];
+            if (members.count == wself.limit)
+            {
+                [wself.tableView addPullToRefreshWithActionHandler:^{
+                    [wself loadMoreData];
+                } position:TEPullToRefreshPositionBottom];
+            }
+            else
+            {
+                wself.tableView.tableFooterView = [[UIView alloc] init];
+            }
+            wself.members = [NSMutableArray arrayWithArray:members];
+            [wself sortMember];
+            [wself.tableView reloadData];
+        }
+        else
+        {
+//            [wself.view makeToast:@"直播间成员获取失败"];
+        }
+    }];
+
     
 }
 
@@ -110,7 +135,15 @@
         [self refresh];
     }
 }
-
+- (void)loadMoreData{
+    __weak typeof(self) wself = self;
+    [self requestTeamMembers:self.members.lastObject handler:^(NSError *error, NSArray *members){
+        [wself.tableView.pullToRefreshView stopAnimating];
+        [wself.members addObjectsFromArray:members];
+        [wself sortMember];
+        [wself.tableView reloadData];
+    }];
+}
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

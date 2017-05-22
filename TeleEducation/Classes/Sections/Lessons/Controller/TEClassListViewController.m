@@ -31,11 +31,19 @@
 
 #import "TELessonViewController.h"
 
+#import "MBProgressHUD.h"
+
+#import "TEClassroomViewController.h"
+
 @interface TEClassListViewController ()<UITableViewDelegate,UITableViewDataSource,TELessonCellDelegate>
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *lessonData;
 @property (nonatomic,strong) NSArray *dateData;
 @property (nonatomic,strong) UIButton * orderBtn;
+@property (nonatomic,assign) NSInteger chooseLesson;
+@property (nonatomic,assign) NSInteger chooseUnit;
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+@property (nonatomic,strong) UILabel *emptyDataLab;
 @end
 
 @implementation TEClassListViewController
@@ -53,6 +61,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+   
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.tableView registerClass:[TELessonCell class] forCellReuseIdentifier:@"lessonCell"];
     [self.tableView registerClass:[TELessonHeaderView class] forHeaderFooterViewReuseIdentifier:@"lessonHeader"];
@@ -62,6 +72,16 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 88, 0)];
+    
+    
+    self.emptyDataLab = [[UILabel alloc] initWithFrame:self.view.bounds];
+    [self.emptyDataLab setFont:[UIFont systemFontOfSize:17.0]];
+    [self.emptyDataLab setText:@"您还没有预约任何课程\n点击' + '按钮预约课程"];
+    [self.view addSubview:self.emptyDataLab];
+    [self.emptyDataLab setTextAlignment:NSTextAlignmentCenter];
+    [self.emptyDataLab setNumberOfLines:0];
+    [self.emptyDataLab setTextColor:SystemBlueColor];
+    [self.emptyDataLab setHidden:YES];
     
     _orderBtn = [UIButton new];
     [_orderBtn setFrame:CGRectMake(0, 0, 48, 48)];
@@ -75,8 +95,26 @@
         [_orderBtn setHidden:YES];
         [self.tableView setContentInset:UIEdgeInsetsZero];
     }
+    
+    [self loadRefreshView];
+    self.tableView.alwaysBounceVertical = YES;
+    
 }
-
+- (void) loadRefreshView
+{
+    // 下拉刷新
+    _refreshControl = [[UIRefreshControl alloc] init];
+    [_refreshControl addTarget:self action:@selector(buildData) forControlEvents:UIControlEventValueChanged];
+    [_refreshControl setTintColor:SystemBlueColor];
+    [self.tableView addSubview:_refreshControl];
+    [self.tableView sendSubviewToBack:_refreshControl];
+}
+- (void) endRefreshControl
+{
+    if (_refreshControl.isRefreshing) {
+        [_refreshControl endRefreshing];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -112,24 +150,38 @@
 //        [self.navigationController pushViewController:vc animated:YES];
     }else if (type == LessonActionTypeStartLesson){
         TELesson* lesson = _lessonData[indexPath.section][indexPath.row];
-        if ([[TELoginManager sharedManager] currentTEUser].type == TEUserTypeTeacher) {
-            [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:lesson.lessonID];
-        }else{
-            
-            if (lesson.nimID.length) {
-                [self reserveNetCallMeeting:lesson.nimID];
-            }else{
-                NSLog(@"教师尚未开始授课");
-                [self refreshData];
-            }
-            
-        }
-        
+//        _chooseUnit = lesson.unitID;
+//        _chooseLesson = lesson.lessonID;
+//        if ([[TELoginManager sharedManager] currentTEUser].type == TEUserTypeTeacher) {
+//            [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:lesson.lessonID];
+//        }else{
+//            
+//            if (lesson.nimID.length) {
+//                [self reserveNetCallMeeting:lesson.nimID];
+//            }else{
+//                NSLog(@"教师尚未开始授课");
+//                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//                hud.label.text = @"教师尚未开始授课";
+//                hud.mode = MBProgressHUDModeText;
+//                [hud hideAnimated:YES afterDelay:2.0];
+//                [self refreshData];
+//            }
+//            
+//        }
+
+        TEClassroomViewController *vc = [[TEClassroomViewController alloc] initWithLesson:lesson];
+        [self presentViewController:vc animated:YES completion:nil];
     }
     
 }
 
 - (void)requestChatroomWithLesson:(NSString *)lesson lessonID:(NSInteger)lessonID{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.label.text = @"创建教室中";
+//    hud.mode = MBProgressHUDModeText;
+//    [hud hideAnimated:YES afterDelay:2.0];
+    
     [[TENIMService sharedService] requestMeeting:lesson completion:^(NSError *error, NSString *meetingRoomID) {
         if (!error) {
             NSLog(@"meetingRoomID:%@",meetingRoomID);
@@ -147,15 +199,32 @@
                 }
                 
             } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+                    hud.mode = MBProgressHUDModeText;
+                    hud.label.text  =@"关联教室失败";
+                    [hud hideAnimated:YES afterDelay:2.0];
+                });
             }];
             
         }else{
             NSLog(@"创建聊天室失败");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text  =@"创建教室失败";
+                [hud hideAnimated:YES afterDelay:2.0];
+            });
         }
     }];
 }
 - (void)reserveNetCallMeeting:(NSString *)roomId{
+    
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+    if (!hud) {
+        hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    }
+    
     NIMNetCallMeeting *meeting = [[NIMNetCallMeeting alloc] init];
     meeting.name = roomId;
     meeting.type = NIMNetCallTypeVideo;
@@ -166,11 +235,24 @@
             NSLog(@"预约会议成功，%@",meeting.name);
             [self enterChatRoom:meeting.name];
         }else{
-            NSLog(@"预约会议失败%ld,%@",error.code,error.description);
+            NSLog(@"预约会议失败%ld,%@",(long)error.code,error.description);
             //417重复操作
             if (error.code == NIMRemoteErrorCodeExist) {
                 [self enterChatRoom:meeting.name];
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+                    hud.mode = MBProgressHUDModeText;
+                    hud.label.text  =@"创建教室失败";
+                    [hud hideAnimated:YES afterDelay:2.0];
+                });
             }
+//            else{
+//                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//                hud.label.text = @"教师尚未开始授课";
+//                hud.mode = MBProgressHUDModeText;
+//                [hud hideAnimated:YES afterDelay:2.0];
+//            }
         }
     }];
 }
@@ -187,12 +269,24 @@
             [[TEMeetingRolesManager sharedService] startNewMeeting:me withChatroom:chatroom newCreated:[TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher?YES:NO];
             
             TELessonViewController *vc = [[TELessonViewController alloc] initWithNIMChatroom:chatroom];
+            vc.lessonID = _chooseLesson;
+            vc.unitID = _chooseUnit;
             [self presentViewController:vc animated:YES completion:nil];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+                [hud hideAnimated:YES afterDelay:2.0];
+            });
         }else{
-            NSLog(@"加入会议失败%ld,%@",error.code,error.description);
+            NSLog(@"加入会议失败%d,%@",error.code,error.description);
             
             //404对象不存在
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text  =@"教师尚未开始授课";
+                [hud hideAnimated:YES afterDelay:2.0];
+            });
+            
         }
     }];
     
@@ -245,15 +339,26 @@
     TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token]type:apiType];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSLog(@"%@",(NSDictionary *)request.responseJSONObject);
+        [self endRefreshControl];
         NSDictionary *dic = request.responseJSONObject;
+        NSLog(@"%@",dic);
+        if ([dic[@"code"] integerValue]==3) {
+            [[TELoginManager sharedManager] logout];
+            return;
+        }
+        
+//        NSDictionary *dic = request.responseJSONObject;
         if ([dic isKindOfClass:[NSDictionary class]]) {
             if ([dic[@"content"] isKindOfClass:[NSArray class]]) {
                 NSLog(@"data format valid");
                 NSArray *jsonAry = dic[@"content"];
                 if (jsonAry.count == 0) {
+                    _tableView.hidden = YES;
+                    _emptyDataLab.hidden = NO;
                     return;
                 }
-                
+                _tableView.hidden = NO;
+                _emptyDataLab.hidden = YES;
                 
                 NSMutableArray *timeOriginalAry = [NSMutableArray array];
                 [jsonAry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -287,9 +392,9 @@
                 [_tableView reloadData];
             }
         }
-        
+
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+        [self endRefreshControl];
     }];
 }
 
@@ -305,10 +410,17 @@
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
+    
     _tableView.left = 0;
     _tableView.top = 0;
     _tableView.width = self.view.width;
     _tableView.height = self.view.height;
+    
+    _emptyDataLab.left = 0;
+    _emptyDataLab.top = 0;
+    _emptyDataLab.width = self.view.width;
+    _emptyDataLab.height = self.view.height;
+
     
     _orderBtn.top = self.view.height- 48.0-49.0-20.0;
     _orderBtn.centerX = self.view.centerX;

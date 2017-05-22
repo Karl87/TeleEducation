@@ -43,6 +43,7 @@
 
 - (void)callSingletonSelector:(SEL)selector{
     NSArray *array = [_singletons allValues];
+    NSLog(@"array count %ld",array.count);
     for (id obj in array) {
         if ([obj respondsToSelector:selector]) {
             SuppressPerformSelectorLeakWarning([obj performSelector:selector]);
@@ -73,7 +74,7 @@
 - (id)init{
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(callEnterForeground)
                                                      name:UIApplicationWillEnterForegroundNotification
@@ -126,7 +127,7 @@
 
 - (void)callEnterBackground
 {
-//    [self callSelector:@selector(onEnterBackground)];
+    [self callSelector:@selector(onEnterBackground)];
 }
 
 - (void)callEnterForeground

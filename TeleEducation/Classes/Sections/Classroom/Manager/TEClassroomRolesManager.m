@@ -1,72 +1,63 @@
 //
-//  TEMeetingRolesManager.m
+//  TEClassroomRolesManager.m
 //  TeleEducation
 //
-//  Created by Karl on 2017/3/9.
+//  Created by Karl on 2017/5/19.
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
-#import "TEMeetingRolesManager.h"
-
-#import "TEMeetingRole.h"
+#import "TEClassroomRolesManager.h"
 #import "TEMeetingMessageHandler.h"
 #import "TESessionMsgConverter.h"
 #import "TEMeetingControlAttachment.h"
 #import "TETimerHolder.h"
-
 #import "NIMAVChat.h"
 #import "NSDictionary+TEJson.h"
-
 #import "TELoginManager.h"
 
-@interface TEMeetingRolesManager ()<TEMeetingMessageHandlerDelegate,TETimeHolderDelegate>
-
-@property (nonatomic,strong) NIMChatroom *chatroom; //所属聊天室
-@property (nonatomic,strong) NSMutableDictionary *meetingRoles; //聊天室成员
+@interface TEClassroomRolesManager ()<TEMeetingMessageHandlerDelegate,TETimeHolderDelegate>
+@property (nonatomic,strong) NIMChatroom *classroom; //所属聊天室
+@property (nonatomic,strong) NSMutableDictionary *classroomRoles; //聊天室成员
 @property (nonatomic,strong) TEMeetingMessageHandler *messageHandler;
-@property (nonatomic,assign) BOOL receivedRolesFromManager; //成员信息是否由管理员处同步
 @property (nonatomic,strong) NSMutableArray *pendingJoinUsers;//待批准成员
-
 @end
 
-@implementation TEMeetingRolesManager
 
-- (void)startNewMeeting:(NIMChatroomMember *)me withChatroom:(NIMChatroom *)chatroom newCreated:(BOOL)newCreated{
-    
-    
-    _meetingRoles = [[NSMutableDictionary alloc] initWithCapacity:1];
-    _chatroom = chatroom;
-    
-    //parseLiveSteamingUrl
-    [self parseLiveSteamingUrls];
-    
-    [self addNewRole:me asActor:YES];
-    
-    _messageHandler = [[TEMeetingMessageHandler alloc] initWithChatroom:chatroom delegate:self];
-    
-    _receivedRolesFromManager = NO;
-    
-    _pendingJoinUsers = [NSMutableArray array];
-    
-//    if ([self myRole].isManager && (!newCreated) ) {
-    if ([self myRole].isManager) {
+@implementation TEClassroomRolesManager
 
-        [self sendAskForActors];
+- (void)enterClassroom:(NIMChatroom *)classroom user:(NIMChatroomMember *)me{
+    
+    if(_classroomRoles){
+        [_classroomRoles removeAllObjects];
+    }else{
+        _classroomRoles = [NSMutableDictionary dictionary];//初始化本地角色缓存
+
     }
     
-    if (!newCreated) {
-        TETimerHolder *timerHolder = [[TETimerHolder alloc] init];
-        [timerHolder startTimer:2 delegate:self repeats:NO];
+    if (_pendingJoinUsers) {
+        [_pendingJoinUsers removeAllObjects];
+    }else{
+        _pendingJoinUsers = [NSMutableArray array];//初始化待加入列表
+
     }
+    
+    _classroom = classroom;
+    
+    [self addNewRole:me asActor:YES];//添加自己
+    
+    _messageHandler = [[TEMeetingMessageHandler alloc] initWithChatroom:classroom delegate:self];
+    
+    //获取其他人角色
+    [self sendAskForActors];
+    
 }
 
 //踢出用户
-
 - (BOOL)kick:(NSString *)user{
     //用户数据存在
-    if ([_meetingRoles objectForKey:user]) {
+    if ([_classroomRoles objectForKey:user]) {
         //移除数据
-        [_meetingRoles removeObjectForKey:user];
+        [_classroomRoles removeObjectForKey:user];
         //通知更新
         [self notifyMeetingRolesUpdate];
         return YES;
@@ -74,49 +65,54 @@
     return NO;
 }
 
-- (TEMeetingRole *)role:(NSString *)user{
-    return [_meetingRoles objectForKey:user];
+//获取本地缓存中某用户角色
+- (TEClassroomRole *)role:(NSString *)user{
+    return [_classroomRoles objectForKey:user];
 }
 
-- (TEMeetingRole *)memberRole:(NIMChatroomMember *)user{
-    TEMeetingRole *role = [self role:user.userId];
+//查询某用户角色，如角色尚未加入缓存，则将其加入缓存
+- (TEClassroomRole *)memberRole:(NIMChatroomMember *)user{
+    TEClassroomRole *role = [self role:user.userId];
     if (!role) {
         role = [self addNewRole:user asActor:YES];
     }
     return role;
 }
 
-- (TEMeetingRole *)myRole{
+//我的角色
+- (TEClassroomRole *)myRole{
     NSString *myUid = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     return [self role:myUid];
 }
 
+//我的视频开关
 - (void)setMyVideo:(BOOL)on{
-    TEMeetingRole *role = [self myRole];
+    TEClassroomRole *role = [self myRole];
     if ([[NIMSDK sharedSDK].netCallManager setCameraDisable:!on]) {
         role.videoOn = on;
     }
     [self notifyMeetingRolesUpdate];
 }
-
+//我的音频开关
 - (void)setMyAudio:(BOOL)on{
-    TEMeetingRole *role = [self myRole];
+    TEClassroomRole *role = [self myRole];
     if ([[NIMSDK sharedSDK].netCallManager setMute:!on]) {
         role.audioOn = on;
     }
     
     [self notifyMeetingRolesUpdate];
 }
-
+//我的画板开关
 - (void)setMyWhiteBoard:(BOOL)on{
-    TEMeetingRole *role = [self myRole];
+    TEClassroomRole *role = [self myRole];
     role.whiteboardOn = on;
     [self notifyMeetingRolesUpdate];
 }
 
+//返回本地缓存中全部Actor用户
 - (NSArray *)allActorsByName:(BOOL)name{
     NSMutableArray *actors;
-    for (TEMeetingRole *role in _meetingRoles.allValues) {
+    for (TEClassroomRole *role in _classroomRoles.allValues) {
         NSString *actor = name?role.nickName:role.uid;
         if (role.isActor) {
             if (!actors) {
@@ -128,33 +124,33 @@
     }
     return actors;
 }
-
-- (void)changeRaiseHand{
-    TEMeetingRole *role = [self myRole];
-    role.isRaisingHand = !role.isRaisingHand;
-    [self sendRaiseHand:role.isRaisingHand];
-    [self notifyMeetingRolesUpdate];
+//修改成员是否Actor
+- (void)changeMemberActorRole:(NSString *)user isActor:(BOOL)actor{
+    if([self recoverActor:user]){
+        
+    }else{
+        
+    }
 }
 
 - (void)changeMemberActorRole:(NSString *)user{
     if (![self recoverActor:user]) {
-        TEMeetingRole *role = [_meetingRoles objectForKey:user];
+        TEClassroomRole *role = [_classroomRoles objectForKey:user];
         
         if (!role.isActor && [self exceedMaxActorsNumber]) {
             NSLog(@"Error setting member %@ to actor: Exceeds max actors number.", user);
             return;
         }
         role.isActor = !role.isActor;
-        role.isRaisingHand = NO;
         [self notifyMeetingRolesUpdate];
         [self sendControlActor:role.isActor to:user];
         [self sendActorsListBroadcast];
     }
 }
 
-- (void)updateMeetingUser:(NSString *)user isJoined:(BOOL)joined
+- (void)updateClassroomUser:(NSString *)user isJoined:(BOOL)joined
 {
-    __block TEMeetingRole *role = [_meetingRoles objectForKey:user];
+    __block TEClassroomRole *role = [_classroomRoles objectForKey:user];
     
     if (!role) {
         __weak typeof(self) wself = self;
@@ -195,131 +191,123 @@
 
 - (void)updateVolumes:(NSDictionary<NSString *, NSNumber *> *)volumes
 {
-    for (NSString *meetingUser in _meetingRoles.allKeys) {
+    for (NSString *meetingUser in _classroomRoles.allKeys) {
         NSNumber *volumeNumber = [volumes objectForKey:meetingUser];
         UInt16 volume = volumeNumber ? volumeNumber.shortValue : 0;
-        TEMeetingRole *role = [self role:meetingUser];
+        TEClassroomRole *role = [self role:meetingUser];
         role.audioVolume = volume;
     }
     [self notifyMeetingVolumesUpdate];
 }
+
 #pragma mark - TEMeetingMessageHandlerDelegate
 - (void)onMembersEnterRoom:(NSArray *)members{
-    [self notifyChatroomMembersUpdate:members entered:YES];
-    BOOL sendNotify = NO;
-    BOOL managerEnterRoom = NO;
-    
-    for (NIMChatroomNotificationMember *member in members) {
-        if ([self myRole].isManager) {
-            if (![member.userId isEqualToString:[self myRole].uid]) {
-                [_messageHandler sendMeetingP2PCommand:[self actorsListAttachment] to:member.userId];
-                sendNotify = YES;
-            }
-        }
-        else {
-            if ([member.userId isEqualToString:_chatroom.creator]) {
-                managerEnterRoom = YES;
-            }
-        }
-    }
-    if (sendNotify) {
+    [self notifyClassroomMembersUpdate:members entered:YES];
+//    BOOL sendNotify = NO;
+//    BOOL managerEnterRoom = NO;
+//    
+//    for (NIMChatroomNotificationMember *member in members) {
+//        if ([self myRole].isManager) {
+//            if (![member.userId isEqualToString:[self myRole].uid]) {
+//                [_messageHandler sendMeetingP2PCommand:[self actorsListAttachment] to:member.userId];
+//                sendNotify = YES;
+//            }
+//        }
+//        else {
+//            if ([member.userId isEqualToString:_classroom.creator]) {
+//                managerEnterRoom = YES;
+//            }
+//        }
+//    }
+//    if (sendNotify) {
         [self notifyMeetingRolesUpdate];
-    }
-    if (managerEnterRoom && [self myRole].isRaisingHand) {
-        [self sendRaiseHand:YES];
-    }
-
+//    }
+//    if (managerEnterRoom && [self myRole].isRaisingHand) {
+//        [self sendRaiseHand:YES];
+//    }
+    
 }
 - (void)onMembersExitRoom:(NSArray *)members{
-    [self notifyChatroomMembersUpdate:members entered:NO];
+    [self notifyClassroomMembersUpdate:members entered:NO];
     
-    if ([self myRole].isManager) {
-        BOOL needNotify = NO;
-        for (NIMChatroomNotificationMember *member in members) {
-            TEMeetingRole *role = [self role:member.userId];
-            if (role.isActor) {
-                role.isActor = NO;
-                needNotify = YES;
-            }
-        }
-        if (needNotify) {
-            [self sendActorsListBroadcast];
+    for (NIMChatroomNotificationMember *member in members) {
+        TEClassroomRole *role = [self role:member.userId];
+        if (role) {
+            [_classroomRoles removeObjectForKey:member.userId];
         }
     }
-    else {
-        for (NIMChatroomNotificationMember *member in members) {
-            if ([member.userId isEqualToString:_chatroom.creator]) {
-                [self myRole].isRaisingHand = NO;
-            }
-        }
-    }
+    
+    
+//    if ([self myRole].isManager) {
+//        BOOL needNotify = NO;
+//        for (NIMChatroomNotificationMember *member in members) {
+//            TEClassroomRole *role = [self role:member.userId];
+//            if (role.isActor) {
+//                role.isActor = NO;
+//                needNotify = YES;
+//            }
+//        }
+//        if (needNotify) {
+//            [self sendActorsListBroadcast];
+//        }
+//    }
+//    else {
+//        for (NIMChatroomNotificationMember *member in members) {
+//            if ([member.userId isEqualToString:_classroom.creator]) {
+////                [self myRole].isRaisingHand = NO;
+//            }
+//        }
+//    }
     [self notifyMeetingRolesUpdate];
 }
 
 - (void)onReceiveMeetingCommand:(TEMeetingControlAttachment *)attachment from:(NSString *)userId{
     switch (attachment.command) {
         case CustomMeetingCommandNotifyActorsList:
-            if (![self myRole].isManager) {
-                [self updateRolesFromManager:attachment.uids];
-            }
             break;
         case CustomMeetingCommandAskForActors:
             [self reportActor:userId];
             break;
         case CustomMeetingCommandActorReply:
-            if ([self myRole].isManager) {
-                [self recoverActor:userId];
-            }
-            else if (!_receivedRolesFromManager) {
-                [self recoverActor:userId];
-            }
+            [self recoverActor:userId];
             break;
             
         case CustomMeetingCommandRaiseHand:
-            if ([self myRole].isManager) {
-                [self dealRaiseHandRequest:YES from:userId];
-            }
+            
             break;
             
         case CustomMeetingCommandCancelRaiseHand:
-            if ([self myRole].isManager) {
-                [self dealRaiseHandRequest:NO from:userId];
-            }
+            
             break;
             
         case CustomMeetingCommandEnableActor:
-            [self changeToActor];
             break;
             
         case CustomMeetingCommandDisableActor:
-            [self changeToViewer:YES];
             break;
             
         default:
             break;
     }
 }
+
 #pragma mark - TETimerHolder
 - (void)onTETimerFired:(TETimerHolder *)holder
 {
-    if ([self myRole].isManager) {
-        [self sendActorsListBroadcast];
-    }
-    else if (!_receivedRolesFromManager) {
-        [self sendAskForActors];
-    }
 }
+
 #pragma mark - private
 
-- (TEMeetingRole *)addNewRole:(NIMChatroomMember *)info asActor:(BOOL)actor
+- (TEClassroomRole *)addNewRole:(NIMChatroomMember *)info asActor:(BOOL)actor
 {
-    NSLog(@"Add new role : %@ (%@), is actor : %@", info.roomNickname, info.userId, actor ? @"YES" : @"NO");
-    TEMeetingRole *newRole = [[TEMeetingRole alloc] init];
+    NSLog(@"添加新成员 : %@ (%@), Actor : %@", info.roomNickname, info.userId, actor ? @"YES" : @"NO");
+    TEClassroomRole *newRole = [[TEClassroomRole alloc] init];
     
     newRole.uid = info.userId;
     newRole.nickName = info.roomNickname;
-    newRole.isManager = [TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher;//info.type == NIMChatroomMemberTypeCreator;
-    newRole.isActor = YES;//newRole.isManager ? YES : actor; //主持人默认都是actor
+    //只有教室为Manager
+    newRole.isManager = [TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher;
+    newRole.isActor = YES;
     newRole.audioOn = YES;
     newRole.videoOn = YES;
     newRole.whiteboardOn = YES;
@@ -330,18 +318,18 @@
         [self.pendingJoinUsers removeObject:info.userId];
     }
     
-    [_meetingRoles setObject:newRole forKey:info.userId];
+    [_classroomRoles setObject:newRole forKey:info.userId];
     
     [self notifyMeetingRolesUpdate];
     
     return newRole;
 }
+
 - (void)changeToActor
 {
     if (![self myRole].isActor) {
         [self notifyMeetingActorBeenEnabled];
         [self myRole].isActor = YES;
-        [self myRole].isRaisingHand = NO;
         [self myRole].audioOn = NO;
         [self myRole].videoOn = YES;
         [self myRole].whiteboardOn = YES;
@@ -353,23 +341,7 @@
         [self notifyMeetingRolesUpdate];
     }
 }
-- (void)changeToViewer:(BOOL)cancelRaiseHand
-{
-    if ([self myRole].isActor) {
-        [[NIMSDK sharedSDK].netCallManager setMeetingRole:NO];
-        [self myRole].isActor = NO;
-        [self notifyMeetingActorBeenDisabled];
-    }
-    
-    if (cancelRaiseHand) {
-        [self myRole].isRaisingHand = NO;
-    }
-    [self myRole].audioOn = NO;
-    [self myRole].videoOn = NO;
-    [self myRole].whiteboardOn = NO;
-    [self notifyMeetingRolesUpdate];
-    
-}
+
 - (void)reportActor:(NSString *)user
 {
     if ([self myRole].isActor) {
@@ -377,66 +349,22 @@
     }
 }
 
-- (void)updateRolesFromManager:(NSArray *)actorsMember
-{
-    _receivedRolesFromManager = YES;
-    
-    if ([actorsMember containsObject:[self myRole].uid]) {
-        [self changeToActor];
-    }
-    else {
-        [self changeToViewer:NO];
-    }
-    
-    for (TEMeetingRole *role in _meetingRoles.allValues) {
-        role.isActor = NO;
-    }
-    
-    NSMutableArray *missingUsers = [NSMutableArray array];
-    for (NSString *actorId in actorsMember) {
-        TEMeetingRole *role = [_meetingRoles objectForKey:actorId];
-        if (!role) {
-            [missingUsers addObject:actorId];
-        }
-        else {
-            role.isActor = YES;
-        }
-    }
-    
-    if (missingUsers.count) {
-        
-        __weak typeof(self) wself = self;
-        
-        NIMChatroomMembersHandler handler = ^(NSError *error, NSArray *members){
-            if (error) {
-                NSLog(@"Error fetching chatroom members by Ids %@", missingUsers);
-            }
-            else {
-                for (NIMChatroomMember *member in members) {
-                    [wself addNewRole:member asActor:YES];
-                }
-            }
-        };
-        
-        [self fetchChatRoomMembers:missingUsers withCompletion:handler];
-    }
-    
-    [self notifyMeetingRolesUpdate];
-}
-
 - (void)fetchChatRoomMembers:(NSArray *)members withCompletion:(NIMChatroomMembersHandler)handler
 {
     NIMChatroomMembersByIdsRequest *chatroomMemberReq = [[NIMChatroomMembersByIdsRequest alloc] init];
-    chatroomMemberReq.roomId = _chatroom.roomId;
+    chatroomMemberReq.roomId = _classroom.roomId;
     chatroomMemberReq.userIds = members;
     
     [[NIMSDK sharedSDK].chatroomManager fetchChatroomMembersByIds:chatroomMemberReq completion:handler];
 }
 
+
+//是否覆盖成员角色信息
 - (BOOL)recoverActor:(NSString *)user
 {
-    __block TEMeetingRole *role = [_meetingRoles objectForKey:user];
+    __block TEClassroomRole *role = [_classroomRoles objectForKey:user];
     
+    //本地缓存中不存在该成员，覆盖
     if (!role) {
         __weak typeof(self) wself = self;
         
@@ -447,14 +375,7 @@
             else {
                 for (NIMChatroomMember *member in members) {
                     role = [wself addNewRole:member asActor:YES];
-                    
-                    if (![wself exceedMaxActorsNumber]) {
-                        role.isActor = YES;
-                        [wself notifyMeetingRolesUpdate];
-                    }
-                    else {
-                        NSLog(@"Error setting member %@ to actor: Exceeds max actors number.", user);
-                    }
+                    [wself notifyMeetingRolesUpdate];
                 }
             }
         };
@@ -462,6 +383,8 @@
         [self fetchChatRoomMembers:@[user] withCompletion:handler];
         return YES;
     }
+    
+    //本地成员中存在该成员，不覆盖
     return NO;
 }
 
@@ -473,80 +396,40 @@
     return attachment;
 }
 
-- (void)dealRaiseHandRequest:(BOOL)raise from:(NSString *)user
-{
-    __block TEMeetingRole *role = [_meetingRoles objectForKey:user];
-    
-    if (!role) {
-        __weak typeof(self) wself = self;
-        
-        NIMChatroomMembersHandler handler = ^(NSError *error, NSArray *members){
-            if (error) {
-                NSLog(@"Error fetching chatroom members by Ids %@", user);
-            }
-            else {
-                for (NIMChatroomMember *member in members) {
-                    role = [wself addNewRole:member asActor:NO];
-                    role.isRaisingHand = raise;
-                    [wself notifyMeetingRolesUpdate];
-                    if (raise) {
-                        [wself notifyMeetingMemberRaiseHand];
-                    }
-                }
-            }
-        };
-        
-        [self fetchChatRoomMembers:@[user] withCompletion:handler];
-    }
-    else {
-        role.isRaisingHand = raise;
-        [self notifyMeetingRolesUpdate];
-        if (raise) {
-            [self notifyMeetingMemberRaiseHand];
-        }
-    }
-}
 
 
 - (void)notifyMeetingRolesUpdate
 {
     if (self.delegate) {
-        [self.delegate meetingRolesUpdate];
-    }
-}
-
-- (void)notifyMeetingMemberRaiseHand
-{
-    if (self.delegate) {
-        [self.delegate meetingMemberRaiseHand];
+        [self.delegate classroomRolesUpdate];
     }
 }
 
 - (void)notifyMeetingActorBeenDisabled
 {
     if (self.delegate) {
-        [self.delegate meetingActorBeenDisabled];
+        [self.delegate classroomActorBeenDisabled];
     }
 }
 
 - (void)notifyMeetingActorBeenEnabled
 {
     if (self.delegate) {
-        [self.delegate meetingActorBeenEnabled];
+        [self.delegate classroomActorBeenEnabled];
     }
 }
 
 - (void)notifyMeetingVolumesUpdate
 {
     if (self.delegate) {
-        [self.delegate meetingVolumesUpdate];
+        [self.delegate classroomVolumesUpdate];
     }
 }
 
-- (void)notifyChatroomMembersUpdate:(NSArray *)members entered:(BOOL)entered
+- (void)notifyClassroomMembersUpdate:(NSArray *)members entered:(BOOL)entered
 {
     if (self.delegate) {
-        [self.delegate chatroomMembersUpdated:members entered:entered];
+        [self.delegate classroomMembersUpdated:members entered:entered];
     }
 }
 
@@ -556,14 +439,9 @@
 }
 
 #pragma mark - send message
-- (void)sendRaiseHand:(BOOL)raiseOrCancel
-{
-    TEMeetingControlAttachment *attachment = [[TEMeetingControlAttachment alloc] init];
-    attachment.command = raiseOrCancel ? CustomMeetingCommandRaiseHand : CustomMeetingCommandCancelRaiseHand;
-    
-    [_messageHandler sendMeetingP2PCommand:attachment to:_chatroom.creator];
-}
 
+
+//控制用户是否Actor
 - (void)sendControlActor:(BOOL)enable to:(NSString *)uid
 {
     TEMeetingControlAttachment *attachment = [[TEMeetingControlAttachment alloc] init];
@@ -572,11 +450,13 @@
     [_messageHandler sendMeetingP2PCommand:attachment to:uid];
 }
 
+//发送Actor列表广播
 - (void)sendActorsListBroadcast
 {
     [_messageHandler sendMeetingBroadcastCommand:[self actorsListAttachment]];
 }
 
+//发送获取所有Actors的请求
 - (void)sendAskForActors
 {
     TEMeetingControlAttachment *attachment = [[TEMeetingControlAttachment alloc] init];
@@ -585,6 +465,7 @@
     [_messageHandler sendMeetingBroadcastCommand:attachment];
 }
 
+//发送自己是Actor的点对点信息
 - (void)sendReportActor:(NSString *)user
 {
     TEMeetingControlAttachment *attachment = [[TEMeetingControlAttachment alloc] init];
@@ -598,11 +479,11 @@
     _livePushUrl = nil;
     _livePlayUrl = nil;
     
-    if (!(_chatroom) || !(_chatroom.ext)) {
+    if (!(_classroom) || !(_classroom.ext)) {
         return;
     }
     
-    NSData *data = [_chatroom.ext dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [_classroom.ext dataUsingEncoding:NSUTF8StringEncoding];
     if (data) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
                                                              options:0

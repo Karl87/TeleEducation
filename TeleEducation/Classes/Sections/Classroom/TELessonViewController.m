@@ -29,6 +29,8 @@
 @property (nonatomic,strong) UIButton *quitBtn;
 @property (nonatomic,strong) TELessonManuView *manuView;
 @property (nonatomic,strong) UIView *contentBg;
+@property (nonatomic, assign) BOOL keyboradIsShown;
+
 @end
 
 
@@ -45,6 +47,7 @@
         _whitboardViewController.view.hidden = NO;
         _membersViewController.view.hidden = YES;
     }else if ([item isEqualToString:@"Chat"]){
+        [_chatroomViewController.sessionInputView reset];
         _chatroomViewController.view.hidden = NO;
         _whitboardViewController.view.hidden = YES;
         _membersViewController.view.hidden = YES;
@@ -107,7 +110,7 @@
 {
     UIView *inputView  = self.chatroomViewController.sessionInputView;
     UIView *revertView;
-//    if ([self.currentChildViewController isKindOfClass:[NTESChatroomViewController class]]) {
+//    if (!self.chatroomViewController.view.hidden) {
 //        revertView = self.view;
 //    }else{
         revertView = self.chatroomViewController.view;
@@ -119,12 +122,12 @@
 #pragma mark - NIMInputDelegate
 - (void)showInputView
 {
-//    self.keyboradIsShown = YES;
+    self.keyboradIsShown = YES;
 }
 
 - (void)hideInputView
 {
-//    self.keyboradIsShown = NO;
+    self.keyboradIsShown = NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -145,9 +148,7 @@
     _manuView.delegate = self;
     [self.view addSubview:_manuView];
     
-    _whitboardViewController = [[TEWhiteboardViewController alloc] initWithChatroom:_chatroom];
-    [self addChildViewController:_whitboardViewController];
-    [_whitboardViewController didMoveToParentViewController:self];
+    
     
     self.chatroomViewController = [[TEChatroomViewController alloc] initWithChatroom:_chatroom];
     [self addChildViewController:_chatroomViewController];
@@ -156,6 +157,12 @@
     self.membersViewController = [[TEMembersViewController alloc] initWithChatroom:_chatroom];
     [self addChildViewController:_membersViewController];
     [_membersViewController didMoveToParentViewController:self];
+    
+    _whitboardViewController = [[TEWhiteboardViewController alloc] initWithChatroom:_chatroom];
+    _whitboardViewController.lessonID = _lessonID;
+    _whitboardViewController.unitID = _unitID;
+    [self addChildViewController:_whitboardViewController];
+    [_whitboardViewController didMoveToParentViewController:self];
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-self.view.frame.size.height/8*3, self.view.height)];
     _contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
@@ -176,6 +183,11 @@
     
     [self.view bringSubviewToFront:self.videoView];
     [self revertInputView];
+    
+    _chatroomViewController.view.hidden = YES;
+    _membersViewController.view.hidden = YES;
+    _whitboardViewController.view.hidden= NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {

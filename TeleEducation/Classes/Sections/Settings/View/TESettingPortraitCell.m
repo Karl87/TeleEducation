@@ -10,6 +10,8 @@
 #import "NIMCommonTableData.h"
 #import "UIView+TE.h"
 #import "UIImage+TEColor.h"
+#import "UIImageView+WebCache.h"
+#import "TELoginManager.h"
 
 @interface TESettingPortraitCell()
 @property (nonatomic,strong) UIImageView *avatarImageView;
@@ -73,11 +75,15 @@
     self.textLabel.text = rowData.title;
     self.detailTextLabel.text = rowData.detailTitle;
     NSDictionary *cellInfo = rowData.extraInfo;
+    
+    BOOL isTeacher = [TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher;
+    
     if ([cellInfo isKindOfClass:[NSDictionary class]]) {
+        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:[cellInfo objectForKey:@"userAvatar"]]];
         [_userNameLab setText:[cellInfo objectForKey:@"userName"]];
         [_userNameLab sizeToFit];
         NSString *balanceCount = [[cellInfo objectForKey:@"balanceCount"] stringValue];
-        NSString *balanceStr = [NSString stringWithFormat:@"剩余课时：%@节",balanceCount];
+        NSString *balanceStr = [NSString stringWithFormat:@"%@课时：%@节",isTeacher?@"已授":@"剩余",balanceCount];
         NSMutableAttributedString *balanceAttStr = [[NSMutableAttributedString alloc] initWithString:balanceStr];
         [balanceAttStr addAttributes:@{NSForegroundColorAttributeName:SystemBlueColor} range:NSMakeRange(5, balanceCount.length)];
         [_balanceLab setAttributedText:balanceAttStr];
@@ -90,6 +96,11 @@
         if ([[cellInfo objectForKey:@"rebookAction"] length]) {
             SEL sel = NSSelectorFromString([cellInfo objectForKey:@"rebookAction"]);
             [_rebookBtn addTarget:tableView.viewController action:sel forControlEvents:UIControlEventTouchUpInside];
+        }
+        if(isTeacher){
+//            _balanceLab.hidden = YES;
+            _recordBtn.hidden = YES;
+            _rebookBtn.hidden = YES;
         }
     }
 }

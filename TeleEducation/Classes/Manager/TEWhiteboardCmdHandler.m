@@ -148,13 +148,14 @@
             case TEWhiteboardCmdTypePointMove:
             case TEWhiteboardCmdTypePointEnd:
             {
-                if (cmd.count == 5) {
+                if (cmd.count == 6) {
                     TEWhiteboardPoint *point = [[TEWhiteboardPoint alloc] init];
                     point.type = type;
                     point.xScale = [cmd[1] floatValue];
                     point.yScale = [cmd[2] floatValue];
                     point.colorRGB = [cmd[3] intValue];
                     point.page = [cmd[4] intValue];
+                    point.lineWidth = [cmd[5] floatValue];
                     if (_delegate) {
                         [_delegate onReceivePoint:point from:sender];
                     }
@@ -237,13 +238,14 @@
             case TEWhiteboardCmdTypePointMove:
             case TEWhiteboardCmdTypePointEnd:
             {
-                if (cmd.count == 5) {
+                if (cmd.count == 6) {
                     TEWhiteboardPoint *point = [[TEWhiteboardPoint alloc] init];
                     point.type = [cmd[0] integerValue];
                     point.xScale = [cmd[1] floatValue];
                     point.yScale = [cmd[2] floatValue];
                     point.colorRGB = [cmd[3] intValue];
                     point.page = [cmd[4] intValue];
+                    point.lineWidth = [cmd[5] floatValue];
                     [points addObject:point];
                 }
                 else {

@@ -17,6 +17,14 @@ typedef NS_ENUM(NSInteger, CustomMeetingCommand) {
     CustomMeetingCommandEnableActor          = 11,//主持人开启参与者的发言请求，点对点消息
     CustomMeetingCommandDisableActor         = 12,//主持人关闭某人发言权限，点对点消息
     CustomMeetingCommandCancelRaiseHand      = 13,//参与者向主持人取消申请发言权限，点对点消息
+    
+    CustomMeetingCommandEnableCamera         = 20,
+    CustomMeetingCommandDisableCamera        = 21,
+    CustomMeetingCommandEnableMicrophone     = 22,
+    CustomMeetingCommandDisableMicrophone    = 23,
+    CustomMeetingCommandEnableWhiteboard     = 24,
+    CustomMeetingCommandDisableWhiteboard    = 25,
+    
 };
 
 @interface TEMeetingControlAttachment : NSObject<NIMCustomAttachment>

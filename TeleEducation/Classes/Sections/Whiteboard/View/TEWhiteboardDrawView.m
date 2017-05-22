@@ -56,7 +56,7 @@
         NSUInteger linesCount = lines.count;
         for (NSUInteger i = 0 ; i < linesCount; i ++) {
             UIBezierPath *path = [[UIBezierPath alloc] init];
-            path.lineWidth = 1.5;
+//            path.lineWidth = 5;
             path.lineJoinStyle = kCGLineJoinRound;
             path.lineCapStyle = kCGLineCapRound;
             
@@ -66,6 +66,10 @@
             TEWhiteboardPoint *firstPoint = [line objectAtIndex:0];
             
             UIColor *lineColor = UIColorFromRGB(firstPoint.colorRGB);
+            float lineWidth = firstPoint.lineWidth;
+            
+            path.lineWidth = lineWidth;
+            
             
             for (NSUInteger j = 0 ; j < pointsCount; j ++) {
                 TEWhiteboardPoint *point = [line objectAtIndex:j];

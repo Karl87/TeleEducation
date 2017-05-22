@@ -6,8 +6,8 @@
 //  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TECommonViewController.h"
 
-@interface TEUserInfoViewController : UIViewController
+@interface TEUserInfoViewController : TECommonViewController
 
 @end

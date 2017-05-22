@@ -27,7 +27,7 @@
 #import "UIAlertView+TEBlock.h"
 #import "TENetworkConfig.h"
 
-@interface TEClassroomViewController ()<NIMChatroomManagerDelegate,NIMLoginManagerDelegate,TEMeetingRoloseManagerDelegate,TEMeetingNetCallManagerDelegate,NIMInputDelegate,TELessonManuViewDelegate>
+@interface TEClassroomViewController ()<NIMChatroomManagerDelegate,NIMLoginManagerDelegate,TEMeetingRoloseManagerDelegate,TEMeetingNetCallManagerDelegate,NIMInputDelegate,TELessonManuViewDelegate,TELessonVideoViewDelegate>
 
 @property (nonatomic,strong) TELesson *lesson;
 @property (nonatomic,strong) NIMChatroom *chatroom;
@@ -59,15 +59,30 @@
 
 - (void)initClassroom{
     
-    if (_lesson.nimID.length) {
+    TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token type:TETokenApiTypeGetNIMID userType:[TELoginManager sharedManager].currentTEUser.type lessonID:_lesson.lessonID];
+    [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
-        //存在教室id 进入教室
+        NSLog(@"获取课程nim信息：%@",request.responseJSONObject);
+        NSDictionary *content = [request.responseJSONObject objectForKey:@"content"];
+        NSString *nimid = [content objectForKey:@"nimid"];
         
-        [self enterChatRoom:_lesson.nimID];
-    }else{
-        //流程 - 请求教室、预约教室、进入教室
-        [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:_lesson.lessonID];
-    }
+        if (nimid.length) {
+            
+            //存在教室id 进入教室
+            
+            [self enterChatRoom:nimid];
+        }else{
+            //流程 - 请求教室、预约教室、进入教室
+            [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:_lesson.lessonID];
+        }
+
+        
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self dismiss];
+    }];
+    
+    
     
 }
 
@@ -205,6 +220,7 @@
     }
     if (!_videoView) {
         _videoView = [[TELessonVideoView alloc] initWithFrame:self.view.bounds];
+        _videoView.delegate = self;
     }
     return _videoView;
 }
@@ -218,8 +234,15 @@
 {
     self.keyboradIsShown = NO;
 }
+#pragma mark - VideoViewDelegate
+- (void)videoViewSizeChanged{
+    [_chatroomViewController.sessionInputView endEditing:YES];
+}
 #pragma mark - ManuViewDelegate
 - (void)lessonManuView:(TELessonManuView *)view didSelectedItem:(NSString *)item{
+    
+    [_chatroomViewController.sessionInputView endEditing:YES];
+    
     if ([item isEqualToString:@"exit"]) {
         [self onExit:nil];
     }else if ([item isEqualToString:@"Whiteboard"]){
@@ -265,12 +288,19 @@
 - (void)updateLessonClassroom:(NSString *)roomId{
     TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token type:TETokenApiTypeSetNIMID userType:[TELoginManager sharedManager].currentTEUser.type lessonID:_lesson.lessonID nimID:roomId];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        NSLog(@"更新课程nim信息：%@",request.responseJSONObject);
+        
         NSDictionary *dic = request.responseJSONObject;
         NSDictionary *content = dic[@"content"];
         NSInteger status = [content[@"status"] integerValue];
         
         if (status == 1) {
-            NSLog(@"更新课程教室信息成功");
+            NSLog(@"更新课程教室信息成功 %@",roomId);
+            if([roomId isEqualToString:@""]){
+                NSLog(@"清空课程教室信息");
+                [self dismiss];
+            }
         }else{
             NSLog(@"更新课程教室信息失败");
         }
@@ -378,7 +408,8 @@
 #pragma mark - TEMeetingNetCallManagerDelegate
 - (void)onJoinMeetingFailed:(NSString *)name error:(NSError *)error{
     if ([[TEMeetingRolesManager sharedService].myRole isManager]) {
-        [self requestCloseChatroom];
+//        [self requestCloseChatroom];
+        [self updateLessonClassroom:@""];
     }
 }
 - (void)onMeetingConntectStatus:(BOOL)connected{
@@ -417,26 +448,30 @@
 
 #pragma mark -Private
 - (void)onExit:(id)sender{
-    if ([[[TEMeetingRolesManager sharedService] myRole] isManager]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"确定离开教室？" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alert showAlertWithCompletionHandler:^(NSInteger index) {
-            switch (index) {
-                case 1:{
-                    [self requestCloseChatroom];
-                    [self dismiss];
-                    break;
-                }
-                    
-                default:
-                    break;
-            }
-        }];
-    }
-    else
-    {
+//    if ([[[TEMeetingRolesManager sharedService] myRole] isManager]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"确定离开教室？" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//        [alert showAlertWithCompletionHandler:^(NSInteger index) {
+//            switch (index) {
+//                case 1:{
+//                    [self requestCloseChatroom];
+//                    [self dismiss];
+//                    break;
+//                }
+//                    
+//                default:
+//                    break;
+//            }
+//        }];
+//    }
+//    else
+//    {
+//        [self dismiss];
+//    }
+    if (_membersViewController.members.count == 1) {
+        [self updateLessonClassroom:@""];
+    }else{
         [self dismiss];
     }
-    
 }
 - (void)dismiss{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -447,7 +482,6 @@
             NSLog(@"关闭课堂失败");
         }else{
             NSLog(@"关闭课堂成功");
-            [self updateLessonClassroom:@""];
         }
     }];
 }

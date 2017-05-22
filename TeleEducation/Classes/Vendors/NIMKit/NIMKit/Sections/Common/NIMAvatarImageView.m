@@ -118,16 +118,19 @@ CGRect NIMKit_CGRectWithCenterAndSize(CGPoint center, CGSize size){
 
 - (void)setAvatarByMessage:(NIMMessage *)message
 {
-    if (message.session.sessionType == NIMSessionTypeChatroom) {
-        NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)message.messageExt : nil;
-        NSLog(@"%@,%@,%@,%@",message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
     
-    }
-
     NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
     option.message = message;
     NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:message.from option:option];
     NSURL *url = info.avatarUrlString ? [NSURL URLWithString:info.avatarUrlString] : nil;
+    if (message.session.sessionType == NIMSessionTypeChatroom) {
+        NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)message.messageExt : nil;
+        NSLog(@"%@,%@,%@,%@",message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
+        if ([ext.roomAvatar hasPrefix:@"https://"]) {
+            url = [NSURL URLWithString:[ext.roomAvatar stringByReplacingOccurrencesOfString:@"https://" withString:@"http://"]];
+        }
+    }
+
     [self nim_setImageWithURL:url placeholderImage:info.avatarImage];
 }
 

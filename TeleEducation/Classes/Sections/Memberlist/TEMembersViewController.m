@@ -18,7 +18,6 @@
 
 @property (nonatomic,strong) NIMChatroom *chatroom;
 
-@property (nonatomic,strong) NSMutableArray<NIMChatroomMember *> *members;
 
 @property (nonatomic,strong) TETimerHolder *fetchMembersTimer;
 
@@ -115,25 +114,27 @@
 }
 
 - (void)updateMembers:(NSArray *)members entered:(BOOL)entered{
-    if (!entered) {
-        return;
-    }
-    NSMutableArray*chatroomMembers = [NSMutableArray array];
-    for (NIMChatroomNotificationMember *memberNorification in members) {
-        if ([self hasMemberData:memberNorification.userId]) {
-            continue;
-        }
-        NIMChatroomMember* chatroomMember = [[NIMChatroomMember alloc] init];
-        chatroomMember.userId = memberNorification.userId;
-        chatroomMember.roomNickname = memberNorification.nick;
-        chatroomMember.type = [chatroomMember.userId isEqualToString:self.chatroom.creator]?NIMChatroomMemberTypeCreator:NIMChatroomMemberTypeNormal;
-        [chatroomMembers addObject:chatroomMember];
-    }
-    
-    if (chatroomMembers.count>0) {
-        [self.members addObjectsFromArray:chatroomMembers];
-        [self refresh];
-    }
+//    if (!entered) {
+//        return;
+//    }
+//    NSMutableArray*chatroomMembers = [NSMutableArray array];
+//    for (NIMChatroomNotificationMember *memberNorification in members) {
+//        if ([self hasMemberData:memberNorification.userId]) {
+//            continue;
+//        }
+//        NIMChatroomMember* chatroomMember = [[NIMChatroomMember alloc] init];
+//        chatroomMember.userId = memberNorification.userId;
+//        chatroomMember.roomNickname = memberNorification.nick;
+//        chatroomMember.type = [chatroomMember.userId isEqualToString:self.chatroom.creator]?NIMChatroomMemberTypeCreator:NIMChatroomMemberTypeNormal;
+//        [chatroomMembers addObject:chatroomMember];
+//    }
+//    
+//    if (chatroomMembers.count>0) {
+//        [self.members addObjectsFromArray:chatroomMembers];
+//        [self refresh];
+//    }
+
+    [self prepareData];
 }
 - (void)loadMoreData{
     __weak typeof(self) wself = self;

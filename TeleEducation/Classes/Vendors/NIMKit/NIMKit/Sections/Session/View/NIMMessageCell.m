@@ -169,7 +169,7 @@
     {
         id<NIMCellLayoutConfig> layoutConfig = [[NIMKit sharedKit] layoutConfig];
         NSString *contentStr = [layoutConfig cellContent:self.model];
-        NSLog(@"!!!!!!%@",contentStr);
+//        NSLog(@"!!!!!!%@",contentStr);
         NSAssert([contentStr length] > 0, @"should offer cell content class name");
         Class clazz = NSClassFromString(contentStr);
         NIMSessionMessageContentView *contentView =  [[clazz alloc] initSessionMessageContentView];

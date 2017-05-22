@@ -109,13 +109,14 @@
                                       Disable      : @(NO),
                                       ForbidSelect : @(YES),
                                       RowHeight     : @(60)
-                                      },
-                                  @{
-                                      Title      :@"修改密码",
-                                      CellAction :@"onTouchResetPassword:",
-                                      ShowAccessory : @(YES),
-                                      RowHeight     : @(60)
                                       }
+//                                  ,
+//                                  @{
+//                                      Title      :@"修改密码",
+//                                      CellAction :@"onTouchResetPassword:",
+//                                      ShowAccessory : @(YES),
+//                                      RowHeight     : @(60)
+//                                      }
                                   ],
                           FooterHeight:@(0)
                           },

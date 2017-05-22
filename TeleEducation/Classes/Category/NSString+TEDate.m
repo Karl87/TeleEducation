@@ -44,7 +44,7 @@
     }else if ([dString isEqualToString:dayAfterTomorrowString]){
         return @"后天";
     }else{
-        return dString;
+        return @"";
     }
 
 }

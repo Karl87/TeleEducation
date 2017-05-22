@@ -12,8 +12,10 @@
 #import "NIMAVChat.h"
 
 @interface TELessonVideoView ()<NIMNetCallManagerDelegate>
+@property (nonatomic,strong) UIImageView *selfBg;
 @property (nonatomic,strong) TEGLView *selfVideo;
 @property (nonatomic, weak) CALayer *localVideoLayer;
+@property (nonatomic,strong) UIImageView *otherBg;
 @property (nonatomic,strong) TEGLView *otherVideo;
 @property (nonatomic,strong) NSMutableArray *actors;
 @property (nonatomic,strong) UIButton *sizeModeBtn;
@@ -33,14 +35,27 @@
         _isFrontCamera = YES;
 //        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
+        
+        _selfBg = [[UIImageView alloc] init];
+        [_selfBg setImage:[UIImage imageNamed:@"videoBackground"]];
+        [_selfBg setContentMode:UIViewContentModeCenter];
+        _selfBg.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:_selfBg];
+        
+        _otherBg = [[UIImageView alloc] init];
+        [_otherBg setImage:[UIImage imageNamed:@"videoBackground"]];
+        [_otherBg setContentMode:UIViewContentModeCenter];
+        _otherBg.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:_otherBg];
+        
         _otherVideo = [[TEGLView alloc] initWithFrame:self.bounds];
-        [_otherVideo setBackgroundColor:[UIColor darkGrayColor]];
+//        [_otherVideo setBackgroundColor:[UIColor darkGrayColor]];
         _otherVideo.contentMode = UIViewContentModeScaleAspectFill;
         [_otherVideo render:nil width:0 height:0];
         [self addSubview:_otherVideo];
         
         _selfVideo = [[TEGLView alloc] initWithFrame:self.bounds];
-        [_selfVideo setBackgroundColor:[UIColor darkGrayColor]];
+//        [_selfVideo setBackgroundColor:[UIColor darkGrayColor]];
         _selfVideo.contentMode = UIViewContentModeScaleAspectFill;
         [_selfVideo render:nil width:0 height:0];
         [self addSubview:_selfVideo];
@@ -71,7 +86,6 @@
         
         [self updateActors];
         [[NIMSDK sharedSDK].netCallManager addDelegate:self];
-        
         
         UITapGestureRecognizer *doubleClick=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(fullScreenAction:)];
         doubleClick.numberOfTapsRequired = 2;
@@ -107,6 +121,11 @@
 
 }
 - (void)fullScreenAction:(id)sender{
+    
+    if ([_delegate respondsToSelector:@selector(videoViewSizeChanged)]) {
+        [_delegate videoViewSizeChanged];
+    }
+    
     self.fullScreen = !_fullScreen;
     [self.viewController.view setNeedsLayout];
     [self setNeedsLayout];
@@ -125,7 +144,7 @@
 //    [self startLocalPreview:layer];
 }
 - (void)onRemoteYUVReady:(NSData *)yuvData width:(NSUInteger)width height:(NSUInteger)height from:(NSString *)user{
-    NSLog(@"%ld",_actors.count);
+//    NSLog(@"%ld",_actors.count);
 //    if (_actors.count == 0) {
 //        return;
 //    }
@@ -204,7 +223,15 @@
         _selfVideo.height  =self.height;
     }
     
+    _otherBg.left = _otherVideo.left;
+    _otherBg.top = _otherVideo.top;
+    _otherBg.width = _otherVideo.width;
+    _otherBg.height = _otherVideo.height;
     
+    _selfBg.left = _selfVideo.left;
+    _selfBg.top = _selfVideo.top;
+    _selfBg.width = _selfVideo.width;
+    _selfBg.height = _selfVideo.height;
     
     _sizeModeBtn.width = btnSize;
     _sizeModeBtn.height = btnSize;

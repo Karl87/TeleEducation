@@ -262,10 +262,10 @@
                 formatedMessage = [NSString stringWithFormat:@"%@转移了群主身份给%@",source,targetText];
                 break;
             case NIMTeamOperationTypeAddManager:
-                formatedMessage = [NSString stringWithFormat:@"%@被添加为群管理员",targetText];
+                formatedMessage = [NSString stringWithFormat:@"%@被添加为群教师",targetText];
                 break;
             case NIMTeamOperationTypeRemoveManager:
-                formatedMessage = [NSString stringWithFormat:@"%@被撤销了群管理员身份",targetText];
+                formatedMessage = [NSString stringWithFormat:@"%@被撤销了群教师身份",targetText];
                 break;
             case NIMTeamOperationTypeAcceptInvitation:
                 formatedMessage = [NSString stringWithFormat:@"%@接受%@的邀请进群",source,targetText];
@@ -341,15 +341,15 @@
     switch (content.eventType) {
         case NIMChatroomEventTypeEnter:
         {
-            return [NSString stringWithFormat:@"欢迎%@进入直播间",targetText];
+            return [NSString stringWithFormat:@"欢迎%@进入教室",targetText];
         }
         case NIMChatroomEventTypeAddBlack:
         {
-            return [NSString stringWithFormat:@"%@被管理员拉入黑名单",targetText];
+            return [NSString stringWithFormat:@"%@被教师拉入黑名单",targetText];
         }
         case NIMChatroomEventTypeRemoveBlack:
         {
-            return [NSString stringWithFormat:@"%@被管理员解除拉黑",targetText];
+            return [NSString stringWithFormat:@"%@被教师解除拉黑",targetText];
         }
         case NIMChatroomEventTypeAddMute:
         {
@@ -359,44 +359,44 @@
             }
             else
             {
-                return [NSString stringWithFormat:@"%@被管理员禁言",targetText];
+                return [NSString stringWithFormat:@"%@被教师禁言",targetText];
             }
         }
         case NIMChatroomEventTypeRemoveMute:
         {
-            return [NSString stringWithFormat:@"%@被管理员解除禁言",targetText];
+            return [NSString stringWithFormat:@"%@被教师解除禁言",targetText];
         }
         case NIMChatroomEventTypeAddManager:
         {
-            return [NSString stringWithFormat:@"%@被任命管理员身份",targetText];
+            return [NSString stringWithFormat:@"%@被任命教师身份",targetText];
         }
         case NIMChatroomEventTypeRemoveManager:
         {
-            return [NSString stringWithFormat:@"%@被解除管理员身份",targetText];
+            return [NSString stringWithFormat:@"%@被解除教师身份",targetText];
         }
         case NIMChatroomEventTypeRemoveCommon:
         {
-            return [NSString stringWithFormat:@"%@被解除直播室成员身份",targetText];
+            return [NSString stringWithFormat:@"%@被解除教室成员身份",targetText];
         }
         case NIMChatroomEventTypeAddCommon:
         {
-            return [NSString stringWithFormat:@"%@被添加为直播室成员身份",targetText];
+            return [NSString stringWithFormat:@"%@被添加为教室成员身份",targetText];
         }
         case NIMChatroomEventTypeInfoUpdated:
         {
-            return [NSString stringWithFormat:@"直播间公告已更新"];
+            return [NSString stringWithFormat:@"教室公告已更新"];
         }
         case NIMChatroomEventTypeKicked:
         {
-            return [NSString stringWithFormat:@"%@被管理员移出直播间",targetText];
+            return [NSString stringWithFormat:@"%@被教师移出教室",targetText];
         }
         case NIMChatroomEventTypeExit:
         {
-            return [NSString stringWithFormat:@"%@离开了直播间",targetText];
+            return [NSString stringWithFormat:@"%@离开了教室",targetText];
         }
         case NIMChatroomEventTypeClosed:
         {
-            return [NSString stringWithFormat:@"直播间已关闭"];
+            return [NSString stringWithFormat:@"教室已关闭"];
         }
         case NIMChatroomEventTypeAddMuteTemporarily:
         {
@@ -406,12 +406,12 @@
             }
             else
             {
-                return [NSString stringWithFormat:@"%@被管理员禁言",targetText];
+                return [NSString stringWithFormat:@"%@被教师禁言",targetText];
             }
         }
         case NIMChatroomEventTypeRemoveMuteTemporarily:
         {
-            return [NSString stringWithFormat:@"%@被管理员解除临时禁言",targetText];
+            return [NSString stringWithFormat:@"%@被教师解除临时禁言",targetText];
         }
         case NIMChatroomEventTypeMemberUpdateInfo:
         {
@@ -419,7 +419,7 @@
         }
         case NIMChatroomEventTypeRoomMuted:
         {
-            return @"全体禁言，管理员可发言";
+            return @"全体禁言，教师可发言";
         }
         case NIMChatroomEventTypeRoomUnMuted:
         {

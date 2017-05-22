@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TELessonVideoViewDelegate <NSObject>
+
+- (void)videoViewSizeChanged;
+
+@end
+
 @interface TELessonVideoView : UIView
 - (void)updateActors;
 - (void)stopLocalPreview;
+@property (nonatomic,weak) id<TELessonVideoViewDelegate> delegate;
 @property (nonatomic,assign) BOOL fullScreen;
 @end

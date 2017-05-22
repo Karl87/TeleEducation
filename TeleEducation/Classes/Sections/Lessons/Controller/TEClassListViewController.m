@@ -121,8 +121,8 @@
 
 - (void)configNav{
     [super configNav];
-    UIBarButtonItem *allClassesBtn = [[UIBarButtonItem alloc] initWithTitle:@"全部课程" style:UIBarButtonItemStylePlain target:self action:@selector(showAllClasses)];
-    [self.navigationItem setRightBarButtonItem:allClassesBtn];
+//    UIBarButtonItem *allClassesBtn = [[UIBarButtonItem alloc] initWithTitle:@"全部课程" style:UIBarButtonItemStylePlain target:self action:@selector(showAllClasses)];
+//    [self.navigationItem setRightBarButtonItem:allClassesBtn];
 }
 
 #pragma mark - 旋转处理 (iOS7)

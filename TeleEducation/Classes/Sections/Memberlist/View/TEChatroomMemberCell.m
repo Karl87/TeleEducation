@@ -43,7 +43,7 @@
 
 - (void)refresh:(NIMChatroomMember *)member{
     
-//    NSLog(@"%@\n%@\n%@\n%@",member.userId,member.roomNickname,member.roomAvatar,member.roomExt);
+    NSLog(@"%@\n%@\n%@\n%@",member.userId,member.roomNickname,member.roomAvatar,member.roomExt);
     
     NSString *avater = member.roomAvatar;
     
@@ -146,6 +146,8 @@
 - (UIImageView *)avatarImageView{
     if (!_avatarImageView) {
         _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+        [_avatarImageView.layer setMasksToBounds:YES];
+        [_avatarImageView.layer setCornerRadius:_avatarImageView.height/2];
     }
     return _avatarImageView;
 }

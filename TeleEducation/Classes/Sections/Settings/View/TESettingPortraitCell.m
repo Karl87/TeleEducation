@@ -29,6 +29,8 @@
         CGFloat avatarSize = 55.0f;
         _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, avatarSize, avatarSize)];
         [_avatarImageView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        _avatarImageView.layer.masksToBounds = YES;
+        _avatarImageView.layer.cornerRadius = _avatarImageView.height/2;
         [self addSubview:_avatarImageView];
         
         _userNameLab  =[[UILabel alloc] initWithFrame:CGRectZero];

@@ -33,31 +33,24 @@
 
 - (void)startNewMeeting:(NIMChatroomMember *)me withChatroom:(NIMChatroom *)chatroom newCreated:(BOOL)newCreated{
     
-    
-    _meetingRoles = [[NSMutableDictionary alloc] initWithCapacity:1];
+    if(_meetingRoles){
+        [_meetingRoles removeAllObjects];
+    }else{
+        _meetingRoles = [NSMutableDictionary dictionary];//初始化本地角色缓存
+    }
+    if (_pendingJoinUsers) {
+        [_pendingJoinUsers removeAllObjects];
+    }else{
+        _pendingJoinUsers = [NSMutableArray array];//初始化待加入列表
+    }
     _chatroom = chatroom;
-    
-    //parseLiveSteamingUrl
     [self parseLiveSteamingUrls];
-    
-    [self addNewRole:me asActor:YES];
+    [self addNewRole:me asActor:YES];//添加自己
     
     _messageHandler = [[TEMeetingMessageHandler alloc] initWithChatroom:chatroom delegate:self];
     
-    _receivedRolesFromManager = NO;
-    
-    _pendingJoinUsers = [NSMutableArray array];
-    
-//    if ([self myRole].isManager && (!newCreated) ) {
-    if ([self myRole].isManager) {
-
-        [self sendAskForActors];
-    }
-    
-    if (!newCreated) {
-        TETimerHolder *timerHolder = [[TETimerHolder alloc] init];
-        [timerHolder startTimer:2 delegate:self repeats:NO];
-    }
+    //获取其他人角色
+    [self sendAskForActors];
 }
 
 //踢出用户
@@ -206,93 +199,100 @@
 #pragma mark - TEMeetingMessageHandlerDelegate
 - (void)onMembersEnterRoom:(NSArray *)members{
     [self notifyChatroomMembersUpdate:members entered:YES];
-    BOOL sendNotify = NO;
-    BOOL managerEnterRoom = NO;
-    
-    for (NIMChatroomNotificationMember *member in members) {
-        if ([self myRole].isManager) {
-            if (![member.userId isEqualToString:[self myRole].uid]) {
-                [_messageHandler sendMeetingP2PCommand:[self actorsListAttachment] to:member.userId];
-                sendNotify = YES;
-            }
-        }
-        else {
-            if ([member.userId isEqualToString:_chatroom.creator]) {
-                managerEnterRoom = YES;
-            }
-        }
-    }
-    if (sendNotify) {
+//    BOOL sendNotify = NO;
+//    BOOL managerEnterRoom = NO;
+//    
+//    for (NIMChatroomNotificationMember *member in members) {
+//        if ([self myRole].isManager) {
+//            if (![member.userId isEqualToString:[self myRole].uid]) {
+//                [_messageHandler sendMeetingP2PCommand:[self actorsListAttachment] to:member.userId];
+//                sendNotify = YES;
+//            }
+//        }
+//        else {
+//            if ([member.userId isEqualToString:_chatroom.creator]) {
+//                managerEnterRoom = YES;
+//            }
+//        }
+//    }
+//    if (sendNotify) {
         [self notifyMeetingRolesUpdate];
-    }
-    if (managerEnterRoom && [self myRole].isRaisingHand) {
-        [self sendRaiseHand:YES];
-    }
+//    }
+//    if (managerEnterRoom && [self myRole].isRaisingHand) {
+//        [self sendRaiseHand:YES];
+//    }
 
 }
 - (void)onMembersExitRoom:(NSArray *)members{
     [self notifyChatroomMembersUpdate:members entered:NO];
     
-    if ([self myRole].isManager) {
-        BOOL needNotify = NO;
-        for (NIMChatroomNotificationMember *member in members) {
-            TEMeetingRole *role = [self role:member.userId];
-            if (role.isActor) {
-                role.isActor = NO;
-                needNotify = YES;
-            }
-        }
-        if (needNotify) {
-            [self sendActorsListBroadcast];
+    for (NIMChatroomNotificationMember *member in members) {
+        TEMeetingRole *role = [self role:member.userId];
+        if (role) {
+            [_meetingRoles removeObjectForKey:member.userId];
         }
     }
-    else {
-        for (NIMChatroomNotificationMember *member in members) {
-            if ([member.userId isEqualToString:_chatroom.creator]) {
-                [self myRole].isRaisingHand = NO;
-            }
-        }
-    }
+    
+//    if ([self myRole].isManager) {
+//        BOOL needNotify = NO;
+//        for (NIMChatroomNotificationMember *member in members) {
+//            TEMeetingRole *role = [self role:member.userId];
+//            if (role.isActor) {
+//                role.isActor = NO;
+//                needNotify = YES;
+//            }
+//        }
+//        if (needNotify) {
+//            [self sendActorsListBroadcast];
+//        }
+//    }
+//    else {
+//        for (NIMChatroomNotificationMember *member in members) {
+//            if ([member.userId isEqualToString:_chatroom.creator]) {
+//                [self myRole].isRaisingHand = NO;
+//            }
+//        }
+//    }
     [self notifyMeetingRolesUpdate];
 }
 
 - (void)onReceiveMeetingCommand:(TEMeetingControlAttachment *)attachment from:(NSString *)userId{
     switch (attachment.command) {
         case CustomMeetingCommandNotifyActorsList:
-            if (![self myRole].isManager) {
-                [self updateRolesFromManager:attachment.uids];
-            }
+//            if (![self myRole].isManager) {
+//                [self updateRolesFromManager:attachment.uids];
+//            }
             break;
         case CustomMeetingCommandAskForActors:
             [self reportActor:userId];
             break;
         case CustomMeetingCommandActorReply:
-            if ([self myRole].isManager) {
+//            if ([self myRole].isManager) {
+//                [self recoverActor:userId];
+//            }
+//            else if (!_receivedRolesFromManager) {
                 [self recoverActor:userId];
-            }
-            else if (!_receivedRolesFromManager) {
-                [self recoverActor:userId];
-            }
+//            }
             break;
             
         case CustomMeetingCommandRaiseHand:
-            if ([self myRole].isManager) {
-                [self dealRaiseHandRequest:YES from:userId];
-            }
+//            if ([self myRole].isManager) {
+//                [self dealRaiseHandRequest:YES from:userId];
+//            }
             break;
             
         case CustomMeetingCommandCancelRaiseHand:
-            if ([self myRole].isManager) {
-                [self dealRaiseHandRequest:NO from:userId];
-            }
+//            if ([self myRole].isManager) {
+//                [self dealRaiseHandRequest:NO from:userId];
+//            }
             break;
             
         case CustomMeetingCommandEnableActor:
-            [self changeToActor];
+//            [self changeToActor];
             break;
             
         case CustomMeetingCommandDisableActor:
-            [self changeToViewer:YES];
+//            [self changeToViewer:YES];
             break;
             
         default:

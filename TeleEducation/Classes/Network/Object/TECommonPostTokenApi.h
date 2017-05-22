@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger,TETokenApiType) {
     TETokenApiTypeGetPeriods,
     TETokenApiTypeOrderLesson,
     TETokenApiTypeGetLessonsBeReserved,
-    TETokenApiTypeSetNIMID
+    TETokenApiTypeSetNIMID,
+    TETokenApiTypeGetNIMID
 };
 
 @interface TECommonPostTokenApi : YTKRequest
@@ -25,4 +26,6 @@ typedef NS_ENUM(NSInteger,TETokenApiType) {
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type unit:(NSInteger)unit course:(NSInteger)course;
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type teacher:(NSInteger)teacher;
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type unit:(NSInteger)unit course:(NSInteger)course pid:(NSInteger)pid teacher:(NSInteger)teacher date:(NSString*)date period:(NSString *)period timeStamp:(NSTimeInterval)stamp;
+- (id)initWithToken:(NSString *)token type:(TETokenApiType)type userType:(TEUserType)userType lessonID:(NSInteger)lessonID;
+
 @end

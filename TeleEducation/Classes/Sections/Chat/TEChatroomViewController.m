@@ -123,6 +123,14 @@
         if ([self isMeetingControlMessage:message]) {
             [filteredMessages removeObject:message];
         }
+//        else{
+//            if (message.session.sessionType == NIMSessionTypeChatroom) {
+//                NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)message.messageExt : nil;
+//                NSLog(@"%@,%@,%@,%@",message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
+//                
+//            }
+//
+//        }
     }
     [super onRecvMessages:filteredMessages];
 }

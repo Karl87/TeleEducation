@@ -15,6 +15,7 @@
 #define OrderLessonURL @"/App/Course/OrderLesson.html"
 #define GetLessonsBeReservedURL @"/App/Course/GetLessonsBeReserved.html"
 #define SetLessonNIMIDURL @"/App/Course/SetLessonNIMID.html"
+#define GetLessonNIMIDURL @"/App/Course/GetLessonNIMID.html"
 
 @implementation TECommonPostTokenApi{
     NSString *_token;
@@ -31,6 +32,18 @@
     NSInteger _lessonID;
     NSString *_nimID;
 }
+
+- (id)initWithToken:(NSString *)token type:(TETokenApiType)type userType:(TEUserType)userType lessonID:(NSInteger)lessonID{
+    self = [super init];
+    if (self) {
+        _token = token;
+        _type = type;
+        _userType = userType;
+        _lessonID = lessonID;
+    }
+    return self;
+}
+
 
 - (id)initWithToken:(NSString *)token type:(TETokenApiType)type userType:(TEUserType)userType lessonID:(NSInteger)lessonID nimID:(NSString *)nimID{
     self = [super init];
@@ -109,6 +122,8 @@
             return GetLessonsBeReservedURL;
         case TETokenApiTypeSetNIMID:
             return SetLessonNIMIDURL;
+        case TETokenApiTypeGetNIMID:
+            return GetLessonNIMIDURL;
     }
     return nil;
 }
@@ -149,6 +164,13 @@
                      @"type":@(_userType),
                      @"id":@(_lessonID),
                      @"nimid":_nimID
+                     };
+
+        case TETokenApiTypeGetNIMID:
+            return @{
+                     @"token":_token,
+                     @"type":@(_userType),
+                     @"id":@(_lessonID)
                      };
         default:
             return @{

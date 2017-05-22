@@ -40,6 +40,9 @@
 }
 
 - (void)lessonManuView:(TELessonManuView *)view didSelectedItem:(NSString *)item{
+    
+    [self.chatroomViewController.sessionInputView endEditing:YES];
+    
     if ([item isEqualToString:@"exit"]) {
         [self onExit:nil];
     }else if ([item isEqualToString:@"Whiteboard"]){

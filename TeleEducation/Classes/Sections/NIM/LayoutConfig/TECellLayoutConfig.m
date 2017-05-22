@@ -149,32 +149,32 @@
 
 - (NSArray *)customViews:(NIMMessageModel *)model
 {
-    if ([self isSupportedChatroomMessage:model.message]) {
-        NSDictionary *ext = model.message.remoteExt;
-        NIMChatroomMemberType type = [ext[@"type"] integerValue];
-        NSString *imageName;
-        switch (type) {
-            case NIMChatroomMemberTypeManager:
-                imageName = @"chatroom_role_manager";
-                break;
-            case NIMChatroomMemberTypeCreator:
-                imageName = @"chatroom_role_master";
-                break;
-            default:
-                break;
-        }
-        UIImageView *imageView;
-        if (imageName.length) {
-            UIImage *image = [UIImage imageNamed:imageName];
-            imageView = [[UIImageView alloc] initWithImage:image];
-            CGFloat leftMargin = 15.f;
-            CGFloat topMatgin  = 0.f;
-            CGRect frame = imageView.frame;
-            frame.origin = CGPointMake(leftMargin, topMatgin);
-            imageView.frame = frame;
-        }
-        return imageView ? @[imageView] : nil;
-    }
+//    if ([self isSupportedChatroomMessage:model.message]) {
+//        NSDictionary *ext = model.message.remoteExt;
+//        NIMChatroomMemberType type = [ext[@"type"] integerValue];
+//        NSString *imageName;
+//        switch (type) {
+//            case NIMChatroomMemberTypeManager:
+//                imageName = @"chatroom_role_manager";
+//                break;
+//            case NIMChatroomMemberTypeCreator:
+//                imageName = @"chatroom_role_master";
+//                break;
+//            default:
+//                break;
+//        }
+//        UIImageView *imageView;
+//        if (imageName.length) {
+//            UIImage *image = [UIImage imageNamed:imageName];
+//            imageView = [[UIImageView alloc] initWithImage:image];
+//            CGFloat leftMargin = 15.f;
+//            CGFloat topMatgin  = 0.f;
+//            CGRect frame = imageView.frame;
+//            frame.origin = CGPointMake(leftMargin, topMatgin);
+//            imageView.frame = frame;
+//        }
+//        return imageView ? @[imageView] : nil;
+//    }
     return [super customViews:model];
 }
 

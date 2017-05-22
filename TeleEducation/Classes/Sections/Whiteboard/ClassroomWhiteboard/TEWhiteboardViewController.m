@@ -140,11 +140,11 @@
     [[TEMeetingRTSManager sharedService] setDelegate:self];
     
     NSError *error;
-    if (_isManager) {
+//    if (_isManager) {
         error = [[TEMeetingRTSManager sharedService] reserveConference:_name];
-    }else{
-        error = [[TEMeetingRTSManager sharedService] joinConference:_name];
-    }
+//    }else{
+//        error = [[TEMeetingRTSManager sharedService] joinConference:_name];
+//    }
     if (error) {
         NSLog(@"Error %zd reserve/join rts conference: %@", error.code, _name);
     }
@@ -189,12 +189,14 @@
     [_pannel addSubview:self.clearBtn];
     
     [self.view addSubview:self.colorView];
+    self.colorView.hidden =YES;
     [self.view addSubview:self.widthView];
+    self.widthView.hidden = YES;
 }
 
 - (UIButton *)cancelBtn{
     if (!_cancelBtn) {
-        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _cancelBtn.layer.cornerRadius = 35/2;
         [_cancelBtn addTarget:self action:@selector(onCancelLinePressed:) forControlEvents:UIControlEventTouchUpInside];
         [_cancelBtn setBackgroundColor:SystemBlueColor];
@@ -205,7 +207,7 @@
 
 - (UIButton *)clearBtn{
     if (!_clearBtn) {
-        _clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _clearBtn.layer.cornerRadius = 35/2;
         [_clearBtn addTarget:self action:@selector(onClearAllPressed:) forControlEvents:UIControlEventTouchUpInside];
         [_clearBtn setBackgroundColor:SystemBlueColor];
@@ -216,7 +218,7 @@
 
 - (UIButton *)colorBtn{
     if (!_colorBtn) {
-        _colorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _colorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _colorBtn.layer.cornerRadius = 35/2;
         [_colorBtn setBackgroundColor:UIColorFromRGB(_myDrawColorRGB)];
         [_colorBtn addTarget:self action:@selector(onColorSelectPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -240,7 +242,7 @@
 
 - (UIButton *)widthBtn{
     if (!_widthBtn) {
-        _widthBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        _widthBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _widthBtn.layer.cornerRadius = 35/2;
         [_widthBtn setBackgroundColor:SystemBlueColor];
         [_widthBtn setTitle:[NSString stringWithFormat:@"%.1f",_myDrawLineWidth] forState:UIControlStateNormal];
@@ -283,7 +285,7 @@
     
     _pannel.left = dLeft;
     _pannel.width = dWidth;
-    _pannel.top = dHeight - 34;
+    _pannel.top = dHeight - 40;
     _pannel.height = 34;
     
     
@@ -299,7 +301,7 @@
     _lastBtn.height = 34;
     
     _nextBtn.centerY = _pannel.height/2;
-    _nextBtn.left = _pageLab.right +10;
+    _nextBtn.left = _pageLab.right +20;
     _nextBtn.width = 34;
     _nextBtn.height = 34;
     

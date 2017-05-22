@@ -10,7 +10,10 @@
 
 @interface TEMembersViewController : UIViewController
 
+@property (nonatomic,strong) NSMutableArray<NIMChatroomMember *> *members;
+
 - (instancetype)initWithChatroom:(NIMChatroom *)chatroom;
+
 - (void)prepareData;
 - (void)refresh;
 - (void)updateMembers:(NSArray *)members entered:(BOOL)entered;

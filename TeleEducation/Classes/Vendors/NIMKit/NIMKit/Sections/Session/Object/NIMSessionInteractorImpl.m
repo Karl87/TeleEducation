@@ -15,7 +15,8 @@
 #import "NIMMessageMaker.h"
 #import "NIMLocationViewController.h"
 #import "NIMKitAudioCenter.h"
-
+#import "TELoginManager.h"
+#import "TENetworkConfig.h"
 static const void * const NTESDispatchMessageDataPrepareSpecificKey = &NTESDispatchMessageDataPrepareSpecificKey;
 dispatch_queue_t NTESMessageDataPrepareQueue()
 {
@@ -118,6 +119,15 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
         for (NIMMessage *message in messages)
         {
             NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+            
+            if (model.message.session.sessionType == NIMSessionTypeChatroom && [model.message.from isEqualToString:[TELoginManager sharedManager].currentTEUser.nimAccount]) {
+                NIMMessageChatroomExtension *meExt = [[NIMMessageChatroomExtension alloc] init];
+                meExt.roomNickname = [TELoginManager sharedManager].currentTEUser.name;
+                meExt.roomAvatar = [[TENetworkConfig sharedConfig].baseURL stringByAppendingString:[TELoginManager sharedManager].currentTEUser.avatar];
+                model.message.messageExt = meExt;
+            }
+            
+            
             [weakSelf.layout layoutConfig:model];
             [models addObject:model];
         }

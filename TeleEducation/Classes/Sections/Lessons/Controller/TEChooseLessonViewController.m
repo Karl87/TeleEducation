@@ -174,7 +174,7 @@
     return nil;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    TEChooseTeacherViewController *vc = [[TEChooseTeacherViewController alloc] initWithTitle:@"选择教师" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
+    TEChooseTeacherViewController *vc = [[TEChooseTeacherViewController alloc] initWithTitle:Babel(@"select_teacher") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
     TEUnit *unit = _data[indexPath.section-1];
     [TEOrderLessonManager sharedManager].lesson.unitID = unit.unitID;
     [TEOrderLessonManager sharedManager].lesson.unit = unit.title;

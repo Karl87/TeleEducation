@@ -141,16 +141,16 @@
 }
 - (void)nimLogin{
     
-    NSLog(@"%@\n%@",_currentTEUser.nimAccount,_currentTEUser.nimToken);
+    __block NSString *note = [NSString stringWithFormat:@"Account:%@\nNIMAccount:%@",_currentTEUser.account,_currentTEUser.nimAccount];
     
     if (![[NIMSDK sharedSDK] loginManager].isLogined) {
         [[[NIMSDK sharedSDK] loginManager] login:_currentTEUser.nimAccount token:_currentTEUser.nimToken completion:^(NSError * _Nullable error) {
             NSLog(@"%ld,%@",error.code,error.description);
             if (error == nil) {
-                NSLog(@"NIM登录成功");
+                LogSuccess(@"NIM登录成功",note);
             }else{
-                NSLog(@"NIM登录失败");
-                NSLog(@"%@,%@,%@",_currentTEUser.phone,_currentTEUser.name,_currentTEUser.nimToken);
+                note = [note stringByAppendingString:[NSString stringWithFormat:@"\nError:%ld,%@",error.code,error.description]];
+                LogError(@"NIM登录失败", note);
                 if(error.code == NIMRemoteErrorCodeUserNotExist || error.code == NIMRemoteErrorCodeInvalidPass){
                     [self registerNIMWithAccount:[NSString stringWithFormat:@"te%@",_currentTEUser.phone] nickname:_currentTEUser.name token:_currentTEUser.nimToken];
                 }
@@ -172,7 +172,12 @@
         }
     }
     [[NIMSDK sharedSDK].loginManager logout:^(NSError * _Nullable error) {
-        
+        if (error) {
+            NSString *note = [NSString stringWithFormat:@"Error:%ld,%@",error.code,error.description];
+            LogError(@"NIM登出失败",note);
+        }else{
+            LogSuccess(@"NIM登出成功",@"");
+        }
     }];
 
 }
@@ -245,8 +250,6 @@
 - (void)refreshUserInfo{
     TEUserInfoApi *api = [[TEUserInfoApi alloc] initWithToken:self.currentTEUser.token type:self.currentTEUser.type];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"%@",request.responseJSONObject);
-        
         
         NSDictionary *userInfo = request.responseJSONObject[@"content"][@"userInfo"];
         TELoginData *data = [[TELoginData alloc] init];
@@ -264,8 +267,13 @@
         data.vipEnd = userInfo[@"vipenddateline"];
         data.classCount = [userInfo[@"classcount"]integerValue];
         [self setCurrentTEUser:data];
+        
+        LogSuccess(@"更新用户信息成功",_currentTEUser.description);
 
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+        NSString *errorDes = [NSString stringWithFormat:@"%ld:%@",request.error.code,request.error.description];
+        LogError(@"访问更新用户信息接口失败", errorDes);
         
     }];
 }

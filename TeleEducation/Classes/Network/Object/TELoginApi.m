@@ -43,23 +43,4 @@
              @"type":@(_type)
              };
 }
-//- (id)jsonValidator{
-//    return @{
-//             @"code":[NSNumber class],
-//             @"content":@{
-//                     @"status":[NSNumber class],
-//                     @"token":[NSString class],
-//                     @"userInfo":@{
-//                             @"name":[NSString class],
-//                             @"phone":[NSString class],
-//                             @"qq":[NSString class],
-//                             @"skype":[NSString class],
-//                             @"image_url":[NSString class],
-//                             @"vipstartdateline":[NSString class],
-//                             @"vipenddateline":[NSString class],
-//                             @"classcount":[NSNumber class]
-//                             }
-//                     }
-//             };
-//}
 @end

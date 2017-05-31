@@ -39,7 +39,7 @@
     if ([_data isKindOfClass:[TEPeriod class]]) {
         TEPeriod *period = _data;
         if ([_timeLab isHighlighted]) {
-            [_timeLab setText:[NSString stringWithFormat:@"%@\n已预约",period.period]];
+            [_timeLab setText:[NSString stringWithFormat:@"%@\n%@",period.period,Babel(@"info_booked")]];
         }else{
             [_timeLab setText:period.period];
         }
@@ -59,7 +59,7 @@
                 if (period.status == TEPeriodStatusLeave) {
                     [_timeLab setText:[NSString stringWithFormat:@"%@\n已请假",period.period]];
                 }else if (period.status == TEPeriodStatusOrdered){
-                    [_timeLab setText:[NSString stringWithFormat:@"%@\n已预约",period.period]];
+                    [_timeLab setText:[NSString stringWithFormat:@"%@\n%@",period.period,Babel(@"info_booked")]];
                 }
             }
         }
@@ -71,7 +71,7 @@
     if ([_data isKindOfClass:[TEPeriod class]]) {
         TEPeriod *period = _data;
         if (highlighted) {
-            [_timeLab setText:[NSString stringWithFormat:@"%@\n预约",period.period]];
+            [_timeLab setText:[NSString stringWithFormat:@"%@\n%@",period.period,Babel(@"action_book")]];
         }else{
             [_timeLab setText:period.period];
         }
@@ -82,7 +82,7 @@
     if ([_data isKindOfClass:[TEPeriod class]]) {
         TEPeriod *period = _data;
         if (selected) {
-            [_timeLab setText:[NSString stringWithFormat:@"%@\n预约",period.period]];
+            [_timeLab setText:[NSString stringWithFormat:@"%@\n%@",period.period,Babel(@"action_book")]];
         }else{
             [_timeLab setText:period.period];
         }

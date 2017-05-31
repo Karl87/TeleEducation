@@ -42,9 +42,7 @@
 }
 
 - (void)refresh:(NIMChatroomMember *)member{
-    
-    NSLog(@"%@\n%@\n%@\n%@",member.userId,member.roomNickname,member.roomAvatar,member.roomExt);
-    
+        
     NSString *avater = member.roomAvatar;
     
     if ([member.roomAvatar hasPrefix:@"https://"]) {
@@ -64,7 +62,7 @@
     switch (member.type) {
         case NIMChatroomMemberTypeCreator:
             self.roleImageView.hidden = NO;
-            [self.roleImageView setImage:[UIImage imageNamed:@"meeting_manager"]];
+            [self.roleImageView setImage:[UIImage imageNamed:@""]];
             break;
         case NIMChatroomMemberTypeManager:
             self.roleImageView.hidden = NO;
@@ -88,12 +86,12 @@
             if (mRole.isActor) {
                 self.meetingRoleButton.hidden = NO;
                 self.meetingRoleButton.backgroundColor = UIColorFromRGB(0x1e77f9);
-                [self.meetingRoleButton setTitle:@"结束互动" forState:UIControlStateNormal];
+                [self.meetingRoleButton setTitle:Babel(@"disable_active") forState:UIControlStateNormal];
             }
             else if (mRole.isRaisingHand) {
                 self.meetingRoleButton.hidden = NO;
                 self.meetingRoleButton.backgroundColor = UIColorFromRGB(0x7dd21f);
-                [self.meetingRoleButton setTitle:@"允许互动" forState:UIControlStateNormal];
+                [self.meetingRoleButton setTitle:Babel(@"enable_avtive") forState:UIControlStateNormal];
                 
             }
             else {
@@ -106,7 +104,7 @@
             if (sRole.isActor) {
                 
                 self.meetingRoleLabel.hidden = NO;
-                [self.meetingRoleLabel setText:@"互动中"];
+                [self.meetingRoleLabel setText:Babel(@"active")];
             }
             else {
                 self.meetingRoleLabel.hidden = YES;

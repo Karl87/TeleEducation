@@ -216,7 +216,7 @@
         _messageLimit      = [globalSetting[@"Message_Limit"] integerValue];
         _recordMaxDuration = [globalSetting[@"Record_Max_Duration"] integerValue];
         
-        _placeholder     = globalSetting[@"Placeholder"];
+        _placeholder     = Babel(@"please_input_message");//globalSetting[@"Placeholder"];
         _maxLength       = [globalSetting[@"Max_Length"] integerValue];
     }
     return self;

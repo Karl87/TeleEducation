@@ -1,0 +1,79 @@
+/*
+  Localizable.strings
+  TeleEducation
+
+  Created by Karl on 2017/5/25.
+  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
+*/
+
+"tabbar_lessons" = "Lessons";
+"tabbar_messages" = "Messages";
+"tabbar_me" = "Me";
+"yesterday" = "Yesterday";
+"today" = "Today";
+"tomorrow" = "Tomorrow";
+"lesson_prepare" = "Prepare";
+"lesson_enter" = "Enter";
+"select_textbook" = "Select Textbook";
+"select_teacher" = "Select Teacher";
+"action_book" = "Book";
+"info_booked" = "Booked";
+"book_lesson" = "Book Lesson";
+"no_book_lessons" = "You have no class";
+"have_booked_lesson" = "You have booked 1 class";
+"book_lesson_unit" = "class";
+"info_taught_lesson" = "Taught";
+"lesson_unit" = "hours of classes";
+"confirm_lesson" = "Confirm";
+"confirm_book" = "Confirm";
+"cancel" = "Cancel";
+"info_no_classes" = "You have no classes.\nClick ' + ' button to book classes.";
+"info_no_messages" = "No Messages";
+"info_remain_classes" = "Remaining classes";
+"purchase_classes" = "Purchase more";
+"purchase_history" = "Purchase history";
+"edit_profile" = "Edit profile";
+"class_notification" = "Class notification";
+"logout" = "Logout";
+"login" = "Login";
+"user_student" = "Student";
+"user_teacher" = "Teacher";
+"login_input_phone" = "Please input phone number";
+"login_input_psw" = "Please input password";
+"forget_psw" = "Forget password";
+"no_account" = "No account? ";
+"register_now" = "Register now!";
+"register" = "Register";
+"register_input_nickname" = "Please input nickname";
+"register_input_phone" = "Please input phone number";
+"register_input_verify" = "Please input verify code";
+"retsiter_input_psw" = "Please input password";
+"info_avatar" = "Avatar";
+"info_name" = "Name";
+"info_phone" = "Phone";
+"info_qq" = "QQ";
+"info_skype" = "Skype";
+
+"time" = "Time";
+"text_book" = "Textbook";
+"teacher" = "Teacher";
+"notice" = "Notice";
+"ok" = "OK";
+"clear_choose" = "Clear";
+"completed" = "Completed";
+"canceled" = "Canceled";
+"credits" = "Credits";
+"edit_psw" = "Edit password";
+"set_avatar" = "Set avatar";
+"capture" = "Capture";
+"select_from_album" = "Select from album";
+"please_input_message" = "Please input message";
+"enter_classroom" = "enter classroom";
+"leave_classroom" = "leave classroom";
+"you" = "You";
+"message_photo" = "send a photo";
+"message_chartlet" = "send a chartlet";
+"message_custom" = "send a message";
+"active" = "Active";
+"enable_active" = "Enable";
+"disable_active" = "Disable";

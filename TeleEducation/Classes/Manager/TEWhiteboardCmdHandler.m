@@ -121,7 +121,7 @@
         
         [[TEMeetingRTSManager sharedService] sendRTSData:[_cmdsSendBuffer dataUsingEncoding:NSUTF8StringEncoding] toUser:nil];
         
-        NSLog(@"send data %@", _cmdsSendBuffer);
+//        NSLog(@"send data %@", _cmdsSendBuffer);
         
         [_cmdsSendBuffer setString:@""];
     }

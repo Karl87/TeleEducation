@@ -125,7 +125,6 @@ CGRect NIMKit_CGRectWithCenterAndSize(CGPoint center, CGSize size){
     NSURL *url = info.avatarUrlString ? [NSURL URLWithString:info.avatarUrlString] : nil;
     if (message.session.sessionType == NIMSessionTypeChatroom) {
         NIMMessageChatroomExtension *ext = [message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)message.messageExt : nil;
-        NSLog(@"%@,%@,%@,%@",message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
         if ([ext.roomAvatar hasPrefix:@"https://"]) {
             url = [NSURL URLWithString:[ext.roomAvatar stringByReplacingOccurrencesOfString:@"https://" withString:@"http://"]];
         }

@@ -36,13 +36,11 @@
 //    NSLog(@"d%@,tod%@,yes%@,tom%@",dString,todayString,yesterdayString,tomorrowString);
     
     if ([dString isEqualToString:todayString]){
-        return @"今天";
+        return Babel(@"today");
     } else if ([dString isEqualToString:yesterdayString]){
-        return @"昨天";
+        return Babel(@"yesterday");
     }else if ([dString isEqualToString:tomorrowString]){
-        return @"明天";
-    }else if ([dString isEqualToString:dayAfterTomorrowString]){
-        return @"后天";
+        return Babel(@"tomorrow");
     }else{
         return @"";
     }

@@ -23,6 +23,7 @@
 #import "TEChatroomViewController.h"
 #import "TEMembersViewController.h"
 #import "TELessonVideoView.h"
+#import "TESurfaceMessageViewController.h"
 
 #import "UIAlertView+TEBlock.h"
 #import "TENetworkConfig.h"
@@ -35,12 +36,15 @@
 @property (nonatomic,strong) TEWhiteboardViewController *whitboardViewController;
 @property (nonatomic, strong) TEChatroomViewController *chatroomViewController;
 @property (nonatomic,strong) TEMembersViewController *membersViewController;
+@property (nonatomic,strong) TESurfaceMessageViewController *surfaceViewController;
 
 @property (nonatomic,strong) TELessonVideoView *videoView;
 @property (nonatomic,strong) UIButton *quitBtn;
 @property (nonatomic,strong) TELessonManuView *manuView;
 @property (nonatomic,strong) UIView *contentBg;
 @property (nonatomic, assign) BOOL keyboradIsShown;
+
+@property (nonatomic,copy) NSString *currentTag;
 
 @end
 
@@ -62,17 +66,18 @@
     TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token type:TETokenApiTypeGetNIMID userType:[TELoginManager sharedManager].currentTEUser.type lessonID:_lesson.lessonID];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
-        NSLog(@"获取课程nim信息：%@",request.responseJSONObject);
         NSDictionary *content = [request.responseJSONObject objectForKey:@"content"];
         NSString *nimid = [content objectForKey:@"nimid"];
         
         if (nimid.length) {
             
             //存在教室id 进入教室
-            
+            NSLog(@"\n----------\n课程nimID为%@，进入教室\n----------",nimid);
             [self enterChatRoom:nimid];
         }else{
             //流程 - 请求教室、预约教室、进入教室
+            NSLog(@"\n----------\n课程nimID为空，请求新的教室\n----------");
+
             [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:_lesson.lessonID];
         }
 
@@ -116,6 +121,15 @@
     [_whitboardViewController.view setFrame:CGRectMake(0, 0, _contentView.bounds.size.width, _contentView.bounds.size.height)];
     _whitboardViewController.view.hidden =NO;
     
+    self.surfaceViewController = [[TESurfaceMessageViewController alloc] initWithChatroom:_chatroom];
+    [self addChildViewController:_surfaceViewController];
+    [_surfaceViewController didMoveToParentViewController:self];
+    [self.view addSubview:_surfaceViewController.view];
+    [_surfaceViewController.view setFrame:CGRectZero];
+    [_surfaceViewController.view setUserInteractionEnabled:NO];
+    _surfaceViewController.view.alpha = 0;
+    _surfaceViewController.autoShow = YES;
+    
     [self revertInputView];
 }
 
@@ -128,6 +142,7 @@
     }
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -150,6 +165,7 @@
     
     
     [self.view bringSubviewToFront:self.videoView];
+    
     [self initClassroom];
 
 }
@@ -187,6 +203,11 @@
     _contentView.left = 5;
     _contentView.width  =self.view.width-self.view.height/8*3 - 10;
     _contentView.height = self.view.height-_contentView.top - 5;
+    
+    _surfaceViewController.view.top = 44+ _contentView.height/2;
+    _surfaceViewController.view.left = 5;
+    _surfaceViewController.view.width  =_contentView.width;
+    _surfaceViewController.view.height = _contentView.height/2-50;
     
 }
 - (void)didReceiveMemoryWarning {
@@ -235,13 +256,25 @@
     self.keyboradIsShown = NO;
 }
 #pragma mark - VideoViewDelegate
-- (void)videoViewSizeChanged{
+- (void)videoViewFullScreen:(BOOL)fullscreen{
+    
     [_chatroomViewController.sessionInputView endEditing:YES];
+    
+    if (fullscreen) {
+        _surfaceViewController.autoShow = YES;
+    }else{
+        if ([_currentTag isEqualToString:@"Chat"]) {
+            _surfaceViewController.autoShow = NO;
+            [_surfaceViewController hide];
+        }
+    }
+    
 }
 #pragma mark - ManuViewDelegate
 - (void)lessonManuView:(TELessonManuView *)view didSelectedItem:(NSString *)item{
     
     [_chatroomViewController.sessionInputView endEditing:YES];
+    _currentTag = item;
     
     if ([item isEqualToString:@"exit"]) {
         [self onExit:nil];
@@ -249,15 +282,19 @@
         _chatroomViewController.view.hidden = YES;
         _whitboardViewController.view.hidden = NO;
         _membersViewController.view.hidden = YES;
+        _surfaceViewController.autoShow = YES;
     }else if ([item isEqualToString:@"Chat"]){
         [_chatroomViewController.sessionInputView reset];
         _chatroomViewController.view.hidden = NO;
         _whitboardViewController.view.hidden = YES;
         _membersViewController.view.hidden = YES;
+        _surfaceViewController.autoShow = NO;
+        [_surfaceViewController hide];
     }else if ([item isEqualToString:@"Members"]){
         _chatroomViewController.view.hidden = YES;
         _whitboardViewController.view.hidden = YES;
         _membersViewController.view.hidden = NO;
+        _surfaceViewController.autoShow = YES;
     }
 }
 #pragma mark - Input
@@ -275,7 +312,7 @@
     
     [[TENIMService sharedService] requestMeeting:lesson completion:^(NSError *error, NSString *meetingRoomID) {
         if (!error) {
-            NSLog(@"meetingRoomID:%@",meetingRoomID);
+            NSLog(@"\n----------🎉🎉🎉请求创建教室成功🎉🎉🎉\n教室ID:%@\n----------",meetingRoomID);
             [self reserveNetCallMeeting:meetingRoomID];
             [self updateLessonClassroom:meetingRoomID];
             
@@ -289,17 +326,16 @@
     TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[TELoginManager sharedManager].currentTEUser.token type:TETokenApiTypeSetNIMID userType:[TELoginManager sharedManager].currentTEUser.type lessonID:_lesson.lessonID nimID:roomId];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
-        NSLog(@"更新课程nim信息：%@",request.responseJSONObject);
-        
         NSDictionary *dic = request.responseJSONObject;
         NSDictionary *content = dic[@"content"];
         NSInteger status = [content[@"status"] integerValue];
         
         if (status == 1) {
-            NSLog(@"更新课程教室信息成功 %@",roomId);
             if([roomId isEqualToString:@""]){
                 NSLog(@"清空课程教室信息");
                 [self dismiss];
+            }else{
+                NSLog(@"更新课程教室信息成功,教室编号%@",roomId);
             }
         }else{
             NSLog(@"更新课程教室信息失败");
@@ -319,10 +355,10 @@
     
     [[NIMSDK sharedSDK].netCallManager reserveMeeting:meeting completion:^(NIMNetCallMeeting * _Nonnull meeting, NSError * _Nonnull error) {
         if (!error) {
-            NSLog(@"预约教室成功，%@",meeting.name);
+            NSLog(@"\n----------🎉🎉🎉预约教室成功🎉🎉🎉\n教室ID:%@\n----------",meeting.name);
             [self enterChatRoom:meeting.name];
         }else{
-            NSLog(@"预约教室失败%ld,%@",(long)error.code,error.description);
+            NSLog(@"\n----------❗️❗️❗️预约教室失败❗️❗️❗️\n教室ID:%@\n失败原因:%ld,%@\n----------",meeting.name,(long)error.code,error.description);
             //417重复操作
             if (error.code == NIMRemoteErrorCodeExist) {
                 [self enterChatRoom:meeting.name];
@@ -337,12 +373,11 @@
     request.roomId = roomId;
     request.roomNickname = [TELoginManager sharedManager].currentTEUser.name;
     request.roomAvatar = [[TENetworkConfig sharedConfig].baseURL stringByAppendingString:[TELoginManager sharedManager].currentTEUser.avatar];
-//    request.roomExt = @"fuck";
-//    NSLog(@"%@",request.roomAvatar);
     
     [[[NIMSDK sharedSDK] chatroomManager] enterChatroom:request completion:^(NSError * _Nullable error, NIMChatroom * _Nullable chatroom, NIMChatroomMember * _Nullable me) {
         if (!error) {
-            NSLog(@"加入教室成功！Chatroom:%@ ,me:%@, creator:%@,%@",chatroom.roomId,me.roomNickname,chatroom.creator,me.roomAvatar);
+            NSString *logStr = [NSString stringWithFormat:@"教室编号:%@\n教室创建者:%@\n我的昵称:%@\n我的头像:%@",chatroom.roomId,chatroom.creator,me.roomNickname,me.roomAvatar];
+            LogSuccess(@"加入教室成功", logStr);
             
             _chatroom = chatroom;
             
@@ -352,12 +387,13 @@
             [self setupClassroom];
             
         }else{
-            NSLog(@"加入教室失败%ld,%@",error.code,error.description);
+            NSString* errorDes = [NSString stringWithFormat:@"%ld :%@",error.code,error.description];
+            LogError(@"加入教室失败", errorDes);
             //404对象不存在
             
             if (error.code ==NIMRemoteErrorCodeNotExist) {
                 _lesson.nimID = nil;
-                [self initClassroom];
+                [self requestChatroomWithLesson:[TELoginManager sharedManager].currentTEUser.nimAccount lessonID:_lesson.lessonID];
             }
         }
     }];

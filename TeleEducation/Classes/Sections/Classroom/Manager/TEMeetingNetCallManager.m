@@ -147,7 +147,12 @@
 
 - (void)onNetStatus:(NIMNetCallNetStatus)status user:(NSString *)user
 {
-    NSLog(@"Net status of %@ is %zd", user, status);
+    if (status == NIMNetCallNetStatusVeryBad) {
+        NSLog(@"‼️ %@网络状态非常差",user);
+    }else if (status == NIMNetCallNetStatusBad){
+        NSLog(@"❗️ %@网络状态差",user);
+    }
+//    NSLog(@"Net status of %@ is %zd", user, status);
 }
 #pragma mark - private
 - (void)fillNetCallOption:(NIMNetCallMeeting *)meeting

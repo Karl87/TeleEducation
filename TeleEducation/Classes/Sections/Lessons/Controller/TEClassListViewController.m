@@ -61,8 +61,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-   
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.tableView registerClass:[TELessonCell class] forCellReuseIdentifier:@"lessonCell"];
     [self.tableView registerClass:[TELessonHeaderView class] forHeaderFooterViewReuseIdentifier:@"lessonHeader"];
@@ -330,24 +328,27 @@
     
     TETokenApiType apiType;
     
-    if ([TELoginManager sharedManager].currentTEUser.type == TEUserTypeStudent) {
-        apiType = TETokenApiTypeGetReservedLessons;
-    }else if ([TELoginManager sharedManager].currentTEUser.type == TEUserTypeTeacher){
-        apiType = TETokenApiTypeGetLessonsBeReserved;
+    switch ([TELoginManager sharedManager].currentTEUser.type) {
+        case TEUserTypeStudent:
+            apiType = TETokenApiTypeGetReservedLessons;
+            break;
+        case TEUserTypeTeacher:
+            apiType = TETokenApiTypeGetLessonsBeReserved;
+            break;
+        default:
+            apiType = TETokenApiTypeGetReservedLessons;
+            break;
     }
     
     TECommonPostTokenApi *api = [[TECommonPostTokenApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token]type:apiType];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"%@",(NSDictionary *)request.responseJSONObject);
         [self endRefreshControl];
         NSDictionary *dic = request.responseJSONObject;
-        NSLog(@"%@",dic);
         if ([dic[@"code"] integerValue]==3) {
             [[TELoginManager sharedManager] logout];
             return;
         }
         
-//        NSDictionary *dic = request.responseJSONObject;
         if ([dic isKindOfClass:[NSDictionary class]]) {
             if ([dic[@"content"] isKindOfClass:[NSArray class]]) {
                 NSLog(@"data format valid");
@@ -404,7 +405,7 @@
 }
 
 - (void)orderBtnTouchAction:(id)sender{
-    TEChooseLessonViewController *vc = [[TEChooseLessonViewController alloc] initWithTitle:@"选择课程" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
+    TEChooseLessonViewController *vc = [[TEChooseLessonViewController alloc] initWithTitle:Babel(@"select_textbook") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:NO orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLayoutSubviews{

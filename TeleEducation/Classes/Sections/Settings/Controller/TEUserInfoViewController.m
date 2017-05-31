@@ -45,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"修改资料";
+    self.title = Babel(@"edit_profile");
     
     [self buildData];
     __weak typeof(self) wself = self;
@@ -98,42 +98,42 @@
                       @{
                           RowContent :@[
                                   @{
-                                      Title      :@"头像",
+                                      Title      :Babel(@"info_avatar"),
                                       CellClass     : @"TEUserInfoAvatarCell",
                                       CellAction :@"onTouchChangeUserAvatar:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
-                                      Title      :@"姓名",
+                                      Title      :Babel(@"info_name"),
                                       DetailTitle:[TELoginManager sharedManager].currentTEUser.name,
                                       CellAction :@"onTouchChangeUserName:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
-                                      Title      :@"绑定手机",
+                                      Title      :Babel(@"info_phone"),
                                       DetailTitle:[TELoginManager sharedManager].currentTEUser.phone,
                                       CellAction :@"onTouchChangeUserMobile:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
-                                      Title      :@"QQ",
+                                      Title      :Babel(@"info_qq"),
                                       DetailTitle:[TELoginManager sharedManager].currentTEUser.qq,
                                       CellAction :@"onTouchChangeUserQQ:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
-                                      Title      :@"Skype",
+                                      Title      :Babel(@"info_skype"),
                                       DetailTitle:[TELoginManager sharedManager].currentTEUser.skype,
                                       CellAction :@"onTouchChangeUserSkype:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       }
                                   ],
-                          FooterTitle:@"* 修改绑定手机后请使用新号码登录"
+                          FooterTitle:@""//@"* 修改绑定手机后请使用新号码登录"
                           }
     ];
     self.data = [NIMCommonTableSection sectionsWithData:data];
@@ -148,7 +148,7 @@
 - (void)onTouchChangeUserAvatar:(id)sender{
     NSLog(@"avatar");
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册", nil];
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:Babel(@"set_avatar") delegate:nil cancelButtonTitle:Babel(@"cancel") destructiveButtonTitle:nil otherButtonTitles:Babel(@"capture"),Babel(@"select_from_album"), nil];
         [sheet showInView:self.view completionHandler:^(NSInteger index) {
             switch (index) {
                 case 0:

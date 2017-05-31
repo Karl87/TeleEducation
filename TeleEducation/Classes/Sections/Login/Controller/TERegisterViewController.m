@@ -36,22 +36,22 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    _name = [[TELoginInput alloc] initWithPlaceHolder:@"请输入姓名" image:[UIImage imageNamed:@"registerNameIcon"] isSecureTextEntry:NO];
+    _name = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"register_input_nickname") image:[UIImage imageNamed:@"registerNameIcon"] isSecureTextEntry:NO];
     [self.view addSubview:_name];
     
-    _phone = [[TELoginInput alloc] initWithPlaceHolder:@"请输入手机号码" image:[UIImage imageNamed:@"loginPhoneIcon"] isSecureTextEntry:NO];
+    _phone = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"register_input_phone") image:[UIImage imageNamed:@"loginPhoneIcon"] isSecureTextEntry:NO];
     _phone.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:_phone];
     
-    _code = [[TELoginInput alloc] initWithPlaceHolder:@"请输入短信验证码" image:[UIImage imageNamed:@"registerCodeIcon"] isSecureTextEntry:NO];
+    _code = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"register_input_verify") image:[UIImage imageNamed:@"registerCodeIcon"] isSecureTextEntry:NO];
     [self.view addSubview:_code];
     
-    _psw = [[TELoginInput alloc] initWithPlaceHolder:@"请输入密码" image:[UIImage imageNamed:@"loginPswIcon"] isSecureTextEntry:YES];
+    _psw = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"register_input_psw") image:[UIImage imageNamed:@"loginPswIcon"] isSecureTextEntry:YES];
     [self.view addSubview:_psw];
     
     _register = [UIButton new];
     [_register setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
-    [_register setTitle:@"注册" forState:UIControlStateNormal];
+    [_register setTitle:Babel(@"register") forState:UIControlStateNormal];
     [_register setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_register.layer setCornerRadius:8.0f];
     [_register.layer setMasksToBounds:YES];

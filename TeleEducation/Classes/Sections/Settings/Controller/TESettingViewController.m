@@ -96,13 +96,13 @@
                                       CellAction    : @"onActionTouchPortrait:"
                                       },
                                   @{
-                                      Title      :@"修改资料",
+                                      Title      :Babel(@"edit_profile"),
                                       CellAction :@"onTouchChangeUserInfo:",
                                       ShowAccessory : @(YES),
                                       RowHeight     : @(60)
                                       },
                                   @{
-                                      Title        : @"上课提醒",
+                                      Title        : Babel(@"class_notification"),
                                       CellClass    : @"TESettingSwitchCell",
                                       CellAction   : @"onActionNeedNotifyValueChange:",
                                       ExtraInfo    : @(YES),
@@ -124,7 +124,7 @@
                           HeaderHeight:@(0),
                           RowContent :@[
                                   @{
-                                      Title      :@"退出账号",
+                                      Title      :Babel(@"logout"),
                                       CellAction :@"onActionTouchLogout:",
                                       ShowAccessory : @(NO),
                                       RowHeight     : @(60)
@@ -168,13 +168,13 @@
 }
 - (void)onTouchChangeUserInfo:(id)sender{
     [self setHidesBottomBarWhenPushed:YES];
-    TEUserInfoViewController *vc = [[TEUserInfoViewController alloc] initWithTitle:@"修改资料" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
+    TEUserInfoViewController *vc = [[TEUserInfoViewController alloc] initWithTitle:Babel(@"edit_profile") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
     [self setHidesBottomBarWhenPushed:NO];
 }
 - (void)onTouchResetPassword:(id)sender{
     [self setHidesBottomBarWhenPushed:YES];
-    TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] initWithTitle:@"修改密码" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
+    TEResetPasswordViewController *vc = [[TEResetPasswordViewController alloc] initWithTitle:Babel(@"edit_password") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait];
     [self.navigationController pushViewController:vc animated:YES];
     [self setHidesBottomBarWhenPushed:NO];
 }

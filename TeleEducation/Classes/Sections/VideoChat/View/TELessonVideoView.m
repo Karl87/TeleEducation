@@ -10,6 +10,7 @@
 #import "TEMeetingRolesManager.h"
 #import "TEGLView.h"
 #import "NIMAVChat.h"
+#import "MBProgressHUD.h"
 
 @interface TELessonVideoView ()<NIMNetCallManagerDelegate>
 @property (nonatomic,strong) UIImageView *selfBg;
@@ -61,26 +62,26 @@
         [self addSubview:_selfVideo];
         
         _sizeModeBtn = [UIButton new];
-        [_sizeModeBtn setImage:[UIImage imageNamed:@"fullScreen"] forState:UIControlStateNormal];
+        [_sizeModeBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_normalsize"] forState:UIControlStateNormal];
         [_sizeModeBtn addTarget:self action:@selector(fullScreenAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_sizeModeBtn];
         
         
         _muteBtn = [UIButton new];
 //        [_muteBtn setTitle:@"静" forState:UIControlStateNormal];
-        [_muteBtn setImage:[UIImage imageNamed:@"audioOn"] forState:UIControlStateNormal];
+        [_muteBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_audio_off"] forState:UIControlStateNormal];
         [_muteBtn addTarget:self action:@selector(muteAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_muteBtn];
         
         _cameraBtn = [UIButton new];
 //        [_cameraBtn setTitle:@"镜" forState:UIControlStateNormal];
-        [_cameraBtn setImage:[UIImage imageNamed:@"videoOn"] forState:UIControlStateNormal];
+        [_cameraBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_off"] forState:UIControlStateNormal];
         [_cameraBtn addTarget:self action:@selector(cameraAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cameraBtn];
         
         _directionBtn = [UIButton new];
 //        [_directionBtn setTitle:@"向" forState:UIControlStateNormal];
-        [_directionBtn setImage:[UIImage imageNamed:@"switchCamera"] forState:UIControlStateNormal];
+        [_directionBtn setBackgroundImage:[UIImage imageNamed:@"switchCamera"] forState:UIControlStateNormal];
         [_directionBtn addTarget:self action:@selector(directionAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_directionBtn];
         
@@ -108,25 +109,72 @@
 - (void)setIsFrontCamera:(BOOL)isFrontCamera{
     _isFrontCamera = isFrontCamera;
     if (_isFrontCamera) {
+        [self hudShowWithStr:@"Change to front camera"];
+
         [[NIMSDK sharedSDK].netCallManager switchCamera:NIMNetCallCameraFront];
     }else{
+        [self hudShowWithStr:@"Change to back camera"];
+
         [[NIMSDK sharedSDK].netCallManager switchCamera:NIMNetCallCameraBack];
     }
 }
-- (void)muteAction:(id)sender{
-    [[TEMeetingRolesManager sharedService] setMyAudio:![TEMeetingRolesManager sharedService].myRole.audioOn];
+
+- (void)hudShowWithStr:(NSString *)str{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = str;
+    [self hudHide];
 }
+
+- (void)hudHide{
+    MBProgressHUD * hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+    if (hud) {
+        [hud hideAnimated:YES afterDelay:1.5];
+    }
+}
+
+- (void)muteAction:(id)sender{
+    if (![TEMeetingRolesManager sharedService].myRole.audioOn) {
+        [self hudShowWithStr:@"Audio on"];
+        [_muteBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_audio_off"] forState:UIControlStateNormal];
+    }else{
+        [self hudShowWithStr:@"Audio off"];
+        [_muteBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_audio_on"] forState:UIControlStateNormal];
+    }
+    [[TEMeetingRolesManager sharedService] setMyAudio:![TEMeetingRolesManager sharedService].myRole.audioOn];
+    
+    
+    
+}
+
 - (void)cameraAction:(id)sender{
+    if (![TEMeetingRolesManager sharedService].myRole.videoOn) {
+        [self hudShowWithStr:@"Video on"];
+        [_cameraBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_off"] forState:UIControlStateNormal];
+    }else{
+        [self hudShowWithStr:@"Video off"];
+        [_cameraBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_on"] forState:UIControlStateNormal];
+    }
     [[TEMeetingRolesManager sharedService] setMyVideo:![TEMeetingRolesManager sharedService].myRole.videoOn];
+    
+    
 
 }
 - (void)fullScreenAction:(id)sender{
     
-    if ([_delegate respondsToSelector:@selector(videoViewSizeChanged)]) {
-        [_delegate videoViewSizeChanged];
+    self.fullScreen = !_fullScreen;
+
+    
+    if (self.fullScreen) {
+        [_sizeModeBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_fullsize"] forState:UIControlStateNormal];
+    }else{
+        [_sizeModeBtn setBackgroundImage:[UIImage imageNamed:@"chatroom_video_normalsize"] forState:UIControlStateNormal];
     }
     
-    self.fullScreen = !_fullScreen;
+    if ([_delegate respondsToSelector:@selector(videoViewFullScreen:)]) {
+        [_delegate videoViewFullScreen:_fullScreen];
+    }
+    
     [self.viewController.view setNeedsLayout];
     [self setNeedsLayout];
 }

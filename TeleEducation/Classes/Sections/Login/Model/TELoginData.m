@@ -83,4 +83,9 @@
     data.classCount = self.classCount;
     return data;
 }
+
+- (NSString *)description{
+    return [NSString stringWithFormat:@"Account:%@\ntoken:%@\nNIMAccount:%@\nNIMToken:%@\nType:%@\nNickname:%@\nPhone:%@\nQQ:%@\nSkype:%@\nAvatar:%@\nVipStart:%@\nVipEnd:%@\nClasscount:%ld",_account,_token,_nimAccount,_nimToken,_type == TEUserTypeTeacher?@"教师":@"学生",_name,_phone,_qq,_skype,_avatar,_vipStart,_vipEnd,(long)_classCount];
+}
+
 @end

@@ -56,7 +56,7 @@
     if ([teacher isKindOfClass:[teacher class]]) {
         _teacherName.text = teacher.name;
         [_teacherName sizeToFit];
-        _lessonTime.text = [NSString stringWithFormat:@"已授课%ld课时",(long)teacher.times];
+        _lessonTime.text = [NSString stringWithFormat:@"%@%ld%@",Babel(@"info_taught_lesson"),(long)teacher.times,Babel(@"lesson_unit")];
         [_lessonTime sizeToFit];
         [_teacherAvatar sd_setImageWithURL:[NSURL URLWithString:teacher.avatar] placeholderImage:nil];
     }

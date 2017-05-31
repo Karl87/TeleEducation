@@ -72,7 +72,7 @@
 - (void)buildData{
     TECourseContentApi *api = [[TECourseContentApi alloc] initWithToken:[[[TELoginManager sharedManager] currentTEUser] token] unit:_unitID lesson:_lessonID];
     [api startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"%@",request.responseJSONObject);
+//        NSLog(@"%@",request.responseJSONObject);
         NSDictionary *dic = request.responseJSONObject;
         if ([dic[@"code"]integerValue] != 1) {
             return;
@@ -89,8 +89,6 @@
             TEWhiteboardLines *lines = [[TEWhiteboardLines alloc] init];
             [_allLines addObject:lines];
         }
-        
-//        [_pageLab setText:[NSString stringWithFormat:@"%d/%ld",_currentPage+1,(unsigned long)_contents.count]];
 
         self.currentPage = 0;
         _drawView.dataSource = _allLines[_currentPage];
@@ -173,8 +171,10 @@
     [_pannel addSubview:_lastBtn];
     
     _pageLab = [UILabel new];
+    [_pageLab setTextColor:SystemBlueColor];
     [_pageLab setTextAlignment:NSTextAlignmentCenter];
-    [_pageLab setText:@"0/0"];
+    [_pageLab setText:@"0 / 0"];
+    [_pageLab setFont:[UIFont fontWithName:@"ChalkboardSE-Bold" size:21]];
     [_pannel addSubview:_pageLab];
     
     _nextBtn = [UIButton new];
@@ -199,8 +199,9 @@
         _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _cancelBtn.layer.cornerRadius = 35/2;
         [_cancelBtn addTarget:self action:@selector(onCancelLinePressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelBtn setImage:[UIImage imageNamed:@"btn_whiteboard_cancel"] forState:normal];
         [_cancelBtn setBackgroundColor:SystemBlueColor];
-        [_cancelBtn setTitle:@"撤" forState:UIControlStateNormal];
+//        [_cancelBtn setTitle:@"撤" forState:UIControlStateNormal];
     }
     return _cancelBtn;
 }
@@ -210,8 +211,12 @@
         _clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _clearBtn.layer.cornerRadius = 35/2;
         [_clearBtn addTarget:self action:@selector(onClearAllPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_clearBtn setImage:[UIImage imageNamed:@"btn_whiteboard_clear"] forState:UIControlStateNormal];
         [_clearBtn setBackgroundColor:SystemBlueColor];
-        [_clearBtn setTitle:@"清" forState:UIControlStateNormal];
+        if (![TEMeetingRolesManager sharedService].myRole.isManager) {
+            _clearBtn.hidden = YES;
+        }
+//        [_clearBtn setTitle:@"清" forState:UIControlStateNormal];
     }
     return _clearBtn;
 }
@@ -220,15 +225,17 @@
     if (!_colorBtn) {
         _colorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
         _colorBtn.layer.cornerRadius = 35/2;
-        [_colorBtn setBackgroundColor:UIColorFromRGB(_myDrawColorRGB)];
+        [_colorBtn setBackgroundColor:SystemBlueColor];
+        [_colorBtn setTintColor:UIColorFromRGB(_myDrawColorRGB)];
+        [_colorBtn setImage:[[UIImage imageNamed:@"btn_whiteboard_color"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_colorBtn addTarget:self action:@selector(onColorSelectPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(9.f, 9.f, 17.f, 17.f)];
-        circle.layer.cornerRadius = 17.f / 2.f;
-        circle.layer.borderColor = [UIColor whiteColor].CGColor;
-        circle.layer.borderWidth = 1;
-        [circle setUserInteractionEnabled:NO];
-        [_colorBtn addSubview:circle];
+//        UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(9.f, 9.f, 17.f, 17.f)];
+//        circle.layer.cornerRadius = 17.f / 2.f;
+//        circle.layer.borderColor = [UIColor whiteColor].CGColor;
+//        circle.layer.borderWidth = 1;
+//        [circle setUserInteractionEnabled:NO];
+//        [_colorBtn addSubview:circle];
     }
     return _colorBtn;
 }
@@ -271,7 +278,7 @@
     CGFloat dWidth = self.view.width;
     CGFloat dHeight = self.view.height;
     
-    NSLog(@"-----%f,-----%f",dWidth,dHeight);
+//    NSLog(@"-----%f,-----%f",dWidth,dHeight);
     
     _drawView.top = dTop;
     _drawView.left = dLeft;
@@ -292,16 +299,16 @@
     
     _pageLab.centerY = _pannel.height/2;
     _pageLab.centerX  =_pannel.width/2;
-    _pageLab.width = 50;
+    _pageLab.width = 80;
     _pageLab.height = 34;
     
     _lastBtn.centerY = _pannel.height/2;
-    _lastBtn.right = _pageLab.left - 20;
+    _lastBtn.right = _pageLab.left - 15;
     _lastBtn.width = 34;
     _lastBtn.height = 34;
     
     _nextBtn.centerY = _pannel.height/2;
-    _nextBtn.left = _pageLab.right +20;
+    _nextBtn.left = _pageLab.right + 15;
     _nextBtn.width = 34;
     _nextBtn.height = 34;
     
@@ -370,7 +377,7 @@
 
 - (void)onColorSelected:(int)rgbColor
 {
-    [self.colorBtn setBackgroundColor:UIColorFromRGB(rgbColor)];
+    [self.colorBtn setTintColor:UIColorFromRGB(rgbColor)];
     _myDrawColorRGB = rgbColor;
     [self.colorView setHidden:YES];
 }
@@ -406,7 +413,7 @@
 }
 - (void)setCurrentPage:(int)currentPage{
     _currentPage = currentPage;
-    [_pageLab setText:[NSString stringWithFormat:@"%d/%ld",_currentPage+1,self.contents.count]];
+    [_pageLab setText:[NSString stringWithFormat:@"%d / %ld",_currentPage+1,self.contents.count]];
     
     [_contentView sd_setImageWithURL:[NSURL URLWithString:[[[TENetworkConfig sharedConfig] baseURL] stringByAppendingString:_contents[_currentPage]]] placeholderImage:nil];
     

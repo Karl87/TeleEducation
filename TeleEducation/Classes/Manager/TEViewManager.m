@@ -46,13 +46,13 @@
 
 - (void)setupMainTabbarController{
         TEMainTabBarViewController *mainTab = [[TEMainTabBarViewController alloc] init];
-        TENavigationViewController *classList = [[TENavigationViewController alloc] initWithRootViewController:[[TEClassListViewController alloc] initWithTitle:@"课程" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskAll]];
-        TENavigationViewController *userCenter = [[TENavigationViewController alloc] initWithRootViewController:[[TESettingViewController alloc] initWithTitle:@"我" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
+        TENavigationViewController *classList = [[TENavigationViewController alloc] initWithRootViewController:[[TEClassListViewController alloc] initWithTitle:Babel(@"tabbar_lessons") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskAll]];
+        TENavigationViewController *userCenter = [[TENavigationViewController alloc] initWithRootViewController:[[TESettingViewController alloc] initWithTitle:Babel(@"tabbar_me") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
     
-        TENavigationViewController *messages =[[TENavigationViewController alloc] initWithRootViewController:[[TEMessagesViewController alloc] initWithTitle:@"消息" statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
+        TENavigationViewController *messages =[[TENavigationViewController alloc] initWithRootViewController:[[TEMessagesViewController alloc] initWithTitle:Babel(@"tabbar_messages") statusStyle:UIStatusBarStyleLightContent showNaviBar:YES naviType:TENaviTypeImage naviColor:SystemBlueColor naviBlur:YES orientationMask:UIInterfaceOrientationMaskPortrait]];
         mainTab.viewControllers = @[classList,messages,userCenter];
         [mainTab.tabBar setTintColor:SystemBlueColor];
-        NSArray *titles = @[@"课程",@"消息",@"我"];
+        NSArray *titles = @[Babel(@"tabbar_lessons"),Babel(@"tabbar_messages"),Babel(@"tabbar_me")];
         NSArray *images = @[@"tabbarLesson",@"tabbarMessage",@"tabbarSetting"];
         for (int i = 0; i<mainTab.viewControllers.count; i++) {
             UITabBarItem *item = [mainTab.tabBar.items objectAtIndex:i];

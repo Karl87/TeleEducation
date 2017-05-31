@@ -105,7 +105,7 @@
     [_topView addSubview:_likeView];
     
     _lessonCountLab = [UILabel new];
-    [_lessonCountLab setText:[NSString stringWithFormat:@"已授课%ld课时",[TEOrderLessonManager sharedManager].lesson.teacher.times]];
+    [_lessonCountLab setText:[NSString stringWithFormat:@"%@ %ld %@",Babel(@"info_taught_lesson"),[TEOrderLessonManager sharedManager].lesson.teacher.times,Babel(@"lesson_unit")]];
     [_lessonCountLab setTextColor:[UIColor whiteColor]];
     [_lessonCountLab setFont:[UIFont systemFontOfSize:13.0]];
     [_topView addSubview:_lessonCountLab];
@@ -133,7 +133,7 @@
     
     _orderLab = [UILabel new];
     [_orderLab setTextColor:[UIColor darkGrayColor]];
-    [_orderLab setText:@"您还没有预约课程"];
+    [_orderLab setText:Babel(@"no_book_lessons")];
     [_orderLab setFont:[UIFont systemFontOfSize:14.0f]];
     [_orderLab sizeToFit];
     [_bottomView addSubview:_orderLab];
@@ -141,7 +141,7 @@
     _orderBtn = [UIButton new];
     [_orderBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
     [_orderBtn setBackgroundImage:[UIImage imageWithColor:[UIColor grayColor]] forState:UIControlStateDisabled];
-    [_orderBtn setTitle:@"预约课程" forState:UIControlStateNormal];
+    [_orderBtn setTitle:Babel(@"book_lesson") forState:UIControlStateNormal];
     [_orderBtn.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_orderBtn addTarget:self action:@selector(orderLessonBtnTouchAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -204,7 +204,7 @@
 - (void)configNav{
     [super configNav];
     
-    UIBarButtonItem *clearBtn = [[UIBarButtonItem alloc] initWithTitle:@"清除选择" style:UIBarButtonItemStylePlain target:self action:@selector(clearTimeOrdered:)];
+    UIBarButtonItem *clearBtn = [[UIBarButtonItem alloc] initWithTitle:Babel(@"clear_choose") style:UIBarButtonItemStylePlain target:self action:@selector(clearTimeOrdered:)];
     [self.navigationItem setRightBarButtonItem:clearBtn];
 }
 
@@ -212,7 +212,7 @@
     [_collectionView setAllowsSelection:NO];
     _selectedIndexpath = nil;
     [_collectionView setAllowsSelection:YES];
-    [_orderLab setText:@"您还没有预约课程"];
+    [_orderLab setText:Babel(@"no_book_lessons")];
     [_orderLab sizeToFit];
     [_orderBtn setEnabled:NO];
 }
@@ -347,7 +347,7 @@
     
     _selectedIndexpath = indexPath;
     
-    [_orderLab setText:@"您已经预约了1节课程"];
+    [_orderLab setText:Babel(@"have_booked_lesson")];
     [_orderLab sizeToFit];
     [_orderBtn setEnabled:YES];
     
@@ -362,13 +362,13 @@
     
 //    [TEOrderLessonManager sharedManager].period.date
     
-    NSString *message = [NSString stringWithFormat:@"时间：%@ %@\n教材：%@-%@\n老师：%@", [TEOrderLessonManager sharedManager].period.date, [TEOrderLessonManager sharedManager].period.period, [TEOrderLessonManager sharedManager].lesson.unit, [TEOrderLessonManager sharedManager].lesson.lesson, [TEOrderLessonManager sharedManager].lesson.teacher.name];
+    NSString *message = [NSString stringWithFormat:@"%@：%@ %@\n%@：%@-%@\n%@：%@", Babel(@"time"),[TEOrderLessonManager sharedManager].period.date, [TEOrderLessonManager sharedManager].period.period, Babel(@"text_book"),[TEOrderLessonManager sharedManager].lesson.unit, [TEOrderLessonManager sharedManager].lesson.lesson,Babel(@"teacher"), [TEOrderLessonManager sharedManager].lesson.teacher.name];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认课程" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:Babel(@"confirm_lesson") message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:Babel(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
-    UIAlertAction *orderAction = [UIAlertAction actionWithTitle:@"确认预约" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *orderAction = [UIAlertAction actionWithTitle:Babel(@"confirm_book") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[TEOrderLessonManager sharedManager] orderLesson];
     }];
     [alertController addAction:cancelAction];
@@ -404,10 +404,10 @@
             break;
     }
     
-    UIAlertController *alert  =[UIAlertController alertControllerWithTitle:@"提示"
+    UIAlertController *alert  =[UIAlertController alertControllerWithTitle:Babel(@"notice")
                                                                    message:[message stringByAppendingString:reson]
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:Babel(@"ok") style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
     

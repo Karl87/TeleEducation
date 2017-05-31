@@ -63,30 +63,35 @@
     [_titleView setImage:[UIImage imageNamed:@"loginTitle"]];
     [self.view addSubview:_titleView];
     
-    _userInput = [[TELoginInput alloc] initWithPlaceHolder:@"请输入手机号/邮箱" image:[UIImage imageNamed:@"loginPhoneIcon"] isSecureTextEntry:NO];
+    _userInput = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"login_input_phone") image:[UIImage imageNamed:@"loginPhoneIcon"] isSecureTextEntry:NO];
     _userInput.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:_userInput];
     
-    _passwordInput = [[TELoginInput alloc] initWithPlaceHolder:@"请输入密码" image:[UIImage imageNamed:@"loginPswIcon"] isSecureTextEntry:YES];
+    _passwordInput = [[TELoginInput alloc] initWithPlaceHolder:Babel(@"login_input_psw") image:[UIImage imageNamed:@"loginPswIcon"] isSecureTextEntry:YES];
     [self.view addSubview:_passwordInput];
     
     _loginBtn = [UIButton new];
     [_loginBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
-    [_loginBtn setTitle:@"登 录" forState:UIControlStateNormal];
+    [_loginBtn setTitle:Babel(@"login") forState:UIControlStateNormal];
     [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_loginBtn.layer setCornerRadius:8.0f];
     [_loginBtn.layer setMasksToBounds:YES];
     [_loginBtn addTarget:self action:@selector(loginBtnActionHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginBtn];
     
-    NSMutableAttributedString *registerBtnStrNormal = [[NSMutableAttributedString alloc] initWithString:@"没有账号？立即注册"];
+    
+    NSString *no_account = Babel(@"no_account");
+    NSString *register_now = Babel(@"register_now");
+    NSString *append = [NSString stringWithFormat:@"%@%@",no_account,register_now];
+    
+    NSMutableAttributedString *registerBtnStrNormal = [[NSMutableAttributedString alloc] initWithString:append];
     [registerBtnStrNormal addAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor],
                                     NSFontAttributeName : [UIFont systemFontOfSize:13.0]}
-                            range:NSMakeRange(0, 5)];
+                            range:NSMakeRange(0, no_account.length)];
     [registerBtnStrNormal addAttributes:@{NSForegroundColorAttributeName : SystemBlueColor,
                                     NSFontAttributeName : [UIFont systemFontOfSize:13.0]}
-                            range:NSMakeRange(5, 4)];
-    NSMutableAttributedString *registerBtnStrHighLight = [[NSMutableAttributedString alloc] initWithString:@"没有账号？立即注册"];
+                            range:NSMakeRange(no_account.length, register_now.length)];
+    NSMutableAttributedString *registerBtnStrHighLight = [[NSMutableAttributedString alloc] initWithString:append];
     [registerBtnStrHighLight addAttributes:@{NSForegroundColorAttributeName : [UIColor groupTableViewBackgroundColor],
                                           NSFontAttributeName : [UIFont systemFontOfSize:13.0]}
                                   range:NSMakeRange(0, registerBtnStrHighLight.length)];
@@ -101,7 +106,7 @@
     _resetPasswordBtn = [UIButton new];
     [_resetPasswordBtn setBackgroundColor:[UIColor clearColor]];
     [_resetPasswordBtn.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
-    [_resetPasswordBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
+    [_resetPasswordBtn setTitle:Babel(@"forget_psw") forState:UIControlStateNormal];
     [_resetPasswordBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [_resetPasswordBtn setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateHighlighted];
     [_resetPasswordBtn sizeToFit];
@@ -114,7 +119,7 @@
 //    [self.view addSubview:_teacherSwitch];
     
     
-    _userTypeSeg = [[UISegmentedControl alloc] initWithItems:@[@"I'm Student",@"I'm Teacher"]];
+    _userTypeSeg = [[UISegmentedControl alloc] initWithItems:@[Babel(@"user_student"),Babel(@"user_teacher")]];
     [_userTypeSeg setTintColor:SystemBlueColor];
     [_userTypeSeg setSelectedSegmentIndex:0];
     [_userTypeSeg sizeToFit];
@@ -174,7 +179,7 @@
 }
 - (void)registerBtnHandler:(UIButton *)button{
     TERegisterViewController *vc = [[TERegisterViewController alloc]
-                                    initWithTitle:@"注册账号"
+                                    initWithTitle:Babel(@"register")
                                     statusStyle:UIStatusBarStyleLightContent
                                     showNaviBar:YES
                                     naviType:TENaviTypeImage

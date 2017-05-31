@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		ACEF6F7F6F06305083D6BA1D /* libPods-TeleEducation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 062130AB1ADCA2C4BE60626B /* libPods-TeleEducation.a */; };
-		CB0A5EE11E83A35200F54E19 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0A5EE01E83A35200F54E19 /* 11.png */; };
-		CB0A5EE31E83A35600F54E19 /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0A5EE21E83A35600F54E19 /* 12.png */; };
 		CB1B89081EC16468003EADC5 /* TEWhiteboardColorSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B89071EC16468003EADC5 /* TEWhiteboardColorSelectView.m */; };
 		CB1B890B1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B890A1EC169A6003EADC5 /* TEWhiteboardWidthSelectView.m */; };
 		CB1B890E1EC2FFF2003EADC5 /* NSString+TEDate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B890D1EC2FFF2003EADC5 /* NSString+TEDate.m */; };
@@ -326,14 +324,16 @@
 		CBA3DC811EA0C226007DF4A3 /* TEWhiteboardPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC161EA0C226007DF4A3 /* TEWhiteboardPoint.m */; };
 		CBA3DC821EA0C226007DF4A3 /* TEWhiteboardDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC1A1EA0C226007DF4A3 /* TEWhiteboardDrawView.m */; };
 		CBA3DC881EA0C2F1007DF4A3 /* TEChatroomMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA3DC871EA0C2F1007DF4A3 /* TEChatroomMemberCell.m */; };
+		CBFAC4231ED5653C00B8010B /* TESurfaceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFAC4221ED5653C00B8010B /* TESurfaceMessageViewController.m */; };
+		CBFAC4261ED576C500B8010B /* TEClassroomSurfaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFAC4251ED576C500B8010B /* TEClassroomSurfaceCell.m */; };
+		CBFAC4281ED6BE6100B8010B /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBFAC4271ED6BE6100B8010B /* View.xib */; };
+		CBFAC4371ED6D39A00B8010B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBFAC4391ED6D39A00B8010B /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		062130AB1ADCA2C4BE60626B /* libPods-TeleEducation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TeleEducation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D550D888191C55D0B3E6362 /* Pods-TeleEducation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeleEducation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeleEducation/Pods-TeleEducation.debug.xcconfig"; sourceTree = "<group>"; };
 		9670BA84425677E72FAB15D8 /* Pods-TeleEducation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeleEducation.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeleEducation/Pods-TeleEducation.release.xcconfig"; sourceTree = "<group>"; };
-		CB0A5EE01E83A35200F54E19 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
-		CB0A5EE21E83A35600F54E19 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
 		CB1B89061EC16468003EADC5 /* TEWhiteboardColorSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardColorSelectView.h; sourceTree = "<group>"; };
 		CB1B89071EC16468003EADC5 /* TEWhiteboardColorSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardColorSelectView.m; sourceTree = "<group>"; };
 		CB1B89091EC169A6003EADC5 /* TEWhiteboardWidthSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEWhiteboardWidthSelectView.h; sourceTree = "<group>"; };
@@ -1021,6 +1021,18 @@
 		CBA3DC1A1EA0C226007DF4A3 /* TEWhiteboardDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEWhiteboardDrawView.m; sourceTree = "<group>"; };
 		CBA3DC861EA0C2F1007DF4A3 /* TEChatroomMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEChatroomMemberCell.h; sourceTree = "<group>"; };
 		CBA3DC871EA0C2F1007DF4A3 /* TEChatroomMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEChatroomMemberCell.m; sourceTree = "<group>"; };
+		CBFAC4211ED5653C00B8010B /* TESurfaceMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESurfaceMessageViewController.h; sourceTree = "<group>"; };
+		CBFAC4221ED5653C00B8010B /* TESurfaceMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESurfaceMessageViewController.m; sourceTree = "<group>"; };
+		CBFAC4241ED576C500B8010B /* TEClassroomSurfaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEClassroomSurfaceCell.h; sourceTree = "<group>"; };
+		CBFAC4251ED576C500B8010B /* TEClassroomSurfaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEClassroomSurfaceCell.m; sourceTree = "<group>"; };
+		CBFAC4271ED6BE6100B8010B /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		CBFAC4331ED6D38600B8010B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		CBFAC4341ED6D38700B8010B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CBFAC4351ED6D38C00B8010B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		CBFAC4361ED6D38D00B8010B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CBFAC4381ED6D39A00B8010B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CBFAC43A1ED6D39D00B8010B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CBFAC43B1ED6D39E00B8010B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1124,8 +1136,6 @@
 		CB338E3F1E4C5064007D29A1 /* TeleEducation */ = {
 			isa = PBXGroup;
 			children = (
-				CB0A5EE21E83A35600F54E19 /* 12.png */,
-				CB0A5EE01E83A35200F54E19 /* 11.png */,
 				CB338E571E4C5519007D29A1 /* Classes */,
 				CB338E431E4C5064007D29A1 /* AppDelegate.h */,
 				CB338E441E4C5064007D29A1 /* AppDelegate.m */,
@@ -1138,6 +1148,7 @@
 				CB338E401E4C5064007D29A1 /* Supporting Files */,
 				CB33906C1E4C6616007D29A1 /* PrefixHeader.pch */,
 				CB3390CB1E4D6440007D29A1 /* TEGlobalMacro.h */,
+				CBFAC4271ED6BE6100B8010B /* View.xib */,
 			);
 			path = TeleEducation;
 			sourceTree = "<group>";
@@ -1437,6 +1448,7 @@
 		CB3391DC1E5C2A6A007D29A1 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				CBFAC4391ED6D39A00B8010B /* Localizable.strings */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2109,6 +2121,8 @@
 				CBA3DB321EA0C226007DF4A3 /* View */,
 				CB1B89121EC5A16E003EADC5 /* TEClassroomViewController.h */,
 				CB1B89131EC5A16E003EADC5 /* TEClassroomViewController.m */,
+				CBFAC4211ED5653C00B8010B /* TESurfaceMessageViewController.h */,
+				CBFAC4221ED5653C00B8010B /* TESurfaceMessageViewController.m */,
 			);
 			path = Classroom;
 			sourceTree = "<group>";
@@ -2152,6 +2166,8 @@
 				CBA3DB361EA0C226007DF4A3 /* TELessonManuView.m */,
 				CBA3DB371EA0C226007DF4A3 /* TELessonMenuCell.h */,
 				CBA3DB381EA0C226007DF4A3 /* TELessonMenuCell.m */,
+				CBFAC4241ED576C500B8010B /* TEClassroomSurfaceCell.h */,
+				CBFAC4251ED576C500B8010B /* TEClassroomSurfaceCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2712,6 +2728,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = CB338E341E4C5064007D29A1;
 			productRefGroup = CB338E3E1E4C5064007D29A1 /* Products */;
@@ -2732,8 +2750,8 @@
 				CBA3D98B1E9B63D9007DF4A3 /* NIMKitResource.bundle in Resources */,
 				CBA3D98A1E9B63D9007DF4A3 /* NIMKitEmoticon.bundle in Resources */,
 				CB338E4D1E4C5064007D29A1 /* Assets.xcassets in Resources */,
-				CB0A5EE31E83A35600F54E19 /* 12.png in Resources */,
-				CB0A5EE11E83A35200F54E19 /* 11.png in Resources */,
+				CBFAC4371ED6D39A00B8010B /* Localizable.strings in Resources */,
+				CBFAC4281ED6BE6100B8010B /* View.xib in Resources */,
 				CBA3D98C1E9B63D9007DF4A3 /* NIMKitSettings.bundle in Resources */,
 				CB338E4B1E4C5064007D29A1 /* Main.storyboard in Resources */,
 				CB4F63721E76A6B3006204BF /* Settings.bundle in Resources */,
@@ -2795,6 +2813,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBFAC4261ED576C500B8010B /* TEClassroomSurfaceCell.m in Sources */,
 				CBA3D9651E9B63D9007DF4A3 /* NIMUsrInfoData.m in Sources */,
 				CBA3D9611E9B63D8007DF4A3 /* NIMCardMemberItem.m in Sources */,
 				CBA3D9531E9B63D8007DF4A3 /* NIMSessionFileTransContentView.m in Sources */,
@@ -2895,6 +2914,7 @@
 				CBA3D9421E9B63D8007DF4A3 /* NIMUnsupportContentConfig.m in Sources */,
 				CBA3DC6A1EA0C226007DF4A3 /* rgb.fsh.c in Sources */,
 				CBA3DC5A1EA0C226007DF4A3 /* TEPurchaseDetailViewController.m in Sources */,
+				CBFAC4231ED5653C00B8010B /* TESurfaceMessageViewController.m in Sources */,
 				CBA3D91B1E9B63D8007DF4A3 /* NIMKitNotificationFirer.m in Sources */,
 				CB1B890E1EC2FFF2003EADC5 /* NSString+TEDate.m in Sources */,
 				CBA3D9681E9B63D9007DF4A3 /* NIMNormalTeamCardViewController.m in Sources */,
@@ -3083,6 +3103,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB338E4A1E4C5064007D29A1 /* Base */,
+				CBFAC4331ED6D38600B8010B /* zh-Hans */,
+				CBFAC4351ED6D38C00B8010B /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3091,8 +3113,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB338E4F1E4C5064007D29A1 /* Base */,
+				CBFAC4341ED6D38700B8010B /* zh-Hans */,
+				CBFAC4361ED6D38D00B8010B /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CBFAC4391ED6D39A00B8010B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CBFAC4381ED6D39A00B8010B /* Base */,
+				CBFAC43A1ED6D39D00B8010B /* zh-Hans */,
+				CBFAC43B1ED6D39E00B8010B /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3102,6 +3136,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3150,6 +3185,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

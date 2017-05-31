@@ -331,7 +331,7 @@
     NSMutableArray *targetNicks = [[NSMutableArray alloc] init];
     for (NIMChatroomNotificationMember *memebr in content.targets) {
         if ([memebr.userId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]]) {
-           [targetNicks addObject:@"你"];
+           [targetNicks addObject:Babel(@"you")];
         }else{
            [targetNicks addObject:memebr.nick];
         }
@@ -341,7 +341,7 @@
     switch (content.eventType) {
         case NIMChatroomEventTypeEnter:
         {
-            return [NSString stringWithFormat:@"欢迎%@进入教室",targetText];
+            return [NSString stringWithFormat:@"%@ %@",targetText,Babel(@"enter_classroom")];
         }
         case NIMChatroomEventTypeAddBlack:
         {
@@ -392,7 +392,7 @@
         }
         case NIMChatroomEventTypeExit:
         {
-            return [NSString stringWithFormat:@"%@离开了教室",targetText];
+            return [NSString stringWithFormat:@"%@ %@",targetText,Babel(@"leave_classroom")];
         }
         case NIMChatroomEventTypeClosed:
         {
@@ -453,7 +453,7 @@
     NSString *currentAccount = [[NIMSDK sharedSDK].loginManager currentAccount];
     for (NSString *item in content.targetIDs) {
         if ([item isEqualToString:currentAccount]) {
-            [targets addObject:@"你"];
+            [targets addObject:Babel(@"you")];
         }else{
             NSString *targetShowName = [NIMKitUtil showNick:item inSession:message.session];
             [targets addObject:targetShowName];

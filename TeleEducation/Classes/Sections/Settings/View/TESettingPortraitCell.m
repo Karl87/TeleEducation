@@ -43,7 +43,7 @@
         [self addSubview:_balanceLab];
         
         _rebookBtn = [UIButton new];
-        [_rebookBtn setTitle:@"续订课程" forState:UIControlStateNormal];
+        [_rebookBtn setTitle:Babel(@"purchase_classes") forState:UIControlStateNormal];
         [_rebookBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_rebookBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
         [_rebookBtn.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
@@ -51,14 +51,14 @@
     
         _recordBtn = [UIButton new];
         [_recordBtn setBackgroundColor:[UIColor clearColor]];
-        NSMutableAttributedString *recordBtnNormal = [[NSMutableAttributedString alloc] initWithString:@"购买记录"];
+        NSMutableAttributedString *recordBtnNormal = [[NSMutableAttributedString alloc] initWithString:Babel(@"purchase_history")];
         [recordBtnNormal addAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor],
                                          NSFontAttributeName : [UIFont systemFontOfSize:13.0],
                                          NSUnderlineStyleAttributeName :[NSNumber numberWithInteger:NSUnderlineStyleSingle],
                                          NSUnderlineColorAttributeName:[UIColor lightGrayColor]
                                          } range:NSMakeRange(0, recordBtnNormal.length)];
 
-        NSMutableAttributedString *recordBtnHighlight = [[NSMutableAttributedString alloc] initWithString:@"购买记录"];
+        NSMutableAttributedString *recordBtnHighlight = [[NSMutableAttributedString alloc] initWithString:Babel(@"purchase_history")];
         [recordBtnHighlight addAttributes:@{NSForegroundColorAttributeName : [UIColor groupTableViewBackgroundColor],
                                          NSFontAttributeName : [UIFont systemFontOfSize:13.0],
                                          NSUnderlineStyleAttributeName :[NSNumber numberWithInteger:NSUnderlineStyleSingle],
@@ -85,9 +85,10 @@
         [_userNameLab setText:[cellInfo objectForKey:@"userName"]];
         [_userNameLab sizeToFit];
         NSString *balanceCount = [[cellInfo objectForKey:@"balanceCount"] stringValue];
-        NSString *balanceStr = [NSString stringWithFormat:@"%@课时：%@节",isTeacher?@"已授":@"剩余",balanceCount];
+        NSString *balanceHeader = [NSString stringWithFormat:@"%@",isTeacher?Babel(@"info_taught_lesson"):Babel(@"credits")];
+        NSString *balanceStr = [NSString stringWithFormat:@"%@ %@ %@",balanceHeader,balanceCount,Babel(@"lesson_unit")];
         NSMutableAttributedString *balanceAttStr = [[NSMutableAttributedString alloc] initWithString:balanceStr];
-        [balanceAttStr addAttributes:@{NSForegroundColorAttributeName:SystemBlueColor} range:NSMakeRange(5, balanceCount.length)];
+        [balanceAttStr addAttributes:@{NSForegroundColorAttributeName:SystemBlueColor} range:NSMakeRange(balanceHeader.length+1, balanceCount.length)];
         [_balanceLab setAttributedText:balanceAttStr];
         [_balanceLab sizeToFit];
         [_recordBtn removeTarget:self.viewController action:NULL forControlEvents:UIControlEventTouchUpInside];

@@ -34,10 +34,10 @@
     config.baseUrl = [[TENetworkConfig sharedConfig] baseURL];
     config.cdnUrl = [[TENetworkConfig sharedConfig] cdnURL];
     
+    LogInfo(@"NIMAppInfo", [TEAppConfig sharedConfig].description);
     
     NSString *NIMKey = [[TEAppConfig sharedConfig] NIMAppKey];
     NSString *cerName = [[TEAppConfig sharedConfig] NIMCerName];
-    NSLog(@"%@,%@",NIMKey,cerName);
     [[NIMSDK sharedSDK] registerWithAppID:NIMKey cerName:cerName];
     
     [NIMCustomObject registerCustomDecoder:[[TECustomAttachmentDecoder alloc] init]];
@@ -55,7 +55,11 @@
 - (void)setupMainViewController{
     
     TELoginData *data = [[TELoginManager sharedManager] currentTEUser];
+    
+    LogInfo(@"缓存用户信息", data.description);
+    
     if ([[data token]length]) {
+        
         [[TELoginManager sharedManager] nimLogin];
         [[TEServiceManager sharedManger] start];
 

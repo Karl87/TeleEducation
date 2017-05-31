@@ -80,7 +80,7 @@
         
         _showContentBtn = [UIButton new];
         [_showContentBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
-        [_showContentBtn setTitle:@"查看教材" forState:UIControlStateNormal];
+        [_showContentBtn setTitle:Babel(@"lesson_prepare") forState:UIControlStateNormal];
         [_showContentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_showContentBtn.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
         [_showContentBtn addTarget:self action:@selector(showContentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,7 +90,7 @@
         
         _startLessonBtn = [UIButton new];
         [_startLessonBtn setBackgroundImage:[UIImage imageWithColor:SystemBlueColor] forState:UIControlStateNormal];
-        [_startLessonBtn setTitle:@"去上课" forState:UIControlStateNormal];
+        [_startLessonBtn setTitle:Babel(@"lesson_enter") forState:UIControlStateNormal];
         [_startLessonBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_startLessonBtn.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
         [_startLessonBtn addTarget:self action:@selector(startLessonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -145,13 +145,13 @@
             _stateLab.hidden = NO;
             _showContentBtn.hidden = YES;
             _startLessonBtn.hidden = YES;
-            [_stateLab setText:@"已完成"];
+            [_stateLab setText:Babel(@"completed")];
             break;
         case TELessonStatusCancel:
             _stateLab.hidden = NO;
             _showContentBtn.hidden = YES;
             _startLessonBtn.hidden = YES;
-            [_stateLab setText:@"已取消"];
+            [_stateLab setText:Babel(@"canceled")];
         default:
             break;
     }

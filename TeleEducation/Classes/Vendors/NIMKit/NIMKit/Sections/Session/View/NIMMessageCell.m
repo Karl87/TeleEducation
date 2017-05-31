@@ -126,12 +126,6 @@
     
     if ([self needShowAvatar])
     {
-        if (self.model.message.session.sessionType == NIMSessionTypeChatroom) {
-            NIMMessageChatroomExtension *ext = [self.model.message.messageExt isKindOfClass:[NIMMessageChatroomExtension class]] ? (NIMMessageChatroomExtension *)self.model.message.messageExt : nil;
-            NSLog(@"%@,%@,%@,%@",self.model.message.text,ext.roomAvatar,ext.roomNickname,ext.roomExt);
-            
-        }
-        
         [_headImageView setAvatarByMessage:self.model.message];
     }
 

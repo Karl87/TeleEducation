@@ -10,7 +10,7 @@
 
 @protocol TELessonVideoViewDelegate <NSObject>
 
-- (void)videoViewSizeChanged;
+- (void)videoViewFullScreen:(BOOL)fullscreen;
 
 @end
 

@@ -1,0 +1,77 @@
+/* 
+  Localizable.strings
+  TeleEducation
+
+  Created by Karl on 2017/5/25.
+  Copyright © 2017年 i-Craftsmen ltd. All rights reserved.
+*/
+"tabbar_lessons" = "課程";
+"tabbar_messages" = "訊息";
+"tabbar_me" = "我";
+"yesterday" = "昨天";
+"today" = "今天";
+"tomorrow" = "明天";
+"lesson_prepare" = "查看教材";
+"lesson_enter" = "去上課";
+"select_textbook" = "選擇課程";
+"select_teacher" = "選擇教師";
+"action_book" = "預約";
+"info_booked" = "已預約";
+"book_lesson" = "預約課程";
+"no_book_lessons" = "您還沒有預約課程";
+"have_booked_lesson" = "您已經預約了1節課程";
+"book_lesson_unit" = "課";
+"info_taught_lesson" = "已授課";
+"lesson_unit" = "課時";
+"confirm_lesson" = "確認課程";
+"confirm_book" = "確認預約";
+"cancel" = "取消";
+"info_no_classes" = "您尚未預約課程\n點擊 ' + ' 按鈕前往預約課程";
+"info_no_messages" = "無信息";
+"info_remain_classes" = "剩餘課時";
+"purchase_classes" = "續訂課程";
+"purchase_history" = "購買紀錄";
+"edit_profile" = "編輯資料";
+"class_notification" = "上課提醒";
+"logout" = "登出";
+"login" = "登錄";
+"user_student" = "學生";
+"user_teacher" = "老師";
+"login_input_phone" = "請輸入手機號碼";
+"login_input_psw" = "請輸入密碼";
+"forget_psw" = "忘記密碼";
+"no_account" = "沒有帳號？";
+"register_now" = "馬上註冊！";
+"register" = "註冊帳號";
+"register_input_nickname" = "請輸入暱稱";
+"register_input_phone" = "請輸入手機號碼";
+"register_input_verify" = "請輸入驗證碼";
+"retsiter_input_psw" = "請輸入密碼";
+"info_avatar" = "頭像";
+"info_name" = "暱稱";
+"info_phone" = "綁定手機";
+"info_qq" = "QQ";
+"info_skype" = "Skype";
+"time" = "時間";
+"text_book" = "課程";
+"teacher" = "教師";
+"notice" = "提醒";
+"ok" = "好的";
+"clear_choose" = "清除選擇";
+"completed" = "已完成";
+"canceled" = "已取消";
+"credits" = "餘額";
+"edit_psw" = "修改密碼";
+"set_avatar" = "設置頭像";
+"capture" = "拍照";
+"select_from_album" = "從相冊選擇";
+"please_input_message" = "請輸入信息";
+"enter_classroom" = "進入課堂";
+"leave_classroom" = "離開課堂";
+"you" = "您";
+"message_photo" = "【圖片】";
+"message_chartlet" = "【表情】";
+"message_custom" = "【信息】";
+"active" = "互動中";
+"enable_active" = "允許互動";
+"disable_active" = "結束互動";

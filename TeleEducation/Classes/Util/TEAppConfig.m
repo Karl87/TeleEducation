@@ -39,4 +39,8 @@
     return _NIMCerName;
 }
 
+- (NSString *)description{
+    return [NSString stringWithFormat:@"NIMAppKey:%@\nNIMCerName:%@\nNimApiURL:%@",_NIMAppKey,_NIMCerName,_NIMApiURL];
+}
+
 @end

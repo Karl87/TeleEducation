@@ -14,6 +14,16 @@
 #import "NIMKit.h"
 #import "TEGlobalMacro.h"
 #import "UIView+TE.h"
+
+#define Babel(_x_) NSLocalizedString(_x_, @"")
+
+#define LogSuccess(title,note) NSLog(@"\n\n-----Success-----\n⭕️⭕️⭕️%@⭕️⭕️⭕️\n%@\n----------\nMethod:%s\nClass:%@:%d\n-----Success-----\n",title,note,__func__,NSStringFromClass([self class]),__LINE__)
+#define LogError(title,note) NSLog(@"\n\n-----Error-----\n❌❌❌%@❌❌❌\n%@\n----------\nMethod:%s\nClass:%@:%d\n-----Error-----\n",title,note,__func__,NSStringFromClass([self class]),__LINE__)
+#define LogInfo(title,note) NSLog(@"\n\n-----Info-----\n📝📝📝%@📝📝📝\n%@\n----------\nMethod:%s\nClass:%@:%d\n-----Info-----\n",title,note,__func__,NSStringFromClass([self class]),__LINE__)
+#define LogWarning(title,note) NSLog(@"\n\n-----Warning-----\n‼️‼️‼️%@‼️‼️‼️\n%@\n----------\nMethod:%s\nClass:%@:%d\n-----Warning-----\n",title,note,__func__,NSStringFromClass([self class]),__LINE__)
+
+
+
 #endif
 
 #endif /* PrefixHeader_pch */
